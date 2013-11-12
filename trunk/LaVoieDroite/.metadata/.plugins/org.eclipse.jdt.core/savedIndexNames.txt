@@ -1,0 +1,8 @@
+INDEX VERSION 1.126+C:\Users\ghizlane\Desktop\freelanceProject_lavoiedroite\lavoiedroite\.metadata\.plugins\org.eclipse.jdt.core
+2011393623.index
+4020008653.index
+3074633992.index
+585005720.index
+1182895315.index
+1522261168.index
+94284412.index

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:padding="1dp" >
+
+    <RelativeLayout
+        android:id="@+id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent" >
+
+        <ImageView
+            android:id="@+id/img_sms"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignBottom="@+id/txt_position"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/sms" />
+
+        <TextView
+            android:id="@+id/txt_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sms"
+            android:layout_toRightOf="@+id/img_position"
+            android:text="Mosquée de paris" 
+            android:paddingTop="5dp"/>
+
+        <ImageView
+            android:id="@+id/img_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/txt_time"
+            android:padding="3dp"
+            android:src="@drawable/date" />
+
+        <TextView
+            android:id="@+id/txt_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="02 Février 2012" />
+
+        <TextView
+            android:id="@+id/sms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_event"
+            android:layout_toRightOf="@+id/img_sms"
+            android:text="Sms" />
+
+        <TextView
+            android:id="@+id/txt_event"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="La Hijra"
+            android:textColor="#004493"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/group_up" />
+
+        <ImageView
+            android:id="@+id/img_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sms"
+            android:layout_toLeftOf="@+id/sms"
+            android:src="@drawable/position" />
+    </RelativeLayout>
+
+</LinearLayout>
