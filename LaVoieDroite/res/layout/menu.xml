@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pj="http://schemas.android.com/apk/res/com.freelanceProject.lavoiedroite"
+    xmlns:bm="com.freelanceProject.lavoiedroite"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/basic_fond1"
+    android:orientation="vertical" 
+    android:layout_gravity="center">
+
+    <LinearLayout
+        android:id="@+id/menu"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:paddingTop="90dp" >
+
+        <com.freelanceProject.lavoiedroite.ui.Carousel
+            android:id="@+id/carousel"
+            android:layout_width="fill_parent"
+            android:layout_height="330dp"
+            android:animationDuration="200"
+            pj:Items="@array/entries"
+            pj:Names="@array/names"
+            pj:SelectedItem="1"
+            pj:UseReflection="false" >
+        </com.freelanceProject.lavoiedroite.ui.Carousel>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <include layout="@layout/header" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
+
+</FrameLayout>

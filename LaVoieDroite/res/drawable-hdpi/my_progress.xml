@@ -1,0 +1,14 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+ <item android:id="@android:id/progress">
+     
+        <bitmap
+            android:gravity="center_vertical"
+            android:src="@drawable/chargement"
+            />
+
+        <corners android:radius="10dp" />
+    </item>
+    
+
+</layer-list>

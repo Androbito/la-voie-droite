@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<previews>
+
+    <preview
+        name="5.1in WVGA"
+        activity="com.freelanceProject.lavoiedroite.Menu"
+        config="layout-sw480dp-w480dp-h800dp-large-long-port-notnight-mdpi-finger-keyssoft-nokeys-navhidden-nonav-800x480-v17"
+        device="5.1in WVGA"
+        devicestate="Portrait"
+        target="Android 4.2"
+        theme="@style/AppTheme" >
+    </preview>
+
+</previews>

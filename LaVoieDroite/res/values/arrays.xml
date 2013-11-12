@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <array name="entries">
+        <item>@drawable/event</item>
+        <item>@drawable/decouv_cours</item>
+        <item>@drawable/fatawa</item>
+        <item>@drawable/streaming</item>
+        <item>@drawable/preche</item>
+        <item>@drawable/conference</item>
+        <item>@drawable/cours_audio</item>
+        <item>@drawable/video</item>
+        <item>@drawable/article</item>
+    </array>
+    <array name="names">
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </array>
+
+</resources>
