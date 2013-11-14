@@ -16,7 +16,7 @@ import com.freelanceProject.lavoiedroite.R;
 import com.freelanceProject.lavoiedroite.Adapters.CoursParThemeAdapter;
 import com.freelanceProject.lavoiedroite.beans.CoursParTheme;
 import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
-import com.freelanceProject.lavoiedroite.connexions.WsRequest;
+import com.freelanceProject.lavoiedroite.ws.WsRequest;
 import com.google.gson.Gson;
 
 public class ThemeDetail extends Activity{

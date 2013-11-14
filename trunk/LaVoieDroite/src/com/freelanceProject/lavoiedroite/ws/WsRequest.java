@@ -1,4 +1,4 @@
-package com.freelanceProject.lavoiedroite.connexions;
+package com.freelanceProject.lavoiedroite.ws;
 
 import java.io.IOException;
 import java.io.InputStream;
