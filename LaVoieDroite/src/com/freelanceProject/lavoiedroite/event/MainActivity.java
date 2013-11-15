@@ -10,10 +10,10 @@ import android.view.View.OnClickListener;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import com.freelanceProject.lavoiedroite.R;
+import com.freelanceProject.lavoiedroite.RechercheCoursAudioParIntervenant;
 import com.freelanceProject.lavoiedroite.Adapters.CoursParThemeAdapter;
 import com.freelanceProject.lavoiedroite.beans.CoursParTheme;
 import com.freelanceProject.lavoiedroite.event.GroupEntity.GroupItemEntity;
-import com.freelanceProject.lavoiedroite.ui.coursAudio.RechercheCoursAudioParIntervenant;
 
 public class MainActivity extends Activity {
 
