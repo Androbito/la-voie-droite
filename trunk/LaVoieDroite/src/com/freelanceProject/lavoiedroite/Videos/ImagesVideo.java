@@ -9,7 +9,7 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
 import com.freelanceProject.lavoiedroite.R;
-import com.freelanceProject.lavoiedroite.ui.coursAudio.RechercheCoursAudioParIntervenant;
+import com.freelanceProject.lavoiedroite.RechercheCoursAudioParIntervenant;
 
 public class ImagesVideo extends  Activity{
 
