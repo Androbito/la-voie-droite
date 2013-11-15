@@ -12,7 +12,6 @@ import com.freelanceProject.lavoiedroite.ui.Carousel;
 import com.freelanceProject.lavoiedroite.ui.CarouselAdapter;
 import com.freelanceProject.lavoiedroite.ui.CarouselAdapter.OnItemClickListener;
 import com.freelanceProject.lavoiedroite.ui.CarouselAdapter.OnItemSelectedListener;
-import com.freelanceProject.lavoiedroite.ui.coursAudio.RechercheCoursAudioParTheme;
 
 public class Menu extends  Activity{
 
