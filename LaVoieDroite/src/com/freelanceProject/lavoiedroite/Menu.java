@@ -86,7 +86,7 @@ public class Menu extends  Activity{
 					ProgressDialog dialog = ProgressDialog.show(Menu.this, "", "Chargement...",
 							true);
 					Intent rech = new Intent(view.getContext(),
-							RechercheCoursAudioParTheme.class);
+							CoursAudioActivity.class);
 					startActivity(rech);
 					dialog.setCancelable(true);
 				}
