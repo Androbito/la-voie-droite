@@ -44,25 +44,27 @@
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.freelanceProject.lavoiedroite.ui.coursAudio.RechercheCoursAudio"
-            android:label="@string/app_name"
+            android:name=".CoursAudioActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.freelanceProject.lavoiedroite.RechercheCoursAudioParTheme"
-            android:label="@string/app_name"
+            android:name=".AudioByIntervenantActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.freelanceProject.lavoiedroite.RechercheCoursAudioParIntervenant"
-            android:label="@string/app_name"
+            android:name=".AudioByLastAddActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.freelanceProject.lavoiedcom.freelanceProject.lavoiedroite.ThemeDetail"
+            android:name=".AudioByThemeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.freelanceProject.lavoiedroite.ThemeDetail"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
