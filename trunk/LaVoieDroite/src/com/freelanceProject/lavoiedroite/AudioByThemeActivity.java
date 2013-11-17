@@ -2,23 +2,26 @@ package com.freelanceProject.lavoiedroite;
 
 import java.util.List;
 
-import com.freelanceProject.lavoiedroite.ws.WSHelper;
-import com.freelanceProject.lavoiedroite.ws.WSHelperListener;
-
 import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
+
+import com.freelanceProject.lavoiedroite.ws.WSHelper;
+import com.freelanceProject.lavoiedroite.ws.WSHelperListener;
 
 public class AudioByThemeActivity extends Activity implements WSHelperListener {
 	ConnectivityManager cManager;
+	TextView textView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.audiobytheme);
+		textView = (TextView) findViewById(R.id.textView1);
 		cManager = (ConnectivityManager) this
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 		WSHelper.getInstance().addWSHelperListener(this);
@@ -28,7 +31,7 @@ public class AudioByThemeActivity extends Activity implements WSHelperListener {
 	@Override
 	public void onAuthorsLoaded(List<String[]> auteurs) {
 		// TODO Auto-generated method stub
-		((TextView) findViewById(R.id.textView1)).setText("" + auteurs.size());
+		Log.i("Taille de la liste des auteurs", "" + auteurs.size());
 	}
 
 	@Override
