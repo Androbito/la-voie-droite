@@ -29,9 +29,18 @@ public class AudioByThemeActivity extends Activity implements WSHelperListener {
 	}
 
 	@Override
-	public void onAuthorsLoaded(List<String[]> auteurs) {
+	public void onAuthorsLoaded(final List<String[]> auteurs) {
 		// TODO Auto-generated method stub
 		Log.i("Taille de la liste des auteurs", "" + auteurs.size());
+		runOnUiThread(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				textView.setText("" + auteurs.size());
+				
+			}
+		});
 	}
 
 	@Override
