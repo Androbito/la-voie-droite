@@ -1,28 +1,18 @@
 package com.freelanceProject.lavoiedroite.ws;
 
-import java.io.IOException;
-import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.xmlpull.v1.XmlPullParserException;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.net.ConnectivityManager;
 
-import com.freelanceProject.lavoiedroite.WSHelperListener;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAuthor;
 import com.freelanceProject.lavoiedroite.web.WebException;
 import com.freelanceProject.lavoiedroite.web.WebListener;
 import com.freelanceProject.lavoiedroite.web.WebThread;
 import com.google.gson.Gson;
-
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.net.ConnectivityManager;
-import android.util.Log;
 
 @SuppressLint("SimpleDateFormat")
 public class WSHelper {
@@ -42,10 +32,10 @@ public class WSHelper {
 		wsHelperListeners = new HashSet<WSHelperListener>();
 	}
 
-	public void getChannels(ConnectivityManager manager, final Activity context) {
+	public void getAuteurs(ConnectivityManager manager, final Activity context) {
 
-		WebThread wt = new WebThread("", WebThread.METHOD_GET, manager,
-				WebThread.ENCODING_UTF_8, false);
+		WebThread wt = new WebThread(URLs.authors, WebThread.METHOD_GET,
+				manager, WebThread.ENCODING_UTF_8, false);
 		wt.setListener(new WebListener() {
 			public void onFinish(String url, String resultat) {
 				onFinishGetAuteurs(resultat, context);
@@ -79,9 +69,12 @@ public class WSHelper {
 		});
 		wt.start();
 	}
+
 	public void addWSHelperListener(WSHelperListener listener) {
 		wsHelperListeners.add(listener);
 	}
 
 	public void removeWSHelperListener(WSHelperListener listener) {
-		wsHelperListeners.remove(listener);}}
+		wsHelperListeners.remove(listener);
+	}
+}
