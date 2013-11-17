@@ -24,7 +24,7 @@ public class CoursAudioActivity extends TabActivity {
 		setupTab(new TextView(this), "Par\nThemes", AudioByThemeActivity.class);
 		setupTab(new TextView(this), "Par\nIntervenants",
 				AudioByIntervenantActivity.class);
-		setupTab(new TextView(this), "Dernier\najout",
+		setupTab(new TextView(this), "Dernier\nAjout",
 				AudioByLastAddActivity.class);
 	}
 
