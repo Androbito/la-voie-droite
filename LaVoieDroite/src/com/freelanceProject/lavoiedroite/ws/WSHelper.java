@@ -12,6 +12,7 @@ import java.util.Set;
 
 import org.xmlpull.v1.XmlPullParserException;
 
+import com.freelanceProject.lavoiedroite.WSHelperListener;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAuthor;
 import com.freelanceProject.lavoiedroite.web.WebException;
 import com.freelanceProject.lavoiedroite.web.WebListener;
@@ -78,4 +79,9 @@ public class WSHelper {
 		});
 		wt.start();
 	}
-}
+	public void addWSHelperListener(WSHelperListener listener) {
+		wsHelperListeners.add(listener);
+	}
+
+	public void removeWSHelperListener(WSHelperListener listener) {
+		wsHelperListeners.remove(listener);}}
