@@ -55,22 +55,23 @@ public class AudioByLastAddActivity extends Activity implements
 			@Override
 			public void run() {
 				lstViewLastCours.setAdapter(new LastAddAdapter(
+						AudioByLastAddActivity.this,
 						AudioByLastAddActivity.this, lastCours));
-				lstViewLastCours
-						.setOnItemClickListener(new OnItemClickListener() {
-
-							@Override
-							public void onItemClick(AdapterView<?> arg0,
-									View arg1, int position, long arg3) {
-								// TODO Auto-generated method stub
-								((TextView) findViewById(R.id.coursIntervenant))
-										.setText(lastCours.get(position)
-												.getIntervenant());
-								((TextView) findViewById(R.id.coursTitle))
-										.setText(lastCours.get(position)
-												.getTitle());
-							}
-						});
+				// lstViewLastCours
+				// .setOnItemClickListener(new OnItemClickListener() {
+				//
+				// @Override
+				// public void onItemClick(AdapterView<?> arg0,
+				// View arg1, int position, long arg3) {
+				// TODO Auto-generated method stub
+				// ((TextView) findViewById(R.id.coursIntervenant))
+				// .setText(lastCours.get(position)
+				// .getIntervenant());
+				// ((TextView) findViewById(R.id.coursTitle))
+				// .setText(lastCours.get(position)
+				// .getTitle());
+				// }
+				// });
 			}
 		});
 	}

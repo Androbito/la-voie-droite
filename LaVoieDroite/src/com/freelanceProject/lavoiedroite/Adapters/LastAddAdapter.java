@@ -3,6 +3,7 @@ package com.freelanceProject.lavoiedroite.Adapters;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,11 +21,14 @@ import com.freelanceProject.lavoiedroite.beans.CoursAudio;
 public class LastAddAdapter extends BaseAdapter {
 	LayoutInflater mLayoutInflater;
 	Context mContext;
+	Activity mActivity;
 	List<CoursAudio> mListAudio;
 
-	public LastAddAdapter(Context mContext, List<CoursAudio> lstAudio) {
+	public LastAddAdapter(Context mContext, Activity mActivity,
+			List<CoursAudio> lstAudio) {
 		super();
 		this.mContext = mContext;
+		this.mActivity = mActivity;
 		this.mLayoutInflater = (LayoutInflater) mContext
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		this.mListAudio = new ArrayList<CoursAudio>();
@@ -69,9 +73,15 @@ public class LastAddAdapter extends BaseAdapter {
 					@Override
 					public void onClick(View arg0) {
 						// TODO Auto-generated method stub
-						Toast.makeText(mContext,
-								mListAudio.get(position).getIntervenant(),
-								Toast.LENGTH_SHORT).show();
+						((TextView) mActivity
+								.findViewById(R.id.coursIntervenant))
+								.setText(mListAudio.get(position)
+										.getIntervenant());
+						((TextView) mActivity.findViewById(R.id.coursTitle))
+								.setText(mListAudio.get(position).getTitle());
+//						Toast.makeText(mContext,
+//								mListAudio.get(position).getIntervenant(),
+//								Toast.LENGTH_SHORT).show();
 					}
 				});
 		return view;
