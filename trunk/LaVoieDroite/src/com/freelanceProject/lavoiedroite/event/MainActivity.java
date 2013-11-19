@@ -2,6 +2,7 @@ package com.freelanceProject.lavoiedroite.event;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,10 +10,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+
 import com.freelanceProject.lavoiedroite.R;
-import com.freelanceProject.lavoiedroite.RechercheCoursAudioParIntervenant;
-import com.freelanceProject.lavoiedroite.Adapters.CoursParThemeAdapter;
-import com.freelanceProject.lavoiedroite.beans.CoursParTheme;
 import com.freelanceProject.lavoiedroite.event.GroupEntity.GroupItemEntity;
 
 public class MainActivity extends Activity {
