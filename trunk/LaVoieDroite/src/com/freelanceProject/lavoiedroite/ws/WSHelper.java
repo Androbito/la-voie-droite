@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.net.ConnectivityManager;
 
 import com.freelanceProject.lavoiedroite.beans.WsResponseAuthor;
+import com.freelanceProject.lavoiedroite.beans.WsResponseLastAdd;
 import com.freelanceProject.lavoiedroite.web.WebException;
 import com.freelanceProject.lavoiedroite.web.WebListener;
 import com.freelanceProject.lavoiedroite.web.WebThread;
@@ -65,6 +66,38 @@ public class WSHelper {
 					Map<String, String> params, String resultat) {
 				// TODO Auto-generated method stub
 
+			}
+		});
+		wt.start();
+	}
+
+	public void getLastAddedCours(ConnectivityManager manager,
+			final Activity context) {
+		WebThread wt = new WebThread(URLs.lastAdd + "tid=8&page=0&npage=25",
+				WebThread.METHOD_GET, manager, WebThread.ENCODING_UTF_8, false);
+		wt.setListener(new WebListener() {
+
+			@Override
+			public void onFinishWithParams(String url,
+					Map<String, String> params, String resultat) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onFinish(String url, String resultat) {
+				WsResponseLastAdd lastAdd = gson.fromJson(resultat,
+						WsResponseLastAdd.class);
+				for (WSHelperListener wsHelperListener : wsHelperListeners)
+					wsHelperListener.onLastAddLoaded(lastAdd
+							.getListCoursAudio());
+			}
+
+			@Override
+			public void onError(WebException error) {
+				// TODO Auto-generated method stub
+				for (WSHelperListener wsHelperListener : wsHelperListeners)
+					wsHelperListener.onErrorLoadingCours(error.toString());
 			}
 		});
 		wt.start();
