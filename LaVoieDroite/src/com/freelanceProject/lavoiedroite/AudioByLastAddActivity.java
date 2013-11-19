@@ -7,8 +7,13 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.freelanceProject.lavoiedroite.Adapters.LastAddAdapter;
 import com.freelanceProject.lavoiedroite.beans.CoursAudio;
 import com.freelanceProject.lavoiedroite.ws.WSHelper;
 import com.freelanceProject.lavoiedroite.ws.WSHelperListener;
@@ -43,8 +48,31 @@ public class AudioByLastAddActivity extends Activity implements
 	}
 
 	@Override
-	public void onLastAddLoaded(List<CoursAudio> lastCours) {
+	public void onLastAddLoaded(final List<CoursAudio> lastCours) {
 		Log.i("Cours :", "" + lastCours.size());
+		runOnUiThread(new Runnable() {
+
+			@Override
+			public void run() {
+				lstViewLastCours.setAdapter(new LastAddAdapter(
+						AudioByLastAddActivity.this, lastCours));
+				lstViewLastCours
+						.setOnItemClickListener(new OnItemClickListener() {
+
+							@Override
+							public void onItemClick(AdapterView<?> arg0,
+									View arg1, int position, long arg3) {
+								// TODO Auto-generated method stub
+								((TextView) findViewById(R.id.coursIntervenant))
+										.setText(lastCours.get(position)
+												.getIntervenant());
+								((TextView) findViewById(R.id.coursTitle))
+										.setText(lastCours.get(position)
+												.getTitle());
+							}
+						});
+			}
+		});
 	}
 
 	@Override

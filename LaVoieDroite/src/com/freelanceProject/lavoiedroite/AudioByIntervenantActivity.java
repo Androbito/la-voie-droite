@@ -54,7 +54,7 @@ public class AudioByIntervenantActivity extends Activity implements
 										auteurs.get(position)[1],
 										Toast.LENGTH_SHORT).show();
 							}
-		});
+						});
 			}
 		});
 	}
@@ -68,13 +68,13 @@ public class AudioByIntervenantActivity extends Activity implements
 	@Override
 	public void onLastAddLoaded(List<CoursAudio> Cours) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onErrorLoadingCours(String string) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
