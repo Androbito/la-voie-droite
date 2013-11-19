@@ -10,8 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.freelanceProject.lavoiedroite.R;
-import com.freelanceProject.lavoiedroite.beans.CoursParTheme;
 import com.freelanceProject.lavoiedroite.beans.Events;
 
 public class EventAdapter extends ArrayAdapter<Events>{

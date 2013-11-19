@@ -14,6 +14,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.freelanceProject.lavoiedroite.Adapters.AuthorsAdapter;
+import com.freelanceProject.lavoiedroite.beans.CoursAudio;
 import com.freelanceProject.lavoiedroite.ws.WSHelper;
 import com.freelanceProject.lavoiedroite.ws.WSHelperListener;
 
@@ -62,6 +63,18 @@ public class AudioByIntervenantActivity extends Activity implements
 	public void onErrorLoadingAuthors(String string) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void onLastAddLoaded(List<CoursAudio> Cours) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onErrorLoadingCours(String string) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
