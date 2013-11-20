@@ -10,6 +10,7 @@ import android.net.ConnectivityManager;
 
 import com.freelanceProject.lavoiedroite.beans.WsResponseAuthor;
 import com.freelanceProject.lavoiedroite.beans.WsResponseLastAdd;
+import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
 import com.freelanceProject.lavoiedroite.web.WebException;
 import com.freelanceProject.lavoiedroite.web.WebListener;
 import com.freelanceProject.lavoiedroite.web.WebThread;
@@ -95,9 +96,36 @@ public class WSHelper {
 
 			@Override
 			public void onError(WebException error) {
-				// TODO Auto-generated method stub
 				for (WSHelperListener wsHelperListener : wsHelperListeners)
 					wsHelperListener.onErrorLoadingCours(error.toString());
+			}
+		});
+		wt.start();
+	}
+
+	public void getThemes(ConnectivityManager manager, final Activity context) {
+		WebThread wt = new WebThread(URLs.themes, WebThread.METHOD_GET,
+				manager, WebThread.ENCODING_UTF_8, false);
+		wt.setListener(new WebListener() {
+
+			@Override
+			public void onFinishWithParams(String url,
+					Map<String, String> params, String resultat) {
+
+			}
+
+			@Override
+			public void onFinish(String url, String resultat) {
+				WsResponseTheme wsResponseTheme = gson.fromJson(resultat,
+						WsResponseTheme.class);
+				for (WSHelperListener wsHelperListener : wsHelperListeners)
+					wsHelperListener.onThemesLoaded(wsResponseTheme);
+			}
+
+			@Override
+			public void onError(WebException error) {
+				for (WSHelperListener wsHelperListener : wsHelperListeners)
+					wsHelperListener.onErrorLoadingThemes(error.toString());
 			}
 		});
 		wt.start();
