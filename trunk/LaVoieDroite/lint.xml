@@ -1,3 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
+    <issue id="NewApi">
+        <ignore path="src/com/freelanceProject/lavoiedroite/Adapters/AuthorsAdapter.java" />
+    </issue>
+    <issue id="UseSparseArrays">
+        <ignore path="src/com/freelanceProject/lavoiedroite/beans/Themes.java" />
+    </issue>
 </lint>
