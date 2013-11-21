@@ -31,12 +31,10 @@ import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Transformation;
 import android.widget.BaseAdapter;
 
 import com.freelanceProject.lavoiedroite.R;
-import com.freelanceProject.lavoiedroite.ui.CarouselAdapter.AdapterContextMenuInfo;
 
 /**
  * 

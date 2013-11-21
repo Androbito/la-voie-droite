@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.FrameLayout.LayoutParams;
 
 import com.freelanceProject.lavoiedroite.R;
 
