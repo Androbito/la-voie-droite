@@ -1,9 +1,6 @@
 package com.freelanceProject.lavoiedroite.beans;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import android.text.InputFilter.LengthFilter;
 
 import com.google.gson.annotations.SerializedName;
 

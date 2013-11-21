@@ -3,8 +3,6 @@ package com.freelanceProject.lavoiedroite.ui;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import com.freelanceProject.lavoiedroite.ui.CarouselAdapter.AdapterDataSetObserver;
-
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.graphics.Matrix;
@@ -15,8 +13,6 @@ import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.BaseSavedState;
-import android.view.View.MeasureSpec;
 import android.widget.AbsSpinner;
 import android.widget.SpinnerAdapter;
 

@@ -56,23 +56,12 @@ public class AudioByThemeActivity extends Activity implements WSHelperListener {
 	@Override
 	public void onThemesLoaded(WsResponseTheme wsResponseTheme) {
 		// TODO Auto-generated method stub
-		Log.i("Categories", "" + wsResponseTheme.getCategories().size());
-		Log.i("coranCat", "" + wsResponseTheme.getThemes().coranCat.size());
-		Log.i("hadithsCat", "" + wsResponseTheme.getThemes().hadithsCat.size());
-		Log.i("croyanceCat",
-				"" + wsResponseTheme.getThemes().croyanceCat.size());
-		Log.i("comportementsCat", ""
-				+ wsResponseTheme.getThemes().comportementsCat.size());
-		Log.i("jurisprudenceCat", ""
-				+ wsResponseTheme.getThemes().jurisprudenceCat.size());
-		Log.i("histoiresCat",
-				"" + wsResponseTheme.getThemes().histoiresCat.size());
-		Log.i("evenementsCat",
-				"" + wsResponseTheme.getThemes().evenementsCat.size());
-		Log.i("familleCat", "" + wsResponseTheme.getThemes().familleCat.size());
-		Log.i("sectesgroupesCat", ""
-				+ wsResponseTheme.getThemes().sectesgroupesCat.size());
-		Log.i("diversCat", "" + wsResponseTheme.getThemes().diversCat.size());
+		Log.i("Nbre de categories", "" + wsResponseTheme.getCategories().size());
+		for (int i = 0; i < wsResponseTheme.getCategories().size(); i++)
+			Log.i(wsResponseTheme.getCategories().get(i).getDetailCategoie(),
+					""
+							+ wsResponseTheme.getCategories().get(i)
+									.getThemes().size());
 	}
 
 	@Override

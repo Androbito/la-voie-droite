@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.annotations.Until;
 
 public class WsResponseLastAdd {
 	@SerializedName("Results")

@@ -13,7 +13,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.freelanceProject.lavoiedroite.R;
 import com.freelanceProject.lavoiedroite.beans.CoursAudio;
