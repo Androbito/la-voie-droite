@@ -14,7 +14,7 @@
             android:id="@+id/txt_theme"
             android:layout_width="wrap_content"
             android:layout_height="0dip"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="25dp"
             android:layout_weight="1"
             android:padding="5dp"
             android:textColor="@android:color/darker_gray" />
