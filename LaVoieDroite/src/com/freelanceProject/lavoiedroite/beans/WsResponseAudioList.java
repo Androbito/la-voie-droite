@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
-public class WsResponseLastAdd {
+public class WsResponseAudioList {
 	@SerializedName("Results")
 	private List<CoursAudio> listCoursAudio;
 

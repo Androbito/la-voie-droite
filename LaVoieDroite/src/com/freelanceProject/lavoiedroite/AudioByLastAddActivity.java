@@ -12,6 +12,7 @@ import android.widget.ListView;
 import com.freelanceProject.lavoiedroite.Adapters.LastAddAdapter;
 import com.freelanceProject.lavoiedroite.beans.CoursAudio;
 import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
+import com.freelanceProject.lavoiedroite.ws.URLs;
 import com.freelanceProject.lavoiedroite.ws.WSHelper;
 import com.freelanceProject.lavoiedroite.ws.WSHelperListener;
 
@@ -29,7 +30,8 @@ public class AudioByLastAddActivity extends Activity implements
 		cManager = (ConnectivityManager) this
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 		WSHelper.getInstance().addWSHelperListener(this);
-		WSHelper.getInstance().getLastAddedCours(cManager, this);
+		WSHelper.getInstance().getAudioCours(
+				URLs.lastAdd + "tid=8&page=0&npage=25", cManager, this);
 	}
 
 	@Override
@@ -45,7 +47,7 @@ public class AudioByLastAddActivity extends Activity implements
 	}
 
 	@Override
-	public void onLastAddLoaded(final List<CoursAudio> lastCours) {
+	public void onAudioListLoaded(final List<CoursAudio> lastCours) {
 		Log.i("Cours :", "" + lastCours.size());
 		runOnUiThread(new Runnable() {
 
@@ -67,13 +69,13 @@ public class AudioByLastAddActivity extends Activity implements
 	@Override
 	public void onThemesLoaded(WsResponseTheme wsResponseTheme) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onErrorLoadingThemes(String string) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
