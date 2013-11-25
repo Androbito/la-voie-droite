@@ -11,7 +11,7 @@ public interface WSHelperListener {
 
 	void onErrorLoadingAuthors(String string);
 
-	void onLastAddLoaded(List<CoursAudio> Cours);
+	void onAudioListLoaded(List<CoursAudio> Cours);
 
 	void onErrorLoadingCours(String string);
 

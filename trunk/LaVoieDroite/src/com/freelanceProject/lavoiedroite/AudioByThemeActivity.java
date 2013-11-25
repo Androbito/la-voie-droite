@@ -59,7 +59,7 @@ public class AudioByThemeActivity extends Activity implements WSHelperListener {
 	}
 
 	@Override
-	public void onLastAddLoaded(List<CoursAudio> Cours) {
+	public void onAudioListLoaded(List<CoursAudio> Cours) {
 		// TODO Auto-generated method stub
 
 	}
