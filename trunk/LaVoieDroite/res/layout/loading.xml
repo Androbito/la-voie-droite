@@ -21,7 +21,7 @@
             android:layout_height="19dp"
             android:paddingTop="2dp"
             android:indeterminateOnly="false"
-            android:max="85"
+            android:max="100"
             android:progressDrawable="@drawable/my_progress" >
         </ProgressBar>
     </LinearLayout>
