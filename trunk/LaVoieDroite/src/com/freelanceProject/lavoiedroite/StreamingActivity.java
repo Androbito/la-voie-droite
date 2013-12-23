@@ -5,20 +5,24 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 public class StreamingActivity extends Activity {
 
 	MediaPlayer mediaPlayer = new MediaPlayer();
 	AudioManager audioManager;
 	ProgressBar volumeControl;
+	ProgressDialog mProgressDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,15 +32,35 @@ public class StreamingActivity extends Activity {
 		audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 		volumeControl.setProgress(100 * (audioManager
 				.getStreamVolume(AudioManager.STREAM_MUSIC) - 1) / 15);
-		Toast.makeText(getApplicationContext(),
-				"" + volumeControl.getProgress(), Toast.LENGTH_SHORT).show();
 	}
 
 	public void Stream(View v) {
-		try {
-			play(new URL("http://37.58.75.163:8060/stream"));
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
+		if (!mediaPlayer.isPlaying()) {
+			mProgressDialog = new ProgressDialog(this);
+			mProgressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+			mProgressDialog.setMessage("Stream loading...");
+			mProgressDialog.show();
+			new Thread((new Runnable() {
+				Message msg = null;
+
+				public void run() {
+					try {
+						play(new URL("http://37.58.75.163:8060/stream"));
+						msg = mHandler.obtainMessage(1);
+						// sends the message to our handler
+						mHandler.sendMessage(msg);
+						mediaPlayer.start();
+					} catch (MalformedURLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			})).start();
+		} else if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+			mediaPlayer.stop();
+			mediaPlayer.reset();
+			((ImageView) findViewById(R.id.imageView1))
+					.setImageResource(R.drawable.play_strm);
 		}
 	}
 
@@ -47,8 +71,6 @@ public class StreamingActivity extends Activity {
 		volumeControl.setProgress(100 * (audioManager
 				.getStreamVolume(AudioManager.STREAM_MUSIC)
 				+ AudioManager.ADJUST_LOWER - 1) / 15);
-		Toast.makeText(getApplicationContext(),
-				"" + volumeControl.getProgress(), Toast.LENGTH_SHORT).show();
 	}
 
 	public void volumeUp(View v) {
@@ -58,32 +80,35 @@ public class StreamingActivity extends Activity {
 		volumeControl.setProgress(100 * (audioManager
 				.getStreamVolume(AudioManager.STREAM_MUSIC)
 				+ AudioManager.ADJUST_RAISE - 1) / 15);
-		Toast.makeText(getApplicationContext(),
-				"" + volumeControl.getProgress(), Toast.LENGTH_SHORT).show();
 	}
 
 	protected void play(URL url) {
-		if (!mediaPlayer.isPlaying()) {
-			try {
-				mediaPlayer.setDataSource(url.toString());
-				mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-				mediaPlayer.prepare();
-				mediaPlayer.start();
+		try {
+			mediaPlayer.setDataSource(url.toString());
+			mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+			mediaPlayer.prepare();
+			mediaPlayer.start();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	final Handler mHandler = new Handler() {
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case 1:
+				mProgressDialog.dismiss();
 				((ImageView) findViewById(R.id.imageView1))
 						.setImageResource(R.drawable.pause_strm);
-			} catch (IllegalArgumentException e) {
-				e.printStackTrace();
-			} catch (SecurityException e) {
-				e.printStackTrace();
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
+				break;
 			}
-		} else {
-			mediaPlayer.stop();
-			((ImageView) findViewById(R.id.imageView1))
-					.setImageResource(R.drawable.play_strm);
 		}
-	}
+	};
 }
