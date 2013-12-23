@@ -7,11 +7,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.freelanceProject.lavoiedroite.R;
@@ -56,33 +53,18 @@ public class LastAddAdapter extends BaseAdapter {
 	public View getView(final int position, final View convertView,
 			final ViewGroup parent) {
 		// TODO Auto-generated method stub
-		final View view = mLayoutInflater.inflate(R.layout.audio_item, parent,
-				false);
+		final View view = mLayoutInflater.inflate(R.layout.lastaudio_item,
+				parent, false);
 		((TextView) view.findViewById(R.id.coursTitleitem)).setText(mListAudio
 				.get(position).getTitle());
-		if (position % 2 == 0)
-			((LinearLayout) view.findViewById(R.id.itemAudioLay))
-					.setBackgroundResource(R.drawable.bg_green);
-		else
-			((LinearLayout) view.findViewById(R.id.itemAudioLay))
-					.setBackgroundResource(R.drawable.bg_blue);
-		((ImageView) view.findViewById(R.id.play))
-				.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View arg0) {
-						// TODO Auto-generated method stub
-						((TextView) mActivity
-								.findViewById(R.id.coursIntervenant))
-								.setText(mListAudio.get(position)
-										.getIntervenant());
-						((TextView) mActivity.findViewById(R.id.coursTitle))
-								.setText(mListAudio.get(position).getTitle());
-//						Toast.makeText(mContext,
-//								mListAudio.get(position).getIntervenant(),
-//								Toast.LENGTH_SHORT).show();
-					}
-				});
+		((TextView) view.findViewById(R.id.coursCategorieitem))
+				.setText(mListAudio.get(position).getCategories());
+		((TextView) view.findViewById(R.id.coursIntervitem)).setText(mListAudio
+				.get(position).getIntervenant());
+		((TextView) view.findViewById(R.id.coursAudioPartitem))
+				.setText(""+mListAudio.get(position).getAudio_count());
+		((TextView) view.findViewById(R.id.coursNbreVisiteuritem))
+				.setText(""+mListAudio.get(position).getVisites());
 		return view;
 	}
 }
