@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/white"
+    android:background="@android:color/transparent"
     android:orientation="vertical"
     android:paddingBottom="1dp"
     android:paddingTop="1dp" >
@@ -47,7 +47,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:paddingTop="8dp"
-                    android:text="Categorie:" />
+                    android:text="Categorie:"
+                    android:textColor="@android:color/darker_gray" />
 
                 <TextView
                     android:id="@+id/coursCategorieitem"
@@ -73,7 +74,8 @@
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nombre de visites:" />
+                    android:text="Nombre de visites:"
+                    android:textColor="@android:color/darker_gray" />
 
                 <TextView
                     android:id="@+id/coursNbreVisiteuritem"
@@ -98,7 +100,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:paddingTop="8dp"
-                    android:text="Intervenant:" />
+                    android:text="Intervenant:"
+                    android:textColor="@android:color/darker_gray" />
 
                 <TextView
                     android:id="@+id/coursIntervitem"
@@ -132,9 +135,17 @@
                     android:id="@+id/coursAudioPartitem"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:text="TextView"
+                    android:textColor="@android:color/darker_gray" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@android:color/darker_gray" />
 
 </LinearLayout>
