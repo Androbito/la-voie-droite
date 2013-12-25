@@ -6,4 +6,6 @@ public class URLs {
 	public static String themes = "http://www.lavoiedroite.com/ws/themes";
 
 	public static String lastAdd = "http://www.lavoiedroite.com/ws/lastadd?";
+	
+	public static String intervenants = "http://www.lavoiedroite.com/ws/intervenants?interv=";
 }
