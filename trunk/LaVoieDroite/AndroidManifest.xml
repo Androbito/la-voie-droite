@@ -38,28 +38,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Menu"
+            android:name="com.freelanceProject.lavoiedroite.Menu"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:name=".CoursAudioActivity"
+            android:name="com.freelanceProject.lavoiedroite.CoursAudioActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:name=".AudioByIntervenantActivity"
+            android:name="com.freelanceProject.lavoiedroite.AudioByIntervenantActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:name=".AudioByLastAddActivity"
+            android:name="com.freelanceProject.lavoiedroite.AudioByLastAddActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:name=".AudioByThemeActivity"
+            android:name="com.freelanceProject.lavoiedroite.AudioByThemeActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
