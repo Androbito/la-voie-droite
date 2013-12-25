@@ -53,7 +53,7 @@ public class LastAddAdapter extends BaseAdapter {
 	public View getView(final int position, final View convertView,
 			final ViewGroup parent) {
 		// TODO Auto-generated method stub
-		final View view = mLayoutInflater.inflate(R.layout.lastaudio_item,
+		final View view = mLayoutInflater.inflate(R.layout.audio_item,
 				parent, false);
 		((TextView) view.findViewById(R.id.coursTitleitem)).setText(mListAudio
 				.get(position).getTitle());
