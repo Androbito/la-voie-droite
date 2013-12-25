@@ -7,9 +7,10 @@ import java.util.Set;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.net.ConnectivityManager;
+import android.util.Log;
 
-import com.freelanceProject.lavoiedroite.beans.WsResponseAuthor;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAudioList;
+import com.freelanceProject.lavoiedroite.beans.WsResponseAuthor;
 import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
 import com.freelanceProject.lavoiedroite.web.WebException;
 import com.freelanceProject.lavoiedroite.web.WebListener;
@@ -72,10 +73,10 @@ public class WSHelper {
 		wt.start();
 	}
 
-	public void getAudioCours(String url,ConnectivityManager manager,
+	public void getAudioCours(String url, ConnectivityManager manager,
 			final Activity context) {
-		WebThread wt = new WebThread(url,
-				WebThread.METHOD_GET, manager, WebThread.ENCODING_UTF_8, false);
+		WebThread wt = new WebThread(url, WebThread.METHOD_GET, manager,
+				WebThread.ENCODING_UTF_8, false);
 		wt.setListener(new WebListener() {
 
 			@Override
@@ -89,6 +90,8 @@ public class WSHelper {
 			public void onFinish(String url, String resultat) {
 				WsResponseAudioList lastAdd = gson.fromJson(resultat,
 						WsResponseAudioList.class);
+				Log.i("url", url);
+				Log.i("getAudioCours", resultat);
 				for (WSHelperListener wsHelperListener : wsHelperListeners)
 					wsHelperListener.onAudioListLoaded(lastAdd
 							.getListCoursAudio());
