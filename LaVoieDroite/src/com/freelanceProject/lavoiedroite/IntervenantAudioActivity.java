@@ -14,15 +14,18 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.freelanceProject.lavoiedroite.Adapters.AuthorsAdapter;
+import com.freelanceProject.lavoiedroite.Adapters.LastAddAdapter;
 import com.freelanceProject.lavoiedroite.beans.CoursAudio;
 import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
+import com.freelanceProject.lavoiedroite.ws.URLs;
 import com.freelanceProject.lavoiedroite.ws.WSHelper;
 import com.freelanceProject.lavoiedroite.ws.WSHelperListener;
 
-public class AudioByIntervenantActivity extends Activity implements
+public class IntervenantAudioActivity extends Activity implements
 		WSHelperListener {
 	ConnectivityManager cManager;
 	ListView lstViewAuteurs;
+	ListView lstViewLastCours;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,14 +47,24 @@ public class AudioByIntervenantActivity extends Activity implements
 			@Override
 			public void run() {
 				lstViewAuteurs.setAdapter(new AuthorsAdapter(
-						AudioByIntervenantActivity.this, auteurs));
+						IntervenantAudioActivity.this, auteurs));
 				lstViewAuteurs
 						.setOnItemClickListener(new OnItemClickListener() {
 
 							@Override
 							public void onItemClick(AdapterView<?> arg0,
 									View arg1, int position, long arg3) {
-								Toast.makeText(AudioByIntervenantActivity.this,
+								setContentView(R.layout.audiobylastadd);
+								lstViewLastCours = (ListView) findViewById(R.id.listViewLastCours);
+								WSHelper.getInstance().addWSHelperListener(
+										IntervenantAudioActivity.this);
+								WSHelper.getInstance().getAudioCours(
+										URLs.intervenants
+												+ auteurs.get(position)[1]
+												+ "&tid=8&page=0&npage=25",
+										cManager,
+										IntervenantAudioActivity.this);
+								Toast.makeText(IntervenantAudioActivity.this,
 										auteurs.get(position)[1],
 										Toast.LENGTH_SHORT).show();
 							}
@@ -67,9 +80,18 @@ public class AudioByIntervenantActivity extends Activity implements
 	}
 
 	@Override
-	public void onAudioListLoaded(List<CoursAudio> Cours) {
+	public void onAudioListLoaded(final List<CoursAudio> Cours) {
 		// TODO Auto-generated method stub
+		Log.i("Cours :", "" + Cours.size());
+		runOnUiThread(new Runnable() {
 
+			@Override
+			public void run() {
+				lstViewLastCours.setAdapter(new LastAddAdapter(
+						IntervenantAudioActivity.this,
+						IntervenantAudioActivity.this, Cours));
+			}
+		});
 	}
 
 	@Override
@@ -81,13 +103,13 @@ public class AudioByIntervenantActivity extends Activity implements
 	@Override
 	public void onThemesLoaded(WsResponseTheme wsResponseTheme) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onErrorLoadingThemes(String string) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

@@ -19,7 +19,7 @@ import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
 import com.freelanceProject.lavoiedroite.ws.WSHelper;
 import com.freelanceProject.lavoiedroite.ws.WSHelperListener;
 
-public class AudioByThemeActivity extends Activity implements WSHelperListener {
+public class ThemeAudioActivity extends Activity implements WSHelperListener {
 	ConnectivityManager cManager;
 	ExpandableListView expandableList;
 	private List<HashMap<String, String>> listCategories = new ArrayList<HashMap<String, String>>(

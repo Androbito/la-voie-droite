@@ -16,7 +16,7 @@ import com.freelanceProject.lavoiedroite.ws.URLs;
 import com.freelanceProject.lavoiedroite.ws.WSHelper;
 import com.freelanceProject.lavoiedroite.ws.WSHelperListener;
 
-public class AudioByLastAddActivity extends Activity implements
+public class LastAddAudioActivity extends Activity implements
 		WSHelperListener {
 	ConnectivityManager cManager;
 	ListView lstViewLastCours;
@@ -54,8 +54,8 @@ public class AudioByLastAddActivity extends Activity implements
 			@Override
 			public void run() {
 				lstViewLastCours.setAdapter(new LastAddAdapter(
-						AudioByLastAddActivity.this,
-						AudioByLastAddActivity.this, lastCours));
+						LastAddAudioActivity.this,
+						LastAddAudioActivity.this, lastCours));
 			}
 		});
 	}
