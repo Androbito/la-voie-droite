@@ -49,17 +49,17 @@
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.freelanceProject.lavoiedroite.AudioByIntervenantActivity"
+            android:name="com.freelanceProject.lavoiedroite.IntervenantAudioActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.freelanceProject.lavoiedroite.AudioByLastAddActivity"
+            android:name="com.freelanceProject.lavoiedroite.LastAddAudioActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.freelanceProject.lavoiedroite.AudioByThemeActivity"
+            android:name="com.freelanceProject.lavoiedroite.ThemeAudioActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
