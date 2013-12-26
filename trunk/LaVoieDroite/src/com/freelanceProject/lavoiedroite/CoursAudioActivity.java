@@ -21,11 +21,11 @@ public class CoursAudioActivity extends TabActivity {
 		setContentView(R.layout.coursaudio);
 		tabHost = getTabHost();
 
-		setupTab(new TextView(this), "Par\nThemes", AudioByThemeActivity.class);
+		setupTab(new TextView(this), "Par\nThemes", ThemeAudioActivity.class);
 		setupTab(new TextView(this), "Par\nIntervenants",
-				AudioByIntervenantActivity.class);
+				IntervenantAudioActivity.class);
 		setupTab(new TextView(this), "Dernier\nAjout",
-				AudioByLastAddActivity.class);
+				LastAddAudioActivity.class);
 		tabHost.setCurrentTab(0);
 	}
 
