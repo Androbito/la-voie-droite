@@ -93,6 +93,13 @@ public class Menu extends Activity {
 					conference.putExtra("tid", "9");
 					startActivity(conference);
 
+				} else if (position == 4) {
+
+					Intent conference = new Intent(view.getContext(),
+							PrechesActivity.class);
+					conference.putExtra("tid", "10");
+					startActivity(conference);
+
 				} else if (position == 3) {
 
 					Intent strm = new Intent(view.getContext(),

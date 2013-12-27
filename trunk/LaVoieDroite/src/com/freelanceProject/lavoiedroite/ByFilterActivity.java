@@ -24,7 +24,7 @@ public class ByFilterActivity extends Activity implements WSHelperListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.audiobyintervenant);
+		setContentView(R.layout.byfiltre);
 		lstViewCoursByIntervenant = (ListView) findViewById(R.id.listViewCours);
 		cManager = (ConnectivityManager) this
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -35,6 +35,8 @@ public class ByFilterActivity extends Activity implements WSHelperListener {
 			((TextView) findViewById(R.id.title)).setText("Conférences");
 		if (getIntent().getStringExtra("tid").equals("8"))
 			((TextView) findViewById(R.id.title)).equals("Cours audio");
+		if (getIntent().getStringExtra("tid").equals("10"))
+			((TextView) findViewById(R.id.title)).equals("Prêches");
 	}
 
 	@Override
