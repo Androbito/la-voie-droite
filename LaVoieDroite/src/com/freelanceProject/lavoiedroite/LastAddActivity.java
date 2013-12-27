@@ -16,7 +16,7 @@ import com.freelanceProject.lavoiedroite.ws.URLs;
 import com.freelanceProject.lavoiedroite.ws.WSHelper;
 import com.freelanceProject.lavoiedroite.ws.WSHelperListener;
 
-public class LastAddAudioActivity extends Activity implements WSHelperListener {
+public class LastAddActivity extends Activity implements WSHelperListener {
 	ConnectivityManager cManager;
 	ListView lstViewLastCours;
 
@@ -30,7 +30,8 @@ public class LastAddAudioActivity extends Activity implements WSHelperListener {
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 		WSHelper.getInstance().addWSHelperListener(this);
 		WSHelper.getInstance().getAudioCours(
-				URLs.lastAdd + "tid=8&page=0&npage=25", cManager, this);
+				URLs.lastAdd + "tid=" + getIntent().getStringExtra("tid")
+						+ "&page=0&npage=25", cManager, this);
 	}
 
 	@Override
@@ -53,8 +54,7 @@ public class LastAddAudioActivity extends Activity implements WSHelperListener {
 			@Override
 			public void run() {
 				lstViewLastCours.setAdapter(new LastAddAdapter(
-						LastAddAudioActivity.this, LastAddAudioActivity.this,
-						lastCours));
+						LastAddActivity.this, LastAddActivity.this, lastCours));
 			}
 		});
 	}

@@ -24,7 +24,7 @@ import com.freelanceProject.lavoiedroite.ws.URLs;
 import com.freelanceProject.lavoiedroite.ws.WSHelper;
 import com.freelanceProject.lavoiedroite.ws.WSHelperListener;
 
-public class ThemeAudioActivity extends Activity implements WSHelperListener {
+public class ThemeActivity extends Activity implements WSHelperListener {
 	ConnectivityManager cManager;
 	ExpandableListView expandableList;
 	private List<HashMap<String, String>> listCategories = new ArrayList<HashMap<String, String>>(
@@ -110,15 +110,18 @@ public class ThemeAudioActivity extends Activity implements WSHelperListener {
 												+ listThemes.get(groupPosition)
 														.get(childPosition)
 														.get("themeId")
-												+ "&tid=8&page=0&npage=25");
-								Toast.makeText(
-										ThemeAudioActivity.this,
-										listCategories.get(groupPosition).get(
-												"categorieName")
-												+ listThemes.get(groupPosition)
-														.get(childPosition)
-														.get("themeId"),
-										Toast.LENGTH_SHORT).show();
+												+ "&tid="
+												+ getIntent().getStringExtra(
+														"tid")
+												+ "&page=0&npage=25");
+								// Toast.makeText(
+								// ThemeActivity.this,
+								// listCategories.get(groupPosition).get(
+								// "categorieName")
+								// + listThemes.get(groupPosition)
+								// .get(childPosition)
+								// .get("themeId"),
+								// Toast.LENGTH_SHORT).show();
 								startActivity(bythemes);
 								return true;
 							}

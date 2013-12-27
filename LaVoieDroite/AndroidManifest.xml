@@ -49,17 +49,17 @@
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.freelanceProject.lavoiedroite.IntervenantAudioActivity"
+            android:name="com.freelanceProject.lavoiedroite.IntervenantActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.freelanceProject.lavoiedroite.LastAddAudioActivity"
+            android:name="com.freelanceProject.lavoiedroite.LastAddActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.freelanceProject.lavoiedroite.ThemeAudioActivity"
+            android:name="com.freelanceProject.lavoiedroite.ThemeActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
@@ -100,6 +100,12 @@
         </activity>
         <activity
             android:name="com.freelanceProject.lavoiedroite.AudioByFilterActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.freelanceProject.lavoiedroite.ConferenceActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
