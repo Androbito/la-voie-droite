@@ -20,8 +20,7 @@ import com.freelanceProject.lavoiedroite.ws.URLs;
 import com.freelanceProject.lavoiedroite.ws.WSHelper;
 import com.freelanceProject.lavoiedroite.ws.WSHelperListener;
 
-public class IntervenantAudioActivity extends Activity implements
-		WSHelperListener {
+public class IntervenantActivity extends Activity implements WSHelperListener {
 	ConnectivityManager cManager;
 	ListView lstViewAuteurs;
 
@@ -45,7 +44,7 @@ public class IntervenantAudioActivity extends Activity implements
 			@Override
 			public void run() {
 				lstViewAuteurs.setAdapter(new AuthorsAdapter(
-						IntervenantAudioActivity.this, auteurs));
+						IntervenantActivity.this, auteurs));
 				lstViewAuteurs
 						.setOnItemClickListener(new OnItemClickListener() {
 
@@ -59,7 +58,10 @@ public class IntervenantAudioActivity extends Activity implements
 										"url",
 										URLs.intervenants
 												+ auteurs.get(position)[1]
-												+ "&tid=8&page=0&npage=25");
+												+ "&tid="
+												+ getIntent().getStringExtra(
+														"tid")
+												+ "&page=0&npage=25");
 								startActivity(goToAudioByIntervenant);
 
 							}

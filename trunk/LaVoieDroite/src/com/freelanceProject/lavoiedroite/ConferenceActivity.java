@@ -11,14 +11,14 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
 @SuppressWarnings("deprecation")
-public class CoursAudioActivity extends TabActivity {
+public class ConferenceActivity extends TabActivity {
 	TabHost tabHost;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.coursaudio);
+		setContentView(R.layout.conferences);
 		tabHost = getTabHost();
 
 		setupTab(new TextView(this), "Par\nThemes", ThemeActivity.class);

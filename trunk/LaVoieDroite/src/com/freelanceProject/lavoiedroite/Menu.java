@@ -83,8 +83,16 @@ public class Menu extends Activity {
 							"Chargement...", true);
 					Intent rech = new Intent(view.getContext(),
 							CoursAudioActivity.class);
+					rech.putExtra("tid", "8");
 					startActivity(rech);
 					dialog.setCancelable(true);
+				} else if (position == 5) {
+
+					Intent conference = new Intent(view.getContext(),
+							ConferenceActivity.class);
+					conference.putExtra("tid", "9");
+					startActivity(conference);
+
 				} else if (position == 3) {
 
 					Intent strm = new Intent(view.getContext(),
