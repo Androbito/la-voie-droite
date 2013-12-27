@@ -2,22 +2,21 @@ package com.freelanceProject.lavoiedroite;
 
 import java.util.List;
 
-import com.freelanceProject.lavoiedroite.Adapters.LastAddAdapter;
-import com.freelanceProject.lavoiedroite.beans.CoursAudio;
-import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
-import com.freelanceProject.lavoiedroite.ws.URLs;
-import com.freelanceProject.lavoiedroite.ws.WSHelper;
-import com.freelanceProject.lavoiedroite.ws.WSHelperListener;
-
 import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
+import android.widget.TextView;
 
-public class AudioByFilterActivity extends Activity implements
-		WSHelperListener {
+import com.freelanceProject.lavoiedroite.Adapters.LastAddAdapter;
+import com.freelanceProject.lavoiedroite.beans.CoursAudio;
+import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
+import com.freelanceProject.lavoiedroite.ws.WSHelper;
+import com.freelanceProject.lavoiedroite.ws.WSHelperListener;
+
+public class ByFilterActivity extends Activity implements WSHelperListener {
 	ListView lstViewCoursByIntervenant;
 	ConnectivityManager cManager;
 
@@ -29,10 +28,13 @@ public class AudioByFilterActivity extends Activity implements
 		lstViewCoursByIntervenant = (ListView) findViewById(R.id.listViewCours);
 		cManager = (ConnectivityManager) this
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
-		WSHelper.getInstance().addWSHelperListener(
-				AudioByFilterActivity.this);
+		WSHelper.getInstance().addWSHelperListener(ByFilterActivity.this);
 		WSHelper.getInstance().getAudioCours(getIntent().getStringExtra("url"),
-				cManager, AudioByFilterActivity.this);
+				cManager, ByFilterActivity.this);
+		if (getIntent().getStringExtra("tid").equals("9"))
+			((TextView) findViewById(R.id.title)).setText("Conférences");
+		if (getIntent().getStringExtra("tid").equals("8"))
+			((TextView) findViewById(R.id.title)).equals("Cours audio");
 	}
 
 	@Override
@@ -56,8 +58,7 @@ public class AudioByFilterActivity extends Activity implements
 			@Override
 			public void run() {
 				lstViewCoursByIntervenant.setAdapter(new LastAddAdapter(
-						AudioByFilterActivity.this,
-						AudioByFilterActivity.this, Cours));
+						ByFilterActivity.this, ByFilterActivity.this, Cours));
 			}
 		});
 	}

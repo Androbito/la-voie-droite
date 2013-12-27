@@ -95,7 +95,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:paddingTop="45dp"
-                        android:text="CONFERENCES" />
+                        android:text="Conférences" />
 
                     <ImageView
                         android:id="@+id/img_options"
