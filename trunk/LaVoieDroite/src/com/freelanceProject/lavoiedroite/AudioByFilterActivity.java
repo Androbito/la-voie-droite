@@ -2,13 +2,6 @@ package com.freelanceProject.lavoiedroite;
 
 import java.util.List;
 
-import android.app.Activity;
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.ListView;
-
 import com.freelanceProject.lavoiedroite.Adapters.LastAddAdapter;
 import com.freelanceProject.lavoiedroite.beans.CoursAudio;
 import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
@@ -16,21 +9,30 @@ import com.freelanceProject.lavoiedroite.ws.URLs;
 import com.freelanceProject.lavoiedroite.ws.WSHelper;
 import com.freelanceProject.lavoiedroite.ws.WSHelperListener;
 
-public class LastAddAudioActivity extends Activity implements WSHelperListener {
+import android.app.Activity;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.ListView;
+
+public class AudioByFilterActivity extends Activity implements
+		WSHelperListener {
+	ListView lstViewCoursByIntervenant;
 	ConnectivityManager cManager;
-	ListView lstViewLastCours;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.audiobylastadd);
-		lstViewLastCours = (ListView) findViewById(R.id.listViewLastCours);
+		setContentView(R.layout.audiobyintervenant);
+		lstViewCoursByIntervenant = (ListView) findViewById(R.id.listViewCours);
 		cManager = (ConnectivityManager) this
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
-		WSHelper.getInstance().addWSHelperListener(this);
-		WSHelper.getInstance().getAudioCours(
-				URLs.lastAdd + "tid=8&page=0&npage=25", cManager, this);
+		WSHelper.getInstance().addWSHelperListener(
+				AudioByFilterActivity.this);
+		WSHelper.getInstance().getAudioCours(getIntent().getStringExtra("url"),
+				cManager, AudioByFilterActivity.this);
 	}
 
 	@Override
@@ -46,15 +48,16 @@ public class LastAddAudioActivity extends Activity implements WSHelperListener {
 	}
 
 	@Override
-	public void onAudioListLoaded(final List<CoursAudio> lastCours) {
-		Log.i("Cours :", "" + lastCours.size());
+	public void onAudioListLoaded(final List<CoursAudio> Cours) {
+		// TODO Auto-generated method stub
+		Log.i("Cours :", "" + Cours.size());
 		runOnUiThread(new Runnable() {
 
 			@Override
 			public void run() {
-				lstViewLastCours.setAdapter(new LastAddAdapter(
-						LastAddAudioActivity.this, LastAddAudioActivity.this,
-						lastCours));
+				lstViewCoursByIntervenant.setAdapter(new LastAddAdapter(
+						AudioByFilterActivity.this,
+						AudioByFilterActivity.this, Cours));
 			}
 		});
 	}
@@ -80,9 +83,7 @@ public class LastAddAudioActivity extends Activity implements WSHelperListener {
 	@Override
 	protected void onStop() {
 		// TODO Auto-generated method stub
-
 		super.onStop();
 		WSHelper.getInstance().removeWSHelperListener(this);
 	}
-
 }
