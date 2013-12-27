@@ -53,18 +53,20 @@ public class LastAddAdapter extends BaseAdapter {
 	public View getView(final int position, final View convertView,
 			final ViewGroup parent) {
 		// TODO Auto-generated method stub
-		final View view = mLayoutInflater.inflate(R.layout.audio_item,
-				parent, false);
+		final View view = mLayoutInflater.inflate(R.layout.audio_item, parent,
+				false);
 		((TextView) view.findViewById(R.id.coursTitleitem)).setText(mListAudio
 				.get(position).getTitle());
 		((TextView) view.findViewById(R.id.coursCategorieitem))
 				.setText(mListAudio.get(position).getCategories());
 		((TextView) view.findViewById(R.id.coursIntervitem)).setText(mListAudio
 				.get(position).getIntervenant());
-		((TextView) view.findViewById(R.id.coursAudioPartitem))
-				.setText(""+mListAudio.get(position).getAudio_count());
-		((TextView) view.findViewById(R.id.coursNbreVisiteuritem))
-				.setText(""+mListAudio.get(position).getVisites());
+		((TextView) view.findViewById(R.id.coursAudioPartitem)).setText(""
+				+ mListAudio.get(position).getAudio_count());
+		((TextView) view.findViewById(R.id.coursNbreVisiteuritem)).setText(""
+				+ mListAudio.get(position).getVisites());
+		((TextView) view.findViewById(R.id.date)).setText(""
+				+ mListAudio.get(position).getDateCreation());
 		return view;
 	}
 }

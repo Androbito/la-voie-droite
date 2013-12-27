@@ -18,6 +18,16 @@ public class CoursAudio {
 	private String visites;
 	@SerializedName("audio_count")
 	private int audio_count;
+	@SerializedName("dateCreation")
+	private String dateCreation;
+
+	public String getDateCreation() {
+		return dateCreation;
+	}
+
+	public void setDateCreation(String dateCreation) {
+		this.dateCreation = dateCreation;
+	}
 
 	public int getNid() {
 		return nid;
