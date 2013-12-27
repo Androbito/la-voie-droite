@@ -53,7 +53,9 @@ public class IntervenantActivity extends Activity implements WSHelperListener {
 									View arg1, int position, long arg3) {
 								Intent goToAudioByIntervenant = new Intent(
 										getApplicationContext(),
-										AudioByFilterActivity.class);
+										ByFilterActivity.class);
+								goToAudioByIntervenant.putExtra("tid",
+										getIntent().getStringExtra("tid"));
 								goToAudioByIntervenant.putExtra(
 										"url",
 										URLs.intervenants

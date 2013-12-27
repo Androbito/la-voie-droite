@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.SimpleExpandableListAdapter;
-import android.widget.Toast;
 
 import com.freelanceProject.lavoiedroite.beans.Categorie;
 import com.freelanceProject.lavoiedroite.beans.CoursAudio;
@@ -103,7 +102,9 @@ public class ThemeActivity extends Activity implements WSHelperListener {
 								// TODO Auto-generated method stub
 								Intent bythemes = new Intent(
 										getApplicationContext(),
-										AudioByFilterActivity.class);
+										ByFilterActivity.class);
+								bythemes.putExtra("tid", getIntent()
+										.getStringExtra("tid"));
 								bythemes.putExtra(
 										"url",
 										URLs.bythemes
