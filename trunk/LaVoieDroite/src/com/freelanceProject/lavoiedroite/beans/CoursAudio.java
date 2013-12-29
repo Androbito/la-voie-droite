@@ -20,6 +20,16 @@ public class CoursAudio {
 	private int audio_count;
 	@SerializedName("dateCreation")
 	private String dateCreation;
+	@SerializedName("audio_type")
+	private AudioType audioType;
+
+	public AudioType getAudioType() {
+		return audioType;
+	}
+
+	public void setAudioType(AudioType audioType) {
+		this.audioType = audioType;
+	}
 
 	public String getDateCreation() {
 		return dateCreation;

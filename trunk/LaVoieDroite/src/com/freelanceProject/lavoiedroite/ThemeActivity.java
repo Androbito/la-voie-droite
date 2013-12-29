@@ -18,6 +18,7 @@ import android.widget.SimpleExpandableListAdapter;
 import com.freelanceProject.lavoiedroite.beans.Categorie;
 import com.freelanceProject.lavoiedroite.beans.CoursAudio;
 import com.freelanceProject.lavoiedroite.beans.Theme;
+import com.freelanceProject.lavoiedroite.beans.WsResponseAudioDetail;
 import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
 import com.freelanceProject.lavoiedroite.ws.URLs;
 import com.freelanceProject.lavoiedroite.ws.WSHelper;
@@ -34,7 +35,7 @@ public class ThemeActivity extends Activity implements WSHelperListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.intervenants);
+		setContentView(R.layout.themes);
 		expandableList = (ExpandableListView) findViewById(R.id.list_theme);
 		SimpleExpandableListAdapter expListAdapter = new SimpleExpandableListAdapter(
 				this, listCategories, R.layout.categorie_group,
@@ -163,6 +164,26 @@ public class ThemeActivity extends Activity implements WSHelperListener {
 
 	@Override
 	public void onErrorLoadingThemes(String string) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+
+		super.onStop();
+		WSHelper.getInstance().removeWSHelperListener(this);
+	}
+
+	@Override
+	public void onDetailItemLoaded(WsResponseAudioDetail wsResponseAudioDetail) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onErrorLoadingItemDetail(String string) {
 		// TODO Auto-generated method stub
 
 	}

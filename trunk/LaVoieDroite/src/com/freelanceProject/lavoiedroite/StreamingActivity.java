@@ -27,7 +27,7 @@ public class StreamingActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.player_laylout);
+		setContentView(R.layout.streaming);
 		volumeControl = (ProgressBar) findViewById(R.id.progress);
 		audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 		volumeControl.setProgress(100 * (audioManager
