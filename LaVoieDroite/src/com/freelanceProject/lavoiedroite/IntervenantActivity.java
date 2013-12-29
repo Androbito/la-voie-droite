@@ -15,6 +15,7 @@ import android.widget.ListView;
 
 import com.freelanceProject.lavoiedroite.Adapters.AuthorsAdapter;
 import com.freelanceProject.lavoiedroite.beans.CoursAudio;
+import com.freelanceProject.lavoiedroite.beans.WsResponseAudioDetail;
 import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
 import com.freelanceProject.lavoiedroite.ws.URLs;
 import com.freelanceProject.lavoiedroite.ws.WSHelper;
@@ -28,7 +29,7 @@ public class IntervenantActivity extends Activity implements WSHelperListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.audiobytheme);
+		setContentView(R.layout.intervenants);
 		lstViewAuteurs = (ListView) findViewById(R.id.listViewAuteurs);
 		cManager = (ConnectivityManager) this
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -102,4 +103,23 @@ public class IntervenantActivity extends Activity implements WSHelperListener {
 
 	}
 
+	@Override
+	public void onDetailItemLoaded(WsResponseAudioDetail wsResponseAudioDetail) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onErrorLoadingItemDetail(String string) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+
+		super.onStop();
+		WSHelper.getInstance().removeWSHelperListener(this);
+	}
 }

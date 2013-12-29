@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.net.ConnectivityManager;
 import android.util.Log;
 
+import com.freelanceProject.lavoiedroite.beans.WsResponseAudioDetail;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAudioList;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAuthor;
 import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
@@ -73,7 +74,7 @@ public class WSHelper {
 		wt.start();
 	}
 
-	public void getAudioCours(String url, ConnectivityManager manager,
+	public void getItemByFilter(String url, ConnectivityManager manager,
 			final Activity context) {
 		WebThread wt = new WebThread(url, WebThread.METHOD_GET, manager,
 				WebThread.ENCODING_UTF_8, false);
@@ -129,6 +130,35 @@ public class WSHelper {
 			public void onError(WebException error) {
 				for (WSHelperListener wsHelperListener : wsHelperListeners)
 					wsHelperListener.onErrorLoadingThemes(error.toString());
+			}
+		});
+		wt.start();
+	}
+
+	public void getItemDetails(ConnectivityManager manager,
+			final Activity context, String idAudio) {
+		WebThread wt = new WebThread(URLs.audio + idAudio,
+				WebThread.METHOD_GET, manager, WebThread.ENCODING_UTF_8, false);
+		wt.setListener(new WebListener() {
+
+			@Override
+			public void onFinishWithParams(String url,
+					Map<String, String> params, String resultat) {
+
+			}
+
+			@Override
+			public void onFinish(String url, String resultat) {
+				WsResponseAudioDetail wsResponseAudioDetail = gson.fromJson(
+						resultat, WsResponseAudioDetail.class);
+				for (WSHelperListener wsHelperListener : wsHelperListeners)
+					wsHelperListener.onDetailItemLoaded(wsResponseAudioDetail);
+			}
+
+			@Override
+			public void onError(WebException error) {
+				for (WSHelperListener wsHelperListener : wsHelperListeners)
+					wsHelperListener.onErrorLoadingItemDetail(error.toString());
 			}
 		});
 		wt.start();

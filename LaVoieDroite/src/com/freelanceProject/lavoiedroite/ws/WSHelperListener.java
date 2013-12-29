@@ -3,6 +3,7 @@ package com.freelanceProject.lavoiedroite.ws;
 import java.util.List;
 
 import com.freelanceProject.lavoiedroite.beans.CoursAudio;
+import com.freelanceProject.lavoiedroite.beans.WsResponseAudioDetail;
 import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
 
 public interface WSHelperListener {
@@ -18,4 +19,8 @@ public interface WSHelperListener {
 	void onThemesLoaded(WsResponseTheme wsResponseTheme);
 
 	void onErrorLoadingThemes(String string);
+
+	void onDetailItemLoaded(WsResponseAudioDetail wsResponseAudioDetail);
+
+	void onErrorLoadingItemDetail(String string);
 }
