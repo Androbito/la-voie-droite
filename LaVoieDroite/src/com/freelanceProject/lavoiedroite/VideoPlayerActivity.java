@@ -22,7 +22,7 @@ public class VideoPlayerActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.video);
 		String url = getIntent().getStringExtra("url");
-		videoID = url.substring(url.indexOf("=")+1);
+		videoID = url.substring(url.indexOf("=") + 1);
 		Log.i("videoId", videoID);
 		back = (ImageView) findViewById(R.id.back);
 		((TextView) findViewById(R.id.textVideoTitre)).setText(getIntent()
@@ -45,7 +45,7 @@ public class VideoPlayerActivity extends Activity {
 				final WebView myWebView = (WebView) findViewById(R.id.webVideo);
 				myWebView.getSettings().setJavaScriptEnabled(true);
 				myWebView.getSettings().setPluginState(PluginState.ON);
-				myWebView.loadUrl("https://www.youtube.com/embed/" + videoID
+				myWebView.loadUrl("http://www.youtube.com/embed/" + videoID
 						+ "?autoplay=1&vq=small");
 				myWebView.setWebChromeClient(new WebChromeClient());
 
