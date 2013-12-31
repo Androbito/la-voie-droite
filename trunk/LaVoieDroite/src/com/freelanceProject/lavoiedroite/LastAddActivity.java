@@ -14,8 +14,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.freelanceProject.lavoiedroite.Adapters.LastAddAdapter;
-import com.freelanceProject.lavoiedroite.beans.CoursAudio;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAudioDetail;
+import com.freelanceProject.lavoiedroite.beans.WsResponseAudioList;
 import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
 import com.freelanceProject.lavoiedroite.ws.URLs;
 import com.freelanceProject.lavoiedroite.ws.WSHelper;
@@ -24,6 +24,7 @@ import com.freelanceProject.lavoiedroite.ws.WSHelperListener;
 public class LastAddActivity extends Activity implements WSHelperListener {
 	ConnectivityManager cManager;
 	ListView lstViewLastCours;
+	private String titre;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,12 @@ public class LastAddActivity extends Activity implements WSHelperListener {
 		WSHelper.getInstance().getItemByFilter(
 				URLs.lastAdd + "tid=" + getIntent().getStringExtra("tid")
 						+ "&page=0&npage=25", cManager, this);
+		if (getIntent().getStringExtra("tid").equals("9"))
+			titre = "Conférences";
+		if (getIntent().getStringExtra("tid").equals("8"))
+			titre = "Cours audio";
+		if (getIntent().getStringExtra("tid").equals("10"))
+			titre = "Prêches";
 	}
 
 	@Override
@@ -52,30 +59,44 @@ public class LastAddActivity extends Activity implements WSHelperListener {
 	}
 
 	@Override
-	public void onAudioListLoaded(final List<CoursAudio> lastCours) {
-		Log.i("Cours :", "" + lastCours.size());
+	public void onAudioListLoaded(final WsResponseAudioList wsResponseAudioList) {
+		Log.i("Cours :", "" + wsResponseAudioList.getListCoursAudio().size());
 		runOnUiThread(new Runnable() {
 
 			@Override
 			public void run() {
 				lstViewLastCours.setAdapter(new LastAddAdapter(
-						LastAddActivity.this, LastAddActivity.this, lastCours));
+						LastAddActivity.this, LastAddActivity.this,
+						wsResponseAudioList.getListCoursAudio()));
 				lstViewLastCours
 						.setOnItemClickListener(new OnItemClickListener() {
 
 							@Override
 							public void onItemClick(AdapterView<?> arg0,
 									View arg1, int position, long arg3) {
-								if (!lastCours.get(position).getAudioType()
+								if (!wsResponseAudioList.getListCoursAudio()
+										.get(position).getAudioType()
 										.getValue().equalsIgnoreCase("serie")) {
 									Intent goToAudiodetail = new Intent(
 											getApplicationContext(),
-											AudioCoursActivity.class);
-									goToAudiodetail.putExtra("idAudio", ""
-											+ lastCours.get(position).getNid());
-									goToAudiodetail.putExtra("intervenant", ""
-											+ lastCours.get(position)
-													.getIntervenant());
+											AudioFilesActivity.class);
+									goToAudiodetail.putExtra("title", titre);
+									goToAudiodetail
+											.putExtra(
+													"idAudio",
+													""
+															+ wsResponseAudioList
+																	.getListCoursAudio()
+																	.get(position)
+																	.getNid());
+									goToAudiodetail
+											.putExtra(
+													"intervenant",
+													""
+															+ wsResponseAudioList
+																	.getListCoursAudio()
+																	.get(position)
+																	.getIntervenant());
 									startActivity(goToAudiodetail);
 								}
 

@@ -94,8 +94,7 @@ public class WSHelper {
 				Log.i("url", url);
 				Log.i("getAudioCours", resultat);
 				for (WSHelperListener wsHelperListener : wsHelperListeners)
-					wsHelperListener.onAudioListLoaded(lastAdd
-							.getListCoursAudio());
+					wsHelperListener.onAudioListLoaded(lastAdd);
 			}
 
 			@Override

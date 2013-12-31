@@ -11,7 +11,7 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
 @SuppressWarnings("deprecation")
-public class CoursAudioActivity extends TabActivity {
+public class CoursActivity extends TabActivity {
 	TabHost tabHost;
 
 	/** Called when the activity is first created. */

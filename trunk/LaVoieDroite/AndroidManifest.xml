@@ -44,7 +44,7 @@
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.freelanceProject.lavoiedroite.CoursAudioActivity"
+            android:name="com.freelanceProject.lavoiedroite.CoursActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
@@ -117,7 +117,7 @@
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.freelanceProject.lavoiedroite.AudioCoursActivity"
+            android:name="com.freelanceProject.lavoiedroite.AudioFilesActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >

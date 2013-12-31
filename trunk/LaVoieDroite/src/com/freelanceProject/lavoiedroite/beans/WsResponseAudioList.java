@@ -8,6 +8,16 @@ import com.google.gson.annotations.SerializedName;
 public class WsResponseAudioList {
 	@SerializedName("Results")
 	private List<CoursAudio> listCoursAudio;
+	@SerializedName("interInfoBar")
+	private InfoBar interInfoBar;
+
+	public InfoBar getInterInfoBar() {
+		return interInfoBar;
+	}
+
+	public void setInterInfoBar(InfoBar interInfoBar) {
+		this.interInfoBar = interInfoBar;
+	}
 
 	public List<CoursAudio> getListCoursAudio() {
 		if (listCoursAudio == null)
