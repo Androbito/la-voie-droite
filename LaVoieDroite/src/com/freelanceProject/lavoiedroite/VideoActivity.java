@@ -17,6 +17,7 @@ import android.widget.ListView;
 import com.freelanceProject.lavoiedroite.Adapters.VideoAdapter;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAudioDetail;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAudioList;
+import com.freelanceProject.lavoiedroite.beans.WsResponseEvents;
 import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
 import com.freelanceProject.lavoiedroite.beans.WsResponseVideo;
 import com.freelanceProject.lavoiedroite.ws.WSHelper;
@@ -136,5 +137,17 @@ public class VideoActivity extends Activity implements WSHelperListener {
 
 		super.onStop();
 		WSHelper.getInstance().removeWSHelperListener(this);
+	}
+
+	@Override
+	public void onEventsLoaded(WsResponseEvents wsResponseEvents) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onErrorLoadingEvents(String string) {
+		// TODO Auto-generated method stub
+
 	}
 }
