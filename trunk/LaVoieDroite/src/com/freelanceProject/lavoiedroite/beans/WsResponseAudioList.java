@@ -12,7 +12,10 @@ public class WsResponseAudioList {
 	private InfoBar interInfoBar;
 
 	public InfoBar getInterInfoBar() {
-		return interInfoBar;
+		if (interInfoBar == null)
+			return new InfoBar(0, 0, 0, 0);
+		else
+			return interInfoBar;
 	}
 
 	public void setInterInfoBar(InfoBar interInfoBar) {
