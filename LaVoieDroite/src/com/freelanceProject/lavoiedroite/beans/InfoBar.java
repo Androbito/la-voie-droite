@@ -12,6 +12,14 @@ public class InfoBar {
 	@SerializedName("articles")
 	private int articles;
 
+	public InfoBar(int cours_audio, int conferences, int preches, int articles) {
+		super();
+		this.cours_audio = cours_audio;
+		this.conferences = conferences;
+		this.preches = preches;
+		this.articles = articles;
+	}
+
 	public int getCours_audio() {
 		return cours_audio;
 	}

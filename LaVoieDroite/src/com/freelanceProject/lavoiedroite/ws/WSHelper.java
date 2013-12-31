@@ -47,11 +47,16 @@ public class WSHelper {
 
 			private void onFinishGetAuteurs(String resultat, Activity context) {
 				// TODO Auto-generated method stub
-				WsResponseAuthor Auteurs = gson.fromJson(resultat,
-						WsResponseAuthor.class);
-				for (WSHelperListener wsHelperListener : wsHelperListeners)
-					wsHelperListener.onAuthorsLoaded(Auteurs.authors);
-
+				if (resultat.equals("{\"Error\":\"No result was found !!!\"}"))
+					for (WSHelperListener wsHelperListener : wsHelperListeners)
+						wsHelperListener
+								.onErrorLoadingAuthors("pas de resultat");
+				else {
+					WsResponseAuthor Auteurs = gson.fromJson(resultat,
+							WsResponseAuthor.class);
+					for (WSHelperListener wsHelperListener : wsHelperListeners)
+						wsHelperListener.onAuthorsLoaded(Auteurs.authors);
+				}
 			}
 
 			public void onError(WebException error) {
@@ -89,12 +94,17 @@ public class WSHelper {
 
 			@Override
 			public void onFinish(String url, String resultat) {
-				WsResponseAudioList lastAdd = gson.fromJson(resultat,
-						WsResponseAudioList.class);
-				Log.i("url", url);
-				Log.i("getAudioCours", resultat);
-				for (WSHelperListener wsHelperListener : wsHelperListeners)
-					wsHelperListener.onAudioListLoaded(lastAdd);
+				if (resultat.equals("{\"Error\":\"No result was found !!!\"}"))
+					for (WSHelperListener wsHelperListener : wsHelperListeners)
+						wsHelperListener.onErrorLoadingCours("pas de resultat");
+				else {
+					WsResponseAudioList lastAdd = gson.fromJson(resultat,
+							WsResponseAudioList.class);
+					Log.i("url", url);
+					Log.i("getAudioCours", resultat);
+					for (WSHelperListener wsHelperListener : wsHelperListeners)
+						wsHelperListener.onAudioListLoaded(lastAdd);
+				}
 			}
 
 			@Override
@@ -119,10 +129,16 @@ public class WSHelper {
 
 			@Override
 			public void onFinish(String url, String resultat) {
-				WsResponseTheme wsResponseTheme = gson.fromJson(resultat,
-						WsResponseTheme.class);
-				for (WSHelperListener wsHelperListener : wsHelperListeners)
-					wsHelperListener.onThemesLoaded(wsResponseTheme);
+				if (resultat.equals("{\"Error\":\"No result was found !!!\"}"))
+					for (WSHelperListener wsHelperListener : wsHelperListeners)
+						wsHelperListener
+								.onErrorLoadingThemes("pas de resultat");
+				else {
+					WsResponseTheme wsResponseTheme = gson.fromJson(resultat,
+							WsResponseTheme.class);
+					for (WSHelperListener wsHelperListener : wsHelperListeners)
+						wsHelperListener.onThemesLoaded(wsResponseTheme);
+				}
 			}
 
 			@Override
@@ -148,10 +164,17 @@ public class WSHelper {
 
 			@Override
 			public void onFinish(String url, String resultat) {
-				WsResponseAudioDetail wsResponseAudioDetail = gson.fromJson(
-						resultat, WsResponseAudioDetail.class);
-				for (WSHelperListener wsHelperListener : wsHelperListeners)
-					wsHelperListener.onDetailItemLoaded(wsResponseAudioDetail);
+				if (resultat.equals("{\"Error\":\"No result was found !!!\"}"))
+					for (WSHelperListener wsHelperListener : wsHelperListeners)
+						wsHelperListener
+								.onErrorLoadingItemDetail("pas de resultat");
+				else {
+					WsResponseAudioDetail wsResponseAudioDetail = gson
+							.fromJson(resultat, WsResponseAudioDetail.class);
+					for (WSHelperListener wsHelperListener : wsHelperListeners)
+						wsHelperListener
+								.onDetailItemLoaded(wsResponseAudioDetail);
+				}
 			}
 
 			@Override
