@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.freelanceProject.lavoiedroite.Videos.ImagesVideo;
 import com.freelanceProject.lavoiedroite.event.MainActivity;
 import com.freelanceProject.lavoiedroite.ui.Carousel;
 import com.freelanceProject.lavoiedroite.ui.CarouselAdapter;
@@ -118,7 +117,7 @@ public class Menu extends Activity {
 					ProgressDialog dialog = ProgressDialog.show(Menu.this, "",
 							"Chargement...", true);
 					Intent rech = new Intent(view.getContext(),
-							ImagesVideo.class);
+							VideoActivity.class);
 					startActivity(rech);
 					dialog.setCancelable(true);
 				}

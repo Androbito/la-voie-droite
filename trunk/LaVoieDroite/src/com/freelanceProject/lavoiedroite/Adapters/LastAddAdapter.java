@@ -5,10 +5,12 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.freelanceProject.lavoiedroite.R;
@@ -55,6 +57,9 @@ public class LastAddAdapter extends BaseAdapter {
 		// TODO Auto-generated method stub
 		final View view = mLayoutInflater.inflate(R.layout.audio_item, parent,
 				false);
+		if (position % 2 == 00)
+			((LinearLayout) view.findViewById(R.id.itemAudioLay))
+					.setBackgroundColor(Color.parseColor("#100000FF"));
 		((TextView) view.findViewById(R.id.coursTitleitem)).setText(mListAudio
 				.get(position).getTitle());
 		((TextView) view.findViewById(R.id.coursCategorieitem))

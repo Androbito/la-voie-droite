@@ -13,6 +13,7 @@ import com.freelanceProject.lavoiedroite.beans.WsResponseAudioDetail;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAudioList;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAuthor;
 import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
+import com.freelanceProject.lavoiedroite.beans.WsResponseVideo;
 import com.freelanceProject.lavoiedroite.web.WebException;
 import com.freelanceProject.lavoiedroite.web.WebListener;
 import com.freelanceProject.lavoiedroite.web.WebThread;
@@ -181,6 +182,42 @@ public class WSHelper {
 			public void onError(WebException error) {
 				for (WSHelperListener wsHelperListener : wsHelperListeners)
 					wsHelperListener.onErrorLoadingItemDetail(error.toString());
+			}
+		});
+		wt.start();
+	}
+
+	public void getVideo(ConnectivityManager manager, final Activity context) {
+		WebThread wt = new WebThread(URLs.videoUrl, WebThread.METHOD_GET,
+				manager, WebThread.ENCODING_UTF_8, false);
+		wt.setListener(new WebListener() {
+
+			@Override
+			public void onFinishWithParams(String url,
+					Map<String, String> params, String resultat) {
+
+			}
+
+			@Override
+			public void onFinish(String url, String resultat) {
+				Log.i("urlVideo", url);
+				Log.i("resultat-Video", resultat);
+
+				if (resultat.equals("{\"Error\":\"No result was found !!!\"}"))
+					for (WSHelperListener wsHelperListener : wsHelperListeners)
+						wsHelperListener.onErrorLoadingVideo("pas de resultat");
+				else {
+					WsResponseVideo wsResponseVideo = gson.fromJson(resultat,
+							WsResponseVideo.class);
+					for (WSHelperListener wsHelperListener : wsHelperListeners)
+						wsHelperListener.onVideoLoaded(wsResponseVideo);
+				}
+			}
+
+			@Override
+			public void onError(WebException error) {
+				for (WSHelperListener wsHelperListener : wsHelperListeners)
+					wsHelperListener.onErrorLoadingVideo(error.toString());
 			}
 		});
 		wt.start();

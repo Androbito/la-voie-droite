@@ -12,10 +12,51 @@
 
         <include layout="@layout/header_back" />
 
-        <VideoView
-            android:id="@+id/video"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"/>
+        <WebView
+            android:id="@+id/webVideo"
+            android:layout_width="match_parent"
+            android:layout_height="238dp" />
+
+        <ScrollView
+            android:id="@+id/scrollView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Titre:"
+                    android:textColor="#004493" />
+
+                <TextView
+                    android:id="@+id/textVideoTitre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Small Text"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="#626262" />
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Details:"
+                    android:textColor="#004493" />
+
+                <TextView
+                    android:id="@+id/textVideoDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textColor="#626262" />
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 
 </FrameLayout>
