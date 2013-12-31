@@ -1,63 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
     android:orientation="vertical" >
 
     <LinearLayout
+        android:id="@+id/layVideo"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:paddingTop="10dp" >
+        android:layout_height="wrap_content" >
 
-        <ImageView
-            android:id="@+id/play_video"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/play_videos"
-            android:layout_gravity="center" />
-    </LinearLayout>
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/image_video"
+            android:gravity="center"
+            android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/black"
-        android:orientation="horizontal"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp" >
-
-        <TextView
-            android:id="@+id/tutre_video"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:text="Titre vidéo"
-            android:textColor="@android:color/white" />
+            <ImageView
+                android:id="@+id/play_video"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/play_videos" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
             android:orientation="vertical"
-            android:padding="5dp" >
+            android:padding="3dp" >
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:orientation="horizontal"
-                android:padding="5dp" >
+                android:text="Titre:"
+                android:textColor="#004493" />
 
-                <TextView
-                    android:id="@+id/nom"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:gravity="center_horizontal"
-                    android:singleLine="true"
-                    android:text="30:30"
-                    android:textColor="@android:color/white" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/textVideoTitre"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:text="Small Text"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#626262" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Details:"
+                android:textColor="#004493" />
+
+            <TextView
+                android:id="@+id/textVideoDetails"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:text="TextView"
+                android:textColor="#626262" />
         </LinearLayout>
     </LinearLayout>
 

@@ -19,6 +19,7 @@ import com.freelanceProject.lavoiedroite.Adapters.LastAddAdapter;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAudioDetail;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAudioList;
 import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
+import com.freelanceProject.lavoiedroite.beans.WsResponseVideo;
 import com.freelanceProject.lavoiedroite.ws.WSHelper;
 import com.freelanceProject.lavoiedroite.ws.WSHelperListener;
 
@@ -164,5 +165,17 @@ public class ByFilterActivity extends Activity implements WSHelperListener {
 	public void onErrorLoadingItemDetail(String string) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void onVideoLoaded(WsResponseVideo wsResponseVideo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onErrorLoadingVideo(String string) {
+		// TODO Auto-generated method stub
+		
 	}
 }

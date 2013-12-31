@@ -81,13 +81,13 @@
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.freelanceProject.lavoiedroite.Videos.CoursVideo"
+            android:name="com.freelanceProject.lavoiedroite.VideoPlayerActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.freelanceProject.lavoiedroite.Videos.ImagesVideo"
+            android:name="com.freelanceProject.lavoiedroite.VideoActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
