@@ -10,13 +10,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.freelanceProject.lavoiedroite.Adapters.LastAddAdapter;
-import com.freelanceProject.lavoiedroite.beans.CoursAudio;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAudioDetail;
+import com.freelanceProject.lavoiedroite.beans.WsResponseAudioList;
 import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
 import com.freelanceProject.lavoiedroite.ws.WSHelper;
 import com.freelanceProject.lavoiedroite.ws.WSHelperListener;
@@ -24,6 +25,7 @@ import com.freelanceProject.lavoiedroite.ws.WSHelperListener;
 public class ByFilterActivity extends Activity implements WSHelperListener {
 	ListView lstViewCoursByIntervenant;
 	ConnectivityManager cManager;
+	String titre = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +39,19 @@ public class ByFilterActivity extends Activity implements WSHelperListener {
 		WSHelper.getInstance().getItemByFilter(
 				getIntent().getStringExtra("url"), cManager,
 				ByFilterActivity.this);
+		if (getIntent().getBooleanExtra("isByInter", false)) {
+			((LinearLayout) findViewById(R.id.interBarInfo))
+					.setVisibility(View.VISIBLE);
+			((TextView) findViewById(R.id.intervenantName)).setText(getIntent()
+					.getStringExtra("intervenantName"));
+		}
 		if (getIntent().getStringExtra("tid").equals("9"))
-			((TextView) findViewById(R.id.title)).setText("Conférences");
+			titre = "Conférences";
 		if (getIntent().getStringExtra("tid").equals("8"))
-			((TextView) findViewById(R.id.title)).equals("Cours audio");
+			titre = "Cours audio";
 		if (getIntent().getStringExtra("tid").equals("10"))
-			((TextView) findViewById(R.id.title)).equals("Prêches");
+			titre = "Prêches";
+		((TextView) findViewById(R.id.title)).setText(titre);
 	}
 
 	@Override
@@ -58,31 +67,59 @@ public class ByFilterActivity extends Activity implements WSHelperListener {
 	}
 
 	@Override
-	public void onAudioListLoaded(final List<CoursAudio> Cours) {
+	public void onAudioListLoaded(final WsResponseAudioList wsResponseAudioList) {
 		// TODO Auto-generated method stub
-		Log.i("Cours :", "" + Cours.size());
+		Log.i("Cours :", "" + wsResponseAudioList.getListCoursAudio().size());
 		runOnUiThread(new Runnable() {
 
 			@Override
 			public void run() {
 				lstViewCoursByIntervenant.setAdapter(new LastAddAdapter(
-						ByFilterActivity.this, ByFilterActivity.this, Cours));
+						ByFilterActivity.this, ByFilterActivity.this,
+						wsResponseAudioList.getListCoursAudio()));
+				if (getIntent().getBooleanExtra("isByInter", false)) {
+					((TextView) findViewById(R.id.nbreArt)).setText("("
+							+ wsResponseAudioList.getInterInfoBar()
+									.getArticles() + ")");
+					((TextView) findViewById(R.id.nbreConf)).setText("("
+							+ wsResponseAudioList.getInterInfoBar()
+									.getConferences() + ")");
+					((TextView) findViewById(R.id.nbreCours)).setText("("
+							+ wsResponseAudioList.getInterInfoBar()
+									.getCours_audio() + ")");
+					((TextView) findViewById(R.id.nbrePre)).setText("("
+							+ wsResponseAudioList.getInterInfoBar()
+									.getPreches() + ")");
+				}
 				lstViewCoursByIntervenant
 						.setOnItemClickListener(new OnItemClickListener() {
 
 							@Override
 							public void onItemClick(AdapterView<?> arg0,
 									View arg1, int position, long arg3) {
-								if (!Cours.get(position).getAudioType()
+								if (!wsResponseAudioList.getListCoursAudio()
+										.get(position).getAudioType()
 										.getValue().equalsIgnoreCase("serie")) {
 									Intent goToAudiodetail = new Intent(
 											getApplicationContext(),
-											AudioCoursActivity.class);
-									goToAudiodetail.putExtra("idAudio", ""
-											+ Cours.get(position).getNid());
-									goToAudiodetail.putExtra("intervenant", ""
-											+ Cours.get(position)
-													.getIntervenant());
+											AudioFilesActivity.class);
+									goToAudiodetail.putExtra("title", titre);
+									goToAudiodetail
+											.putExtra(
+													"idAudio",
+													""
+															+ wsResponseAudioList
+																	.getListCoursAudio()
+																	.get(position)
+																	.getNid());
+									goToAudiodetail
+											.putExtra(
+													"intervenant",
+													""
+															+ wsResponseAudioList
+																	.getListCoursAudio()
+																	.get(position)
+																	.getIntervenant());
 									startActivity(goToAudiodetail);
 								}
 

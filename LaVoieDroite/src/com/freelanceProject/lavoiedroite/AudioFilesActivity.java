@@ -2,20 +2,21 @@ package com.freelanceProject.lavoiedroite;
 
 import java.util.List;
 
-import com.freelanceProject.lavoiedroite.Adapters.AudioElementAdapter;
-import com.freelanceProject.lavoiedroite.beans.CoursAudio;
-import com.freelanceProject.lavoiedroite.beans.WsResponseAudioDetail;
-import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
-import com.freelanceProject.lavoiedroite.ws.WSHelper;
-import com.freelanceProject.lavoiedroite.ws.WSHelperListener;
-
 import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.TextView;
 
-public class AudioCoursActivity extends Activity implements WSHelperListener {
+import com.freelanceProject.lavoiedroite.Adapters.AudioElementAdapter;
+import com.freelanceProject.lavoiedroite.beans.WsResponseAudioDetail;
+import com.freelanceProject.lavoiedroite.beans.WsResponseAudioList;
+import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
+import com.freelanceProject.lavoiedroite.ws.WSHelper;
+import com.freelanceProject.lavoiedroite.ws.WSHelperListener;
+
+public class AudioFilesActivity extends Activity implements WSHelperListener {
 
 	ConnectivityManager cManager;
 	ListView lstViewAudios;
@@ -31,6 +32,8 @@ public class AudioCoursActivity extends Activity implements WSHelperListener {
 		WSHelper.getInstance().addWSHelperListener(this);
 		WSHelper.getInstance().getItemDetails(cManager, this,
 				getIntent().getStringExtra("idAudio"));
+		((TextView) findViewById(R.id.title)).setText(getIntent()
+				.getStringExtra("title"));
 	}
 
 	@Override
@@ -45,11 +48,6 @@ public class AudioCoursActivity extends Activity implements WSHelperListener {
 
 	}
 
-	@Override
-	public void onAudioListLoaded(List<CoursAudio> Cours) {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public void onErrorLoadingCours(String string) {
@@ -79,7 +77,7 @@ public class AudioCoursActivity extends Activity implements WSHelperListener {
 			public void run() {
 				// TODO Auto-generated method stub
 				lstViewAudios.setAdapter(new AudioElementAdapter(
-						getApplicationContext(), AudioCoursActivity.this,
+						getApplicationContext(), AudioFilesActivity.this,
 						wsResponseAudioDetail.getListAudio(), getIntent()
 								.getStringExtra("intervenant")));
 			}
@@ -98,6 +96,12 @@ public class AudioCoursActivity extends Activity implements WSHelperListener {
 	public void onErrorLoadingItemDetail(String string) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void onAudioListLoaded(WsResponseAudioList wsResponseAudioList) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

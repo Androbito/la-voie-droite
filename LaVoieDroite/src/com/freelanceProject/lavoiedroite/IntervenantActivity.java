@@ -14,8 +14,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.freelanceProject.lavoiedroite.Adapters.AuthorsAdapter;
-import com.freelanceProject.lavoiedroite.beans.CoursAudio;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAudioDetail;
+import com.freelanceProject.lavoiedroite.beans.WsResponseAudioList;
 import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
 import com.freelanceProject.lavoiedroite.ws.URLs;
 import com.freelanceProject.lavoiedroite.ws.WSHelper;
@@ -58,6 +58,11 @@ public class IntervenantActivity extends Activity implements WSHelperListener {
 								goToAudioByIntervenant.putExtra("tid",
 										getIntent().getStringExtra("tid"));
 								goToAudioByIntervenant.putExtra(
+										"intervenantName",
+										auteurs.get(position)[0]);
+								goToAudioByIntervenant.putExtra("isByInter",
+										true);
+								goToAudioByIntervenant.putExtra(
 										"url",
 										URLs.intervenants
 												+ auteurs.get(position)[1]
@@ -75,12 +80,6 @@ public class IntervenantActivity extends Activity implements WSHelperListener {
 
 	@Override
 	public void onErrorLoadingAuthors(String string) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onAudioListLoaded(final List<CoursAudio> Cours) {
 		// TODO Auto-generated method stub
 
 	}
@@ -121,5 +120,11 @@ public class IntervenantActivity extends Activity implements WSHelperListener {
 
 		super.onStop();
 		WSHelper.getInstance().removeWSHelperListener(this);
+	}
+
+	@Override
+	public void onAudioListLoaded(WsResponseAudioList wsResponseAudioList) {
+		// TODO Auto-generated method stub
+
 	}
 }

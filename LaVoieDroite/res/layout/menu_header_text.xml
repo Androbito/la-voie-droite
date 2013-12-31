@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:paddingTop="45dp"
-            android:text="COURS AUDIO"/>
+            android:text="Cours audio"/>
 
         <ImageView
             android:id="@+id/img_options"

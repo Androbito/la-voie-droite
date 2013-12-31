@@ -16,9 +16,9 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.SimpleExpandableListAdapter;
 
 import com.freelanceProject.lavoiedroite.beans.Categorie;
-import com.freelanceProject.lavoiedroite.beans.CoursAudio;
 import com.freelanceProject.lavoiedroite.beans.Theme;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAudioDetail;
+import com.freelanceProject.lavoiedroite.beans.WsResponseAudioList;
 import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
 import com.freelanceProject.lavoiedroite.ws.URLs;
 import com.freelanceProject.lavoiedroite.ws.WSHelper;
@@ -59,12 +59,6 @@ public class ThemeActivity extends Activity implements WSHelperListener {
 
 	@Override
 	public void onErrorLoadingAuthors(String string) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onAudioListLoaded(List<CoursAudio> Cours) {
 		// TODO Auto-generated method stub
 
 	}
@@ -184,6 +178,12 @@ public class ThemeActivity extends Activity implements WSHelperListener {
 
 	@Override
 	public void onErrorLoadingItemDetail(String string) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onAudioListLoaded(WsResponseAudioList wsResponseAudioList) {
 		// TODO Auto-generated method stub
 
 	}
