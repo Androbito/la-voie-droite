@@ -100,6 +100,14 @@ public class StreamingActivity extends Activity {
 
 	}
 
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		mediaPlayer.stop();
+		mediaPlayer.reset();
+	}
+
 	final Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {

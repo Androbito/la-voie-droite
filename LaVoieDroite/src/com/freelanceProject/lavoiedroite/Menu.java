@@ -1,7 +1,6 @@
 package com.freelanceProject.lavoiedroite;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -75,50 +74,37 @@ public class Menu extends Activity {
 			@Override
 			public void onItemClick(CarouselAdapter<?> parent, View view,
 					int position, long id) {
-
-				if (position == 6) {
-					ProgressDialog dialog = ProgressDialog.show(Menu.this, "",
-							"Chargement...", true);
+				if (position == 0) {
 					Intent rech = new Intent(view.getContext(),
-							CoursActivity.class);
-					rech.putExtra("tid", "8");
+							EventActivity.class);
 					startActivity(rech);
-					dialog.setCancelable(true);
-				} else if (position == 5) {
-
-					Intent conference = new Intent(view.getContext(),
-							ConferenceActivity.class);
-					conference.putExtra("tid", "9");
-					startActivity(conference);
-
+				} else if (position == 1) {
+					Intent rech = new Intent(view.getContext(),
+							NewCoursActivity.class);
+					startActivity(rech);
+				} else if (position == 3) {
+					Intent strm = new Intent(view.getContext(),
+							StreamingActivity.class);
+					startActivity(strm);
 				} else if (position == 4) {
-
 					Intent conference = new Intent(view.getContext(),
 							PrechesActivity.class);
 					conference.putExtra("tid", "10");
 					startActivity(conference);
-
-				} else if (position == 3) {
-
-					Intent strm = new Intent(view.getContext(),
-							StreamingActivity.class);
-
-					startActivity(strm);
-
-				} else if (position == 0) {
-					ProgressDialog dialog = ProgressDialog.show(Menu.this, "",
-							"Chargement...", true);
+				} else if (position == 5) {
+					Intent conference = new Intent(view.getContext(),
+							ConferenceActivity.class);
+					conference.putExtra("tid", "9");
+					startActivity(conference);
+				} else if (position == 6) {
 					Intent rech = new Intent(view.getContext(),
-							EventActivity.class);
+							CoursActivity.class);
+					rech.putExtra("tid", "8");
 					startActivity(rech);
-					dialog.setCancelable(true);
 				} else if (position == 7) {
-					ProgressDialog dialog = ProgressDialog.show(Menu.this, "",
-							"Chargement...", true);
 					Intent rech = new Intent(view.getContext(),
 							VideoActivity.class);
 					startActivity(rech);
-					dialog.setCancelable(true);
 				}
 			}
 
