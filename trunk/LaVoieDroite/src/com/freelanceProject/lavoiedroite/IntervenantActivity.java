@@ -16,6 +16,7 @@ import android.widget.ListView;
 import com.freelanceProject.lavoiedroite.Adapters.AuthorsAdapter;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAudioDetail;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAudioList;
+import com.freelanceProject.lavoiedroite.beans.WsResponseEvents;
 import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
 import com.freelanceProject.lavoiedroite.beans.WsResponseVideo;
 import com.freelanceProject.lavoiedroite.ws.URLs;
@@ -137,6 +138,18 @@ public class IntervenantActivity extends Activity implements WSHelperListener {
 
 	@Override
 	public void onErrorLoadingVideo(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onEventsLoaded(WsResponseEvents wsResponseEvents) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onErrorLoadingEvents(String string) {
 		// TODO Auto-generated method stub
 		
 	}

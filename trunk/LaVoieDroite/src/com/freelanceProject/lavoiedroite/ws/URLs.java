@@ -12,6 +12,8 @@ public class URLs {
 	public static String bythemes = "http://www.lavoiedroite.com/ws/bytheme?cat=";
 
 	public static String audio = "http://www.lavoiedroite.com/ws/audio?id=";
-	
+
 	public static String videoUrl = "http://www.lavoiedroite.com/ws/videos?page=0&npage=25";
+
+	public static String evenementsUrl = "http://www.lavoiedroite.com/ws/events?page=0&npage=25";
 }

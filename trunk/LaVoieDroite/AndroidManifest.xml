@@ -75,7 +75,7 @@
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.freelanceProject.lavoiedroite.event.MainActivity"
+            android:name="com.freelanceProject.lavoiedroite.EventActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
