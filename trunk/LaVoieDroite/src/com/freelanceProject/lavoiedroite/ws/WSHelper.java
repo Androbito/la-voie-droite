@@ -13,6 +13,7 @@ import com.freelanceProject.lavoiedroite.beans.WsResponseAudioDetail;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAudioList;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAuthor;
 import com.freelanceProject.lavoiedroite.beans.WsResponseEvents;
+import com.freelanceProject.lavoiedroite.beans.WsResponseFaTArt;
 import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
 import com.freelanceProject.lavoiedroite.beans.WsResponseVideo;
 import com.freelanceProject.lavoiedroite.web.WebException;
@@ -103,7 +104,6 @@ public class WSHelper {
 					WsResponseAudioList lastAdd = gson.fromJson(resultat,
 							WsResponseAudioList.class);
 					Log.i("url", url);
-					Log.i("getAudioCours", resultat);
 					for (WSHelperListener wsHelperListener : wsHelperListeners)
 						wsHelperListener.onAudioListLoaded(lastAdd);
 				}
@@ -202,7 +202,6 @@ public class WSHelper {
 			@Override
 			public void onFinish(String url, String resultat) {
 				Log.i("urlVideo", url);
-				Log.i("resultat-Video", resultat);
 
 				if (resultat.equals("{\"Error\":\"No result was found !!!\"}"))
 					for (WSHelperListener wsHelperListener : wsHelperListeners)
@@ -246,8 +245,6 @@ public class WSHelper {
 				else {
 					WsResponseEvents wsResponseEvents = gson.fromJson(resultat,
 							WsResponseEvents.class);
-					Log.i("wsResponseEvents",
-							"" + wsResponseEvents.listEvents.size());
 					for (WSHelperListener wsHelperListener : wsHelperListeners)
 						wsHelperListener.onEventsLoaded(wsResponseEvents);
 				}
@@ -264,6 +261,43 @@ public class WSHelper {
 
 	public void addWSHelperListener(WSHelperListener listener) {
 		wsHelperListeners.add(listener);
+	}
+
+	public void getLastFatArt(String url, ConnectivityManager manager,
+			final Activity context) {
+		WebThread wt = new WebThread(url, WebThread.METHOD_GET, manager,
+				WebThread.ENCODING_UTF_8, false);
+		wt.setListener(new WebListener() {
+
+			@Override
+			public void onFinishWithParams(String url,
+					Map<String, String> params, String resultat) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onFinish(String url, String resultat) {
+				if (resultat.equals("{\"Error\":\"No result was found !!!\"}"))
+					for (WSHelperListener wsHelperListener : wsHelperListeners)
+						wsHelperListener
+								.onErrorLoadingFatArt("pas de resultat");
+				else {
+					WsResponseFaTArt fatArt = gson.fromJson(resultat,
+							WsResponseFaTArt.class);
+					Log.i("url", url);
+					for (WSHelperListener wsHelperListener : wsHelperListeners)
+						wsHelperListener.onFatArtLoaded(fatArt);
+				}
+			}
+
+			@Override
+			public void onError(WebException error) {
+				for (WSHelperListener wsHelperListener : wsHelperListeners)
+					wsHelperListener.onErrorLoadingFatArt(error.toString());
+			}
+		});
+		wt.start();
 	}
 
 	public void removeWSHelperListener(WSHelperListener listener) {

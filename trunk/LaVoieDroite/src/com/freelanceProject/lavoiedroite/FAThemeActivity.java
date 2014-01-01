@@ -27,7 +27,7 @@ import com.freelanceProject.lavoiedroite.ws.URLs;
 import com.freelanceProject.lavoiedroite.ws.WSHelper;
 import com.freelanceProject.lavoiedroite.ws.WSHelperListener;
 
-public class ThemeActivity extends Activity implements WSHelperListener {
+public class FAThemeActivity extends Activity implements WSHelperListener {
 	ConnectivityManager cManager;
 	ExpandableListView expandableList;
 	private List<HashMap<String, String>> listCategories = new ArrayList<HashMap<String, String>>(
@@ -74,7 +74,6 @@ public class ThemeActivity extends Activity implements WSHelperListener {
 
 	@Override
 	public void onThemesLoaded(WsResponseTheme wsResponseTheme) {
-		Log.i("Nbre de categories", "" + wsResponseTheme.getCategories().size());
 		for (int i = 0; i < wsResponseTheme.getCategories().size(); i++)
 			Log.i(wsResponseTheme.getCategories().get(i).getDetailCategoie(),
 					""
@@ -98,29 +97,21 @@ public class ThemeActivity extends Activity implements WSHelperListener {
 									int groupPosition, int childPosition,
 									long id) {
 								// TODO Auto-generated method stub
+
 								Intent bythemes = new Intent(
 										getApplicationContext(),
-										ByFilterActivity.class);
-								bythemes.putExtra("tid", getIntent()
-										.getStringExtra("tid"));
+										FAByThemeActivity.class);
 								bythemes.putExtra(
 										"url",
-										URLs.bythemes
+										URLs.FatArtUrl
+												+ getIntent().getStringExtra(
+														"type")
+												+ "&cat="
 												+ listThemes.get(groupPosition)
 														.get(childPosition)
-														.get("themeId")
-												+ "&tid="
-												+ getIntent().getStringExtra(
-														"tid")
-												+ "&page=0&npage=25");
-								// Toast.makeText(
-								// ThemeActivity.this,
-								// listCategories.get(groupPosition).get(
-								// "categorieName")
-								// + listThemes.get(groupPosition)
-								// .get(childPosition)
-								// .get("themeId"),
-								// Toast.LENGTH_SHORT).show();
+														.get("themeId"));
+								bythemes.putExtra("type", getIntent()
+										.getStringExtra("type"));
 								startActivity(bythemes);
 								return true;
 							}
@@ -194,37 +185,37 @@ public class ThemeActivity extends Activity implements WSHelperListener {
 	@Override
 	public void onVideoLoaded(WsResponseVideo wsResponseVideo) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onErrorLoadingVideo(String string) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onEventsLoaded(WsResponseEvents wsResponseEvents) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onErrorLoadingEvents(String string) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onFatArtLoaded(WsResponseFaTArt wsResponseFaTArt) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onErrorLoadingFatArt(String error) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

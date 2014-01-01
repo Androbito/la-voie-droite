@@ -7,36 +7,34 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import com.freelanceProject.lavoiedroite.Adapters.AudioElementAdapter;
+import com.freelanceProject.lavoiedroite.Adapters.LastFatArtAdapter;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAudioDetail;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAudioList;
 import com.freelanceProject.lavoiedroite.beans.WsResponseEvents;
 import com.freelanceProject.lavoiedroite.beans.WsResponseFaTArt;
 import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
 import com.freelanceProject.lavoiedroite.beans.WsResponseVideo;
+import com.freelanceProject.lavoiedroite.ws.URLs;
 import com.freelanceProject.lavoiedroite.ws.WSHelper;
 import com.freelanceProject.lavoiedroite.ws.WSHelperListener;
 
-public class AudioFilesActivity extends Activity implements WSHelperListener {
-
+public class FALastAddActivity extends Activity implements WSHelperListener {
 	ConnectivityManager cManager;
-	ListView lstViewAudios;
+	ListView lstViewLastFA;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.audiodetail);
-		lstViewAudios = (ListView) findViewById(R.id.listAudio);
+		setContentView(R.layout.fabylastadd);
+		lstViewLastFA = (ListView) findViewById(R.id.listViewLastFA);
 		cManager = (ConnectivityManager) this
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 		WSHelper.getInstance().addWSHelperListener(this);
-		WSHelper.getInstance().getItemDetails(cManager, this,
-				getIntent().getStringExtra("idAudio"));
-		((TextView) findViewById(R.id.title)).setText(getIntent()
-				.getStringExtra("title"));
+		WSHelper.getInstance().getLastFatArt(
+				URLs.LastFatArtUrl + getIntent().getStringExtra("type"),
+				cManager, this);
 	}
 
 	@Override
@@ -51,6 +49,9 @@ public class AudioFilesActivity extends Activity implements WSHelperListener {
 
 	}
 
+	@Override
+	public void onAudioListLoaded(final WsResponseAudioList wsResponseAudioList) {
+	}
 
 	@Override
 	public void onErrorLoadingCours(String string) {
@@ -71,28 +72,17 @@ public class AudioFilesActivity extends Activity implements WSHelperListener {
 	}
 
 	@Override
-	public void onDetailItemLoaded(
-			final WsResponseAudioDetail wsResponseAudioDetail) {
-		// TODO Auto-generated method stub
-		runOnUiThread(new Runnable() {
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				lstViewAudios.setAdapter(new AudioElementAdapter(
-						getApplicationContext(), AudioFilesActivity.this,
-						wsResponseAudioDetail.getListAudio(), getIntent()
-								.getStringExtra("intervenant")));
-			}
-		});
-	}
-
-	@Override
 	protected void onStop() {
 		// TODO Auto-generated method stub
 
 		super.onStop();
 		WSHelper.getInstance().removeWSHelperListener(this);
+	}
+
+	@Override
+	public void onDetailItemLoaded(WsResponseAudioDetail wsResponseAudioDetail) {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
@@ -102,45 +92,48 @@ public class AudioFilesActivity extends Activity implements WSHelperListener {
 	}
 
 	@Override
-	public void onAudioListLoaded(WsResponseAudioList wsResponseAudioList) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void onVideoLoaded(WsResponseVideo wsResponseVideo) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onErrorLoadingVideo(String string) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onEventsLoaded(WsResponseEvents wsResponseEvents) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onErrorLoadingEvents(String string) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public void onFatArtLoaded(WsResponseFaTArt wsResponseFaTArt) {
+	public void onFatArtLoaded(final WsResponseFaTArt wsResponseFaTArt) {
 		// TODO Auto-generated method stub
-		
+		runOnUiThread(new Runnable() {
+
+			@Override
+			public void run() {
+				lstViewLastFA.setAdapter(new LastFatArtAdapter(
+						getApplicationContext(), wsResponseFaTArt
+								.getListFatArts()));
+			}
+		});
+
 	}
 
 	@Override
 	public void onErrorLoadingFatArt(String error) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

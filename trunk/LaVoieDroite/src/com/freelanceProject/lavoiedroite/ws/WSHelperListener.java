@@ -5,6 +5,7 @@ import java.util.List;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAudioDetail;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAudioList;
 import com.freelanceProject.lavoiedroite.beans.WsResponseEvents;
+import com.freelanceProject.lavoiedroite.beans.WsResponseFaTArt;
 import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
 import com.freelanceProject.lavoiedroite.beans.WsResponseVideo;
 
@@ -33,4 +34,8 @@ public interface WSHelperListener {
 	void onEventsLoaded(WsResponseEvents wsResponseEvents);
 
 	void onErrorLoadingEvents(String string);
+
+	void onFatArtLoaded(WsResponseFaTArt wsResponseFaTArt);
+
+	void onErrorLoadingFatArt(String error);
 }

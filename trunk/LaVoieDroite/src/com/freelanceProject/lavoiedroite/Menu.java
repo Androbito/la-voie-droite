@@ -41,7 +41,7 @@ public class Menu extends Activity {
 					txt.setText("Découvrez cours");
 					break;
 				case 2:
-					txt.setText("Fatawas");
+					txt.setText("Fatwas");
 					break;
 				case 3:
 					txt.setText("Live Streaming");
@@ -82,6 +82,11 @@ public class Menu extends Activity {
 					Intent rech = new Intent(view.getContext(),
 							NewCoursActivity.class);
 					startActivity(rech);
+				} else if (position == 2) {
+					Intent fatArt = new Intent(view.getContext(),
+							FatawaArticlesActivity.class);
+					fatArt.putExtra("type", "fatwa");
+					startActivity(fatArt);
 				} else if (position == 3) {
 					Intent strm = new Intent(view.getContext(),
 							StreamingActivity.class);
@@ -105,6 +110,11 @@ public class Menu extends Activity {
 					Intent rech = new Intent(view.getContext(),
 							VideoActivity.class);
 					startActivity(rech);
+				}else if (position == 8) {
+					Intent fatArt = new Intent(view.getContext(),
+							FatawaArticlesActivity.class);
+					fatArt.putExtra("type", "article");
+					startActivity(fatArt);
 				}
 			}
 
