@@ -33,15 +33,16 @@ public class AudioElementAdapter extends BaseAdapter {
 	Activity mActivity;
 	String intervenant;
 	List<AudioElement> mListAudio;
-	MediaPlayer mediaPlayer = new MediaPlayer();
+	MediaPlayer mediaPlayer;
 	AudioManager audioManager;
 	ProgressDialog mProgressDialog;
 
-	public AudioElementAdapter(Context mContext, Activity mActivity,
-			List<AudioElement> lstAudio, String mIntervenant) {
+	public AudioElementAdapter(MediaPlayer mediaPlayer, Context mContext,
+			Activity mActivity, List<AudioElement> lstAudio, String mIntervenant) {
 		super();
 		this.mContext = mContext;
 		this.mActivity = mActivity;
+		this.mediaPlayer = mediaPlayer;
 		this.intervenant = mIntervenant;
 		this.mLayoutInflater = (LayoutInflater) mContext
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -128,14 +129,10 @@ public class AudioElementAdapter extends BaseAdapter {
 					}
 				}
 			})).start();
-			((ImageView) view.findViewById(R.id.play))
-					.setImageResource(R.drawable.pause);
 		} else if (mediaPlayer != null && mediaPlayer.isPlaying()) {
 			mediaPlayer.stop();
 			mediaPlayer.reset();
 			((ImageView) mActivity.findViewById(R.id.playIcon))
-					.setImageResource(R.drawable.player);
-			((ImageView) view.findViewById(R.id.play))
 					.setImageResource(R.drawable.player);
 		}
 	}

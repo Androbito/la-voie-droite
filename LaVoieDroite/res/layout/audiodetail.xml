@@ -169,6 +169,7 @@
             android:id="@+id/playIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="play"
             android:src="@drawable/player" />
 
         <ScrollView
@@ -202,12 +203,12 @@
             android:layout_height="wrap_content"
             android:src="@drawable/date" />
 
-        <DigitalClock
-            android:id="@+id/digitalClock1"
+        <TextView
+            android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:text="DigitalClock" />
+            android:text="TextView" />
+        
     </LinearLayout>
 
 </LinearLayout>

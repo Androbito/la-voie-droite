@@ -107,6 +107,12 @@ public class ByFilterActivity extends Activity implements WSHelperListener {
 											getApplicationContext(),
 											AudioFilesActivity.class);
 									goToAudiodetail.putExtra("title", titre);
+									goToAudiodetail.putExtra(
+											"date",
+											wsResponseAudioList
+													.getListCoursAudio()
+													.get(position)
+													.getDateCreation());
 									goToAudiodetail
 											.putExtra(
 													"idAudio",
@@ -172,36 +178,36 @@ public class ByFilterActivity extends Activity implements WSHelperListener {
 	@Override
 	public void onVideoLoaded(WsResponseVideo wsResponseVideo) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onErrorLoadingVideo(String string) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onEventsLoaded(WsResponseEvents wsResponseEvents) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onErrorLoadingEvents(String string) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onFatArtLoaded(WsResponseFaTArt wsResponseFaTArt) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onErrorLoadingFatArt(String error) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
