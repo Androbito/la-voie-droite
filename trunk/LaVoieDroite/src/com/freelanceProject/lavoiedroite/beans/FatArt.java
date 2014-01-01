@@ -13,8 +13,8 @@ public class FatArt {
 	private String dateCreation;
 	@SerializedName("title")
 	private String title;
-	@SerializedName("html")
-	private String html;
+//	@SerializedName("html")
+//	private String html;
 	@SerializedName("ContentType")
 	private String contentType;
 	@SerializedName("visites")
@@ -62,13 +62,13 @@ public class FatArt {
 		this.title = title;
 	}
 
-	public String getHtml() {
-		return html;
-	}
-
-	public void setHtml(String html) {
-		this.html = html;
-	}
+//	public String getHtml() {
+//		return html;
+//	}
+//
+//	public void setHtml(String html) {
+//		this.html = html;
+//	}
 
 	public String getContentType() {
 		return contentType;

@@ -4,9 +4,13 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.freelanceProject.lavoiedroite.Adapters.LastFatArtAdapter;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAudioDetail;
@@ -125,6 +129,21 @@ public class FALastAddActivity extends Activity implements WSHelperListener {
 				lstViewLastFA.setAdapter(new LastFatArtAdapter(
 						getApplicationContext(), wsResponseFaTArt
 								.getListFatArts()));
+				lstViewLastFA.setOnItemClickListener(new OnItemClickListener() {
+
+					@Override
+					public void onItemClick(AdapterView<?> arg0, View arg1,
+							int position, long arg3) {
+						// TODO Auto-generated method stub
+						Intent reader = new Intent(getApplicationContext(),
+								FAReaderActivity.class);
+						reader.putExtra("pdf", wsResponseFaTArt
+								.getListFatArts().get(position).getPdf());
+						reader.putExtra("type",
+								getIntent().getStringExtra("type"));
+						startActivity(reader);
+					}
+				});
 			}
 		});
 
