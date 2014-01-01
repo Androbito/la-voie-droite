@@ -15,6 +15,7 @@ import android.widget.Toast;
 public class FAReaderActivity extends Activity {
 	private WebView webview;
 	private ProgressDialog progressBar;
+	private String titre;
 	private static final String TAG = "Main";
 
 	/** Called when the activity is first created. */
@@ -23,8 +24,11 @@ public class FAReaderActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.reader);
-		((TextView) findViewById(R.id.title)).setText(getIntent()
-				.getStringExtra("type"));
+		if (getIntent().getStringExtra("type").equals("fatwa"))
+			titre = "Fatwas";
+		if (getIntent().getStringExtra("type").equals("article"))
+			titre = "Articles";
+		((TextView) findViewById(R.id.title)).setText(titre);
 		webview = (WebView) findViewById(R.id.webview);
 
 		WebSettings settings = webview.getSettings();

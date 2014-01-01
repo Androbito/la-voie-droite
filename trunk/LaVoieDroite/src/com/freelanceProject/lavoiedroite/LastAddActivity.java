@@ -84,6 +84,12 @@ public class LastAddActivity extends Activity implements WSHelperListener {
 											getApplicationContext(),
 											AudioFilesActivity.class);
 									goToAudiodetail.putExtra("title", titre);
+									goToAudiodetail.putExtra(
+											"date",
+											wsResponseAudioList
+													.getListCoursAudio()
+													.get(position)
+													.getDateCreation());
 									goToAudiodetail
 											.putExtra(
 													"idAudio",
@@ -162,25 +168,25 @@ public class LastAddActivity extends Activity implements WSHelperListener {
 	@Override
 	public void onEventsLoaded(WsResponseEvents wsResponseEvents) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onErrorLoadingEvents(String string) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onFatArtLoaded(WsResponseFaTArt wsResponseFaTArt) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onErrorLoadingFatArt(String error) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
