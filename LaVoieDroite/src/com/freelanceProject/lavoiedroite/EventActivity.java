@@ -17,6 +17,7 @@ import com.freelanceProject.lavoiedroite.Adapters.EvenementAdapter;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAudioDetail;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAudioList;
 import com.freelanceProject.lavoiedroite.beans.WsResponseEvents;
+import com.freelanceProject.lavoiedroite.beans.WsResponseFaTArt;
 import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
 import com.freelanceProject.lavoiedroite.beans.WsResponseVideo;
 import com.freelanceProject.lavoiedroite.ws.WSHelper;
@@ -127,6 +128,18 @@ public class EventActivity extends Activity implements WSHelperListener {
 	public void onErrorLoadingEvents(String string) {
 		// TODO Auto-generated method stub
 		Log.i("Error", string);
+	}
+
+	@Override
+	public void onFatArtLoaded(WsResponseFaTArt wsResponseFaTArt) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onErrorLoadingFatArt(String error) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

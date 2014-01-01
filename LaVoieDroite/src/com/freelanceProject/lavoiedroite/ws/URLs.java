@@ -16,4 +16,8 @@ public class URLs {
 	public static String videoUrl = "http://www.lavoiedroite.com/ws/videos?page=0&npage=25";
 
 	public static String evenementsUrl = "http://www.lavoiedroite.com/ws/events?page=0&npage=25";
+
+	public static String FatArtUrl = "http://www.lavoiedroite.com/ws/articlesfatwas?type=";
+
+	public static String LastFatArtUrl = "http://www.lavoiedroite.com/ws/articlesfatwasLast?type=";
 }
