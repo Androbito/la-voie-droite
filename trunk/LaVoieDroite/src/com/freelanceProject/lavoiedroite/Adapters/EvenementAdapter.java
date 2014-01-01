@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +57,9 @@ public class EvenementAdapter extends BaseAdapter {
 		// TODO Auto-generated method stub
 		final View view = mLayoutInflater.inflate(R.layout.evenement_item, parent,
 				false);
+		if (position % 2 == 00)
+			((LinearLayout) view.findViewById(R.id.layEvent))
+					.setBackgroundColor(Color.parseColor("#100000FF"));
 		((TextView) view.findViewById(R.id.titleEvent)).setText(listEvents.get(
 				position).getTitle());
 		((TextView) view.findViewById(R.id.dateEvent)).setText(listEvents.get(
