@@ -94,8 +94,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:paddingTop="45dp"
-                        android:text="Événements" />
+                        android:gravity="center_horizontal"
+                        android:paddingTop="35dp"
+                        android:text="Les Cours près de \nChez Vous" />
 
                     <ImageView
                         android:id="@+id/img_options"
