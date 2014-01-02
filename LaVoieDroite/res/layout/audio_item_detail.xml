@@ -58,7 +58,7 @@
             android:background="#083982" />
 
         <ImageView
-            android:id="@+id/imageView1"
+            android:id="@+id/smsend"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="#1EFFFFFF"
