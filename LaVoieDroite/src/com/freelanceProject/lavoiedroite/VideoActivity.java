@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -110,15 +111,25 @@ public class VideoActivity extends Activity implements WSHelperListener {
 					@Override
 					public void onItemClick(AdapterView<?> arg0, View arg1,
 							int position, long arg3) {
-						Intent videoPlay = new Intent(getApplicationContext(),
-								VideoPlayerActivity.class);
-						videoPlay.putExtra("url", wsResponseVideo
-								.getListVideos().get(position).getUrl());
-						videoPlay.putExtra("titre", wsResponseVideo
-								.getListVideos().get(position).getTitle());
-						videoPlay.putExtra("name", wsResponseVideo
-								.getListVideos().get(position).getName());
-						startActivity(videoPlay);
+						// Intent videoPlay = new
+						// Intent(getApplicationContext(),
+						// VideoPlayerActivity.class);
+						// videoPlay.putExtra("url", wsResponseVideo
+						// .getListVideos().get(position).getUrl());
+						// videoPlay.putExtra("titre", wsResponseVideo
+						// .getListVideos().get(position).getTitle());
+						// videoPlay.putExtra("name", wsResponseVideo
+						// .getListVideos().get(position).getName());
+						// startActivity(videoPlay);
+						String url = wsResponseVideo.getListVideos()
+								.get(position).getUrl();
+						Uri uri = Uri.parse(url);
+
+						String videoID = uri.getQueryParameter("v");
+						Intent intent = new Intent(Intent.ACTION_VIEW, Uri
+								.parse("vnd.youtube:" + videoID));
+						intent.putExtra("VIDEO_ID", videoID);
+						startActivity(intent);
 					}
 				});
 			}
@@ -155,12 +166,12 @@ public class VideoActivity extends Activity implements WSHelperListener {
 	@Override
 	public void onFatArtLoaded(WsResponseFaTArt wsResponseFaTArt) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onErrorLoadingFatArt(String error) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
