@@ -9,6 +9,7 @@ import java.util.List;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -88,6 +89,23 @@ public class AudioElementAdapter extends BaseAdapter {
 		else
 			((LinearLayout) view.findViewById(R.id.itemLay))
 					.setBackgroundColor(Color.parseColor("#1457BA"));
+		((ImageView) view.findViewById(R.id.smsend))
+				.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+						sendIntent.putExtra(
+								"sms_body",
+								" Salam alikoum ton ami vous invite à voir le cours "
+										+ mListAudio.get(position)
+												.getDescription()
+										+ " sur le lien"
+										+ mListAudio.get(position).getUrl());
+						sendIntent.setType("vnd.android-dir/mms-sms");
+						mActivity.startActivity(sendIntent);
+					}
+				});
 		((ImageView) view.findViewById(R.id.play))
 				.setOnClickListener(new OnClickListener() {
 
