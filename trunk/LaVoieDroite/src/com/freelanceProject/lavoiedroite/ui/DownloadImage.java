@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-public class DownloadImage extends AsyncTask<ImageView, Void, Bitmap> {
+public class DownloadImage extends AsyncTask<ZoomImageView, Void, Bitmap> {
 
 	ProgressBar p = null;
 	ImageView vue = null;
@@ -51,17 +51,17 @@ public class DownloadImage extends AsyncTask<ImageView, Void, Bitmap> {
 	}
 
 	@Override
-	protected Bitmap doInBackground(ImageView... params) {
+	protected Bitmap doInBackground(ZoomImageView... params) {
 		this.vue = (ImageView) params[0];
 
 		return download_Image((String) vue.getTag());
 	}
 
-	/*
-	 * protected void doInBackground(ProgressBar... params) { //this.imageView =
-	 * (ImageButton)params[0]; this.p = (ProgressBar)params[0]; return
-	 * download_Image((String)imageView.getTag()); }
-	 */
+	
+//	  protected void doInBackground(ProgressBar... params) { //this.imageView =
+//	  (ImageButton)params[0]; this.p = (ProgressBar)params[0]; return
+//	  download_Image((String)imageView.getTag()); }
+	 
 
 	protected void onPreExecute() {
 		super.onPreExecute();
