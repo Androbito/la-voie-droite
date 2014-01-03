@@ -1,5 +1,6 @@
 package com.freelanceProject.lavoiedroite.Adapters;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -13,6 +14,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
@@ -27,6 +30,7 @@ import android.widget.TextView;
 
 import com.freelanceProject.lavoiedroite.R;
 import com.freelanceProject.lavoiedroite.beans.AudioElement;
+import com.freelanceProject.lavoiedroite.web.DownloadManager;
 
 public class AudioElementAdapter extends BaseAdapter {
 	LayoutInflater mLayoutInflater;
@@ -37,6 +41,7 @@ public class AudioElementAdapter extends BaseAdapter {
 	MediaPlayer mediaPlayer;
 	AudioManager audioManager;
 	ProgressDialog mProgressDialog;
+	private DownloadManager downloadManager;
 
 	public AudioElementAdapter(MediaPlayer mediaPlayer, Context mContext,
 			Activity mActivity, List<AudioElement> lstAudio, String mIntervenant) {
@@ -44,6 +49,9 @@ public class AudioElementAdapter extends BaseAdapter {
 		this.mContext = mContext;
 		this.mActivity = mActivity;
 		this.mediaPlayer = mediaPlayer;
+		this.downloadManager = new DownloadManager(
+				mContext.getContentResolver(),
+				"com.freelanceProject.lavoiedroite");
 		this.intervenant = mIntervenant;
 		this.mLayoutInflater = (LayoutInflater) mContext
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -89,6 +97,31 @@ public class AudioElementAdapter extends BaseAdapter {
 		else
 			((LinearLayout) view.findViewById(R.id.itemLay))
 					.setBackgroundColor(Color.parseColor("#1457BA"));
+		((ImageView) view.findViewById(R.id.download))
+				.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						DownloadManager.Request request = new DownloadManager.Request(
+								Uri.parse(mListAudio.get(position).getUrl()));
+						request.setDescription(mListAudio.get(position)
+								.getDescription());
+						request.setTitle("Téléchargement du cours");
+						request.setDestinationUri(Uri
+								.fromFile(new File(Environment
+										.getExternalStorageDirectory()
+										.toString()
+										+ "/LaVoieDroite_mp3", mListAudio
+										.get(position)
+										.getUrl()
+										.substring(
+												mListAudio.get(position)
+														.getUrl()
+														.lastIndexOf("/") + 1))));
+						downloadManager.enqueue(request);
+					}
+				});
 		((ImageView) view.findViewById(R.id.smsend))
 				.setOnClickListener(new OnClickListener() {
 
