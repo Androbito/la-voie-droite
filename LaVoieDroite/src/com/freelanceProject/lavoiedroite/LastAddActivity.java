@@ -18,6 +18,7 @@ import com.freelanceProject.lavoiedroite.beans.WsResponseAudioDetail;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAudioList;
 import com.freelanceProject.lavoiedroite.beans.WsResponseEvents;
 import com.freelanceProject.lavoiedroite.beans.WsResponseFaTArt;
+import com.freelanceProject.lavoiedroite.beans.WsResponseSouSeries;
 import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
 import com.freelanceProject.lavoiedroite.beans.WsResponseVideo;
 import com.freelanceProject.lavoiedroite.ws.URLs;
@@ -187,6 +188,18 @@ public class LastAddActivity extends Activity implements WSHelperListener {
 	public void onErrorLoadingFatArt(String error) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void onSerieLoaded(WsResponseSouSeries wsResponseSserie) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onErrorLoadingSerie(String error) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

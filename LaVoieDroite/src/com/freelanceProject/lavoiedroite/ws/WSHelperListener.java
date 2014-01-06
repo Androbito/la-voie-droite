@@ -6,6 +6,7 @@ import com.freelanceProject.lavoiedroite.beans.WsResponseAudioDetail;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAudioList;
 import com.freelanceProject.lavoiedroite.beans.WsResponseEvents;
 import com.freelanceProject.lavoiedroite.beans.WsResponseFaTArt;
+import com.freelanceProject.lavoiedroite.beans.WsResponseSouSeries;
 import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
 import com.freelanceProject.lavoiedroite.beans.WsResponseVideo;
 
@@ -38,4 +39,8 @@ public interface WSHelperListener {
 	void onFatArtLoaded(WsResponseFaTArt wsResponseFaTArt);
 
 	void onErrorLoadingFatArt(String error);
+
+	void onSerieLoaded(WsResponseSouSeries wsResponseSserie);
+
+	void onErrorLoadingSerie(String error);
 }
