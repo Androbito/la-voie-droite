@@ -20,4 +20,6 @@ public class URLs {
 	public static String FatArtUrl = "http://www.lavoiedroite.com/ws/articlesfatwas?type=";
 
 	public static String LastFatArtUrl = "http://www.lavoiedroite.com/ws/articlesfatwasLast?type=";
+
+	public static String SerieUrl = "http://www.lavoiedroite.com/ws/serie?nid=";
 }
