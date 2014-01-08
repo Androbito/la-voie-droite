@@ -14,6 +14,7 @@ import com.freelanceProject.lavoiedroite.beans.WsResponseAudioList;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAuthor;
 import com.freelanceProject.lavoiedroite.beans.WsResponseEvents;
 import com.freelanceProject.lavoiedroite.beans.WsResponseFaTArt;
+import com.freelanceProject.lavoiedroite.beans.WsResponseSouSeries;
 import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
 import com.freelanceProject.lavoiedroite.beans.WsResponseVideo;
 import com.freelanceProject.lavoiedroite.web.WebException;
@@ -295,6 +296,42 @@ public class WSHelper {
 			public void onError(WebException error) {
 				for (WSHelperListener wsHelperListener : wsHelperListeners)
 					wsHelperListener.onErrorLoadingFatArt(error.toString());
+			}
+		});
+		wt.start();
+	}
+
+	public void getSerie(String nid, ConnectivityManager manager,
+			final Activity context) {
+		WebThread wt = new WebThread(URLs.SerieUrl + nid, WebThread.METHOD_GET,
+				manager, WebThread.ENCODING_UTF_8, false);
+		wt.setListener(new WebListener() {
+
+			@Override
+			public void onFinishWithParams(String url,
+					Map<String, String> params, String resultat) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onFinish(String url, String resultat) {
+				if (resultat.equals("{\"Error\":\"No result was found !!!\"}"))
+					for (WSHelperListener wsHelperListener : wsHelperListeners)
+						wsHelperListener.onErrorLoadingSerie("pas de resultat");
+				else {
+					WsResponseSouSeries sousSerie = gson.fromJson(resultat,
+							WsResponseSouSeries.class);
+					Log.i("url", url);
+					for (WSHelperListener wsHelperListener : wsHelperListeners)
+						wsHelperListener.onSerieLoaded(sousSerie);
+				}
+			}
+
+			@Override
+			public void onError(WebException error) {
+				for (WSHelperListener wsHelperListener : wsHelperListeners)
+					wsHelperListener.onErrorLoadingSerie(error.toString());
 			}
 		});
 		wt.start();

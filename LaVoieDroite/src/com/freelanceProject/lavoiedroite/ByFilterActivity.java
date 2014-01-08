@@ -131,8 +131,20 @@ public class ByFilterActivity extends Activity implements WSHelperListener {
 																	.get(position)
 																	.getIntervenant());
 									startActivity(goToAudiodetail);
-								}else{
-									
+								} else {
+									Intent goToSeries = new Intent(
+											getApplicationContext(),
+											SeriesActivity.class);
+									goToSeries.putExtra("title", titre);
+									goToSeries
+											.putExtra(
+													"nid",
+													""
+															+ wsResponseAudioList
+																	.getListCoursAudio()
+																	.get(position)
+																	.getNid());
+									startActivity(goToSeries);
 								}
 
 							}
@@ -217,12 +229,12 @@ public class ByFilterActivity extends Activity implements WSHelperListener {
 	@Override
 	public void onSerieLoaded(WsResponseSouSeries wsResponseSserie) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onErrorLoadingSerie(String error) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
