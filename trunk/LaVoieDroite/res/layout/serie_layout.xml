@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@drawable/basic_fond"
     android:orientation="vertical" >
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/menu"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
         android:orientation="vertical" >
 
         <LinearLayout
-            android:id="@+id/menu"
+            android:id="@+id/LinearLayout01"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
@@ -23,7 +25,7 @@
                 android:orientation="horizontal" >
 
                 <LinearLayout
-                    android:id="@+id/menu"
+                    android:id="@+id/LinearLayout01"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/header"
@@ -34,8 +36,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="8dp"
-                        android:src="@drawable/back" >
-                    </ImageView>
+                        android:src="@drawable/back" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -99,8 +100,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
-                            android:paddingTop="45dp"
-                            android:text="fatawarticles" />
+                            android:paddingTop="45dp" />
 
                         <ImageView
                             android:id="@+id/img_options"
@@ -149,51 +149,153 @@
             </FrameLayout>
         </LinearLayout>
 
-        <WebView
-            android:id="@+id/webVideo"
+        <ListView
+            android:id="@+id/listViewSerie"
             android:layout_width="match_parent"
-            android:layout_height="238dp" />
+            android:layout_height="match_parent"
+            android:cacheColorHint="#00000000"
+            android:divider="#000000" >
+        </ListView>
+    </LinearLayout>
 
-        <ScrollView
-            android:id="@+id/scrollView1"
+    <LinearLayout
+        android:id="@+id/interBarInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:background="#00122B"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/iconintervenantmenu_footer" />
+
+            <TextView
+                android:id="@+id/intervenantName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/separator" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:weightSum="4" >
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dip"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/ImageView01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/iconcoursaudiomenu_footer" />
+
+                <TextView
+                    android:id="@+id/TextView01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cours Audio" />
+
+                <TextView
+                    android:id="@+id/nbreCours"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/iconconferencesmenu_footer" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Conférences" />
+
+                <TextView
+                    android:id="@+id/nbreConf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/iconprechesmenu_footer" />
 
                 <TextView
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Titre:"
-                    android:textColor="#004493" />
+                    android:text="Prêches" />
 
                 <TextView
-                    android:id="@+id/textVideoTitre"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Small Text"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="#626262" />
+                    android:id="@+id/nbrePre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
 
-                <TextView
-                    android:id="@+id/textView1"
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/imageView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Details:"
-                    android:textColor="#004493" />
+                    android:src="@drawable/iconarticlesmenu_footer" />
 
                 <TextView
-                    android:id="@+id/textVideoDetails"
-                    android:layout_width="match_parent"
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TextView"
-                    android:textColor="#626262" />
+                    android:text="Articles" />
+
+                <TextView
+                    android:id="@+id/nbreArt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
-        </ScrollView>
+        </LinearLayout>
     </LinearLayout>
 
-</FrameLayout>
+</LinearLayout>
