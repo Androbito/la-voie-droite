@@ -26,7 +26,10 @@ public class LastFatArtAdapter extends BaseAdapter {
 		this.mLayoutInflater = (LayoutInflater) mContext
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		this.mListFatArt = new ArrayList<FatArt>();
-		this.mListFatArt.addAll(lstFatArt);
+		if (lstFatArt.size() > 10)
+			this.mListFatArt.addAll(lstFatArt.subList(0, 10));
+		else
+			this.mListFatArt.addAll(lstFatArt);
 	}
 
 	@Override

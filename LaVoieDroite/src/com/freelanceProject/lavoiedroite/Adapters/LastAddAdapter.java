@@ -30,7 +30,10 @@ public class LastAddAdapter extends BaseAdapter {
 		this.mLayoutInflater = (LayoutInflater) mContext
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		this.mListAudio = new ArrayList<CoursAudio>();
-		this.mListAudio.addAll(lstAudio);
+		if (lstAudio.size() > 10)
+			this.mListAudio.addAll(lstAudio.subList(0, 10));
+		else
+			this.mListAudio.addAll(lstAudio);
 	}
 
 	@Override
