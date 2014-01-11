@@ -34,7 +34,7 @@ public class SplashScreen extends Activity implements LoadingTaskFinishedListene
     }
  
     private void startApp() {
-        Intent intent = new Intent(SplashScreen.this,Menu.class);
+        Intent intent = new Intent(SplashScreen.this,MainActivity.class);
         startActivity(intent);
     }
 }

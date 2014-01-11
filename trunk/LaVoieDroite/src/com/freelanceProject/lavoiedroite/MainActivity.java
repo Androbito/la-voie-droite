@@ -11,7 +11,7 @@ import com.freelanceProject.lavoiedroite.ui.CarouselAdapter;
 import com.freelanceProject.lavoiedroite.ui.CarouselAdapter.OnItemClickListener;
 import com.freelanceProject.lavoiedroite.ui.CarouselAdapter.OnItemSelectedListener;
 
-public class Menu extends Activity {
+public class MainActivity extends Activity {
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

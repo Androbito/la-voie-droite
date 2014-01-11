@@ -44,7 +44,7 @@ public class EventActivity extends Activity implements WSHelperListener {
 			public void onClick(View v) {
 
 				Intent menu = new Intent(EventActivity.this,
-						com.freelanceProject.lavoiedroite.Menu.class);
+						com.freelanceProject.lavoiedroite.MainActivity.class);
 				startActivity(menu);
 			}
 		});
