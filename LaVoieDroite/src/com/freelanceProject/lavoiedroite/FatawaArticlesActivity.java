@@ -32,6 +32,7 @@ public class FatawaArticlesActivity extends TabActivity {
 		View tabview = createTabView(tabHost.getContext(), tag);
 		Intent tabIntent = new Intent(this, cls);
 		tabIntent.putExtra("type", getIntent().getStringExtra("type"));
+		tabIntent.putExtra("tid", getIntent().getStringExtra("tid"));
 		TabSpec setContent = tabHost.newTabSpec(tag).setIndicator(tabview)
 				.setContent(tabIntent);
 		tabHost.addTab(setContent);

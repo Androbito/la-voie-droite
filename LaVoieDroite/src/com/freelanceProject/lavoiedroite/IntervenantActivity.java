@@ -38,7 +38,7 @@ public class IntervenantActivity extends Activity implements WSHelperListener {
 		cManager = (ConnectivityManager) this
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 		WSHelper.getInstance().addWSHelperListener(this);
-		WSHelper.getInstance().getAuteurs(cManager, this);
+		WSHelper.getInstance().getAuteurs(getIntent().getStringExtra("tid"),cManager, this);
 	}
 
 	@Override
