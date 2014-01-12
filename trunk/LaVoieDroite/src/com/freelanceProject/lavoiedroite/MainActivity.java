@@ -86,6 +86,7 @@ public class MainActivity extends Activity {
 					Intent fatArt = new Intent(view.getContext(),
 							FatawaArticlesActivity.class);
 					fatArt.putExtra("type", "fatwa");
+					fatArt.putExtra("tid", "12");
 					startActivity(fatArt);
 				} else if (position == 3) {
 					Intent strm = new Intent(view.getContext(),
@@ -110,10 +111,11 @@ public class MainActivity extends Activity {
 					Intent rech = new Intent(view.getContext(),
 							VideoActivity.class);
 					startActivity(rech);
-				}else if (position == 8) {
+				} else if (position == 8) {
 					Intent fatArt = new Intent(view.getContext(),
 							FatawaArticlesActivity.class);
 					fatArt.putExtra("type", "article");
+					fatArt.putExtra("tid", "11");
 					startActivity(fatArt);
 				}
 			}

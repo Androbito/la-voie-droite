@@ -40,9 +40,10 @@ public class WSHelper {
 		wsHelperListeners = new HashSet<WSHelperListener>();
 	}
 
-	public void getAuteurs(ConnectivityManager manager, final Activity context) {
+	public void getAuteurs(String tid, ConnectivityManager manager,
+			final Activity context) {
 
-		WebThread wt = new WebThread(URLs.authors, WebThread.METHOD_GET,
+		WebThread wt = new WebThread(URLs.authors + tid, WebThread.METHOD_GET,
 				manager, WebThread.ENCODING_UTF_8, false);
 		wt.setListener(new WebListener() {
 			public void onFinish(String url, String resultat) {
@@ -119,8 +120,9 @@ public class WSHelper {
 		wt.start();
 	}
 
-	public void getThemes(ConnectivityManager manager, final Activity context) {
-		WebThread wt = new WebThread(URLs.themes, WebThread.METHOD_GET,
+	public void getThemes(String tid, ConnectivityManager manager,
+			final Activity context) {
+		WebThread wt = new WebThread(URLs.themes + tid, WebThread.METHOD_GET,
 				manager, WebThread.ENCODING_UTF_8, false);
 		wt.setListener(new WebListener() {
 

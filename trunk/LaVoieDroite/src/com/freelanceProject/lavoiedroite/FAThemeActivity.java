@@ -51,7 +51,7 @@ public class FAThemeActivity extends Activity implements WSHelperListener {
 		cManager = (ConnectivityManager) this
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 		WSHelper.getInstance().addWSHelperListener(this);
-		WSHelper.getInstance().getThemes(cManager, this);
+		WSHelper.getInstance().getThemes(getIntent().getStringExtra("tid"),cManager, this);
 
 	}
 

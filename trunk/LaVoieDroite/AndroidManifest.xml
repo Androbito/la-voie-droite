@@ -39,7 +39,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.freelanceProject.lavoiedroite.Menu"
+            android:name="com.freelanceProject.lavoiedroite.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
