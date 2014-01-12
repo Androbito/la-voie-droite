@@ -24,7 +24,7 @@ public class CoursActivity extends TabActivity {
 		setupTab(new TextView(this), "Par\nThemes", ThemeActivity.class);
 		setupTab(new TextView(this), "Par\nIntervenants",
 				IntervenantActivity.class);
-		setupTab(new TextView(this), "Dernier\nAjout", LastAddActivity.class);
+		setupTab(new TextView(this), "Derniers\nAjout", LastAddActivity.class);
 		tabHost.setCurrentTab(0);
 	}
 

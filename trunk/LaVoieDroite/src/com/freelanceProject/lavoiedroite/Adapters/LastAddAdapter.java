@@ -65,8 +65,6 @@ public class LastAddAdapter extends BaseAdapter {
 					.setBackgroundColor(Color.parseColor("#100000FF"));
 		((TextView) view.findViewById(R.id.coursTitleitem)).setText(mListAudio
 				.get(position).getTitle());
-		((TextView) view.findViewById(R.id.coursCategorieitem))
-				.setText(mListAudio.get(position).getCategories());
 		((TextView) view.findViewById(R.id.coursIntervitem)).setText(mListAudio
 				.get(position).getIntervenant());
 		((TextView) view.findViewById(R.id.coursAudioPartitem)).setText(""
