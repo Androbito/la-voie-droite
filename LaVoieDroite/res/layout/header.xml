@@ -1,19 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/form"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="horizontal" >
+    android:background="@drawable/header"
+    android:gravity="center_horizontal"
+    android:paddingTop="55dp"
+    android:weightSum="6" >
 
     <LinearLayout
-        android:id="@+id/menu"
-        android:layout_width="fill_parent"
+        android:layout_width="0dip"
         android:layout_height="wrap_content"
-        android:background="@drawable/header"
-        android:orientation="horizontal" >
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
 
+        <ImageView
+            android:id="@+id/img_acceuil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/home" />
+
+        <TextView
+            android:id="@+id/txt_acceuil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Acceuil" />
     </LinearLayout>
 
-    <include layout="@layout/menu_header" />
+    <LinearLayout
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/img_rech"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/recherche" />
+
+        <TextView
+            android:id="@+id/txt_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_weight="2"
+        android:gravity="center_horizontal"
+        android:text="Bienvenue"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <LinearLayout
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/img_volume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/volume" />
+
+        <TextView
+            android:id="@+id/TextView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Volume" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/img_contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/contact" />
+
+        <TextView
+            android:id="@+id/txt_contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contact" />
+    </LinearLayout>
+
+</LinearLayout>
