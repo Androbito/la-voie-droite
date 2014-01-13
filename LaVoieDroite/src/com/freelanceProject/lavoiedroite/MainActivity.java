@@ -35,22 +35,22 @@ public class MainActivity extends Activity {
 
 				switch (position) {
 				case 0:
-					txt.setText("Evénements");
+					txt.setText("Evènement");
 					break;
 				case 1:
-					txt.setText("Découvrez cours");
+					txt.setText("Planning et lieux des cours");
 					break;
 				case 2:
-					txt.setText("Fatwas");
+					txt.setText("Fatawas");
 					break;
 				case 3:
-					txt.setText("Live Streaming");
+					txt.setText("Le Direct");
 					break;
 				case 4:
-					txt.setText("Prêche Vendredi");
+					txt.setText("Prêches du Vendredi");
 					break;
 				case 5:
-					txt.setText("Conférence");
+					txt.setText("Conférences");
 					break;
 				case 6:
 					txt.setText("Cours audio");

@@ -23,8 +23,8 @@ public class FatawaArticlesActivity extends TabActivity {
 			((TextView) findViewById(R.id.title)).setText("Fatwas");
 		else
 			((TextView) findViewById(R.id.title)).setText("Articles");
-		setupTab(new TextView(this), "Par\nThemes", FAThemeActivity.class);
-		setupTab(new TextView(this), "Dernier\nAjout", FALastAddActivity.class);
+		setupTab(new TextView(this), "Par\nTheme", FAThemeActivity.class);
+		setupTab(new TextView(this), "Derniers\nAjout", FALastAddActivity.class);
 		tabHost.setCurrentTab(0);
 	}
 

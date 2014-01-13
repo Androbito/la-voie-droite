@@ -21,10 +21,10 @@ public class ConferenceActivity extends TabActivity {
 		setContentView(R.layout.conferences);
 		tabHost = getTabHost();
 
-		setupTab(new TextView(this), "Par\nThemes", ThemeActivity.class);
+		setupTab(new TextView(this), "Par\nTheme", ThemeActivity.class);
 		setupTab(new TextView(this), "Par\nIntervenants",
 				IntervenantActivity.class);
-		setupTab(new TextView(this), "Dernier\nAjout", LastAddActivity.class);
+		setupTab(new TextView(this), "Derniers\nAjout", LastAddActivity.class);
 		tabHost.setCurrentTab(0);
 	}
 
