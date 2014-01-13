@@ -25,7 +25,7 @@ public class Rotator {
     private float mCoeffVelocity = 0.05f;
     private float mVelocity;
     
-    private static final int DEFAULT_DURATION = 250;
+    private static final int DEFAULT_DURATION = 300;
     private static final int SCROLL_MODE = 0;
     private static final int FLING_MODE = 1;
     

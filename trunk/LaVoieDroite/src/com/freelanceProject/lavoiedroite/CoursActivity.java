@@ -21,7 +21,7 @@ public class CoursActivity extends TabActivity {
 		setContentView(R.layout.coursaudio);
 		tabHost = getTabHost();
 
-		setupTab(new TextView(this), "Par\nThemes", ThemeActivity.class);
+		setupTab(new TextView(this), "Par\nTheme", ThemeActivity.class);
 		setupTab(new TextView(this), "Par\nIntervenants",
 				IntervenantActivity.class);
 		setupTab(new TextView(this), "Derniers\nAjout", LastAddActivity.class);
