@@ -8,6 +8,7 @@ import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -44,6 +45,14 @@ public class AudioFilesActivity extends Activity implements WSHelperListener {
 				.getStringExtra("title"));
 		((TextView) findViewById(R.id.date)).setText(getIntent()
 				.getStringExtra("date"));
+		ImageView back = (ImageView) findViewById(R.id.back);
+		back.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 	}
 
 	@Override
@@ -165,13 +174,13 @@ public class AudioFilesActivity extends Activity implements WSHelperListener {
 	@Override
 	public void onSerieLoaded(WsResponseSouSeries wsResponseSserie) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onErrorLoadingSerie(String error) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

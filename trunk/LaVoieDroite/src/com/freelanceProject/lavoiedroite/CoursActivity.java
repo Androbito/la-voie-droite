@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
@@ -20,7 +22,14 @@ public class CoursActivity extends TabActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.coursaudio);
 		tabHost = getTabHost();
+		ImageView back = (ImageView) findViewById(R.id.back);
+		back.setOnClickListener(new OnClickListener() {
 
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 		setupTab(new TextView(this), "Par\nTheme", ThemeActivity.class);
 		setupTab(new TextView(this), "Par\nIntervenants",
 				IntervenantActivity.class);
