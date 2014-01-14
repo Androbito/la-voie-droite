@@ -14,6 +14,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.Window;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
@@ -28,6 +29,14 @@ public class StreamingActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.streaming);
+		ImageView back = (ImageView) findViewById(R.id.back);
+		back.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 		volumeControl = (ProgressBar) findViewById(R.id.progress);
 		audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 		volumeControl.setProgress(100 * (audioManager

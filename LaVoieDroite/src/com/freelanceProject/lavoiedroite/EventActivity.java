@@ -4,7 +4,6 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,16 +35,13 @@ public class EventActivity extends Activity implements WSHelperListener {
 		setContentView(R.layout.evenements);
 		cManager = (ConnectivityManager) this
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
-		ImageView back = (ImageView) findViewById(R.id.back);
 		lstViewEvenement = (ListView) findViewById(R.id.list_event);
+		ImageView back = (ImageView) findViewById(R.id.back);
 		back.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-
-				Intent menu = new Intent(EventActivity.this,
-						com.freelanceProject.lavoiedroite.MainActivity.class);
-				startActivity(menu);
+				finish();
 			}
 		});
 		WSHelper.getInstance().addWSHelperListener(this);
@@ -134,25 +130,25 @@ public class EventActivity extends Activity implements WSHelperListener {
 	@Override
 	public void onFatArtLoaded(WsResponseFaTArt wsResponseFaTArt) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onErrorLoadingFatArt(String error) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onSerieLoaded(WsResponseSouSeries wsResponseSserie) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onErrorLoadingSerie(String error) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

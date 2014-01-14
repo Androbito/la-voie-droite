@@ -130,10 +130,7 @@ public class AudioElementAdapter extends BaseAdapter {
 						Intent sendIntent = new Intent(Intent.ACTION_VIEW);
 						sendIntent.putExtra(
 								"sms_body",
-								" Salam alikoum ton ami vous invite à voir le cours "
-										+ mListAudio.get(position)
-												.getDescription()
-										+ " sur le lien"
+								"Je vous recommande le contenu suivant: "
 										+ mListAudio.get(position).getUrl());
 						sendIntent.setType("vnd.android-dir/mms-sms");
 						mActivity.startActivity(sendIntent);

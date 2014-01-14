@@ -6,13 +6,17 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -48,6 +52,14 @@ public class FAByThemeActivity extends Activity implements WSHelperListener {
 		if (getIntent().getStringExtra("type").equals("article"))
 			titre = "Articles";
 		((TextView) findViewById(R.id.title)).setText(titre);
+		ImageView back = (ImageView) findViewById(R.id.back);
+		back.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 	}
 
 	@Override
@@ -152,7 +164,18 @@ public class FAByThemeActivity extends Activity implements WSHelperListener {
 						reader.putExtra("pdf", wsResponseFaTArt
 								.getListFatArts().get(position).getPdf());
 						reader.putExtra("type", titre);
-						startActivity(reader);
+						Intent intent = new Intent(Intent.ACTION_VIEW, Uri
+								.parse(wsResponseFaTArt.getListFatArts()
+										.get(position).getPdf()));
+						intent.setType("application/pdf");
+						PackageManager pm = getPackageManager();
+						List<ResolveInfo> activities = pm
+								.queryIntentActivities(intent, 0);
+						if (activities.size() > 0) {
+							startActivity(intent);
+						} else {
+							startActivity(reader);
+						}
 					}
 				});
 			}
@@ -191,12 +214,12 @@ public class FAByThemeActivity extends Activity implements WSHelperListener {
 	@Override
 	public void onSerieLoaded(WsResponseSouSeries wsResponseSserie) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onErrorLoadingSerie(String error) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

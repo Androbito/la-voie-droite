@@ -5,7 +5,10 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -142,7 +145,18 @@ public class FALastAddActivity extends Activity implements WSHelperListener {
 								.getListFatArts().get(position).getPdf());
 						reader.putExtra("type",
 								getIntent().getStringExtra("type"));
-						startActivity(reader);
+						Intent intent = new Intent(Intent.ACTION_VIEW, Uri
+								.parse(wsResponseFaTArt.getListFatArts()
+												.get(position).getPdf()));
+						intent.setType("application/pdf");
+						PackageManager pm = getPackageManager();
+						List<ResolveInfo> activities = pm
+								.queryIntentActivities(intent, 0);
+						if (activities.size() > 0) {
+							startActivity(intent);
+						} else {
+							startActivity(reader);
+						}
 					}
 				});
 			}
@@ -159,13 +173,13 @@ public class FALastAddActivity extends Activity implements WSHelperListener {
 	@Override
 	public void onSerieLoaded(WsResponseSouSeries wsResponseSserie) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onErrorLoadingSerie(String error) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
