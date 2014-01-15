@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,10 +54,7 @@ public class AuthorsAdapter extends BaseAdapter {
 				.get(position)[0]);
 		if (position % 2 == 0)
 			((TextView) view.findViewById(R.id.intervenant))
-					.setBackgroundResource(R.drawable.bg_green);
-		else
-			((TextView) view.findViewById(R.id.intervenant))
-					.setBackgroundResource(R.drawable.bg_blue);
+					.setBackgroundColor(Color.parseColor("#100000FF"));
 		return view;
 	}
 }
