@@ -62,10 +62,8 @@ public class SeriesAdapter extends BaseAdapter {
 					.setBackgroundColor(Color.parseColor("#100000FF"));
 		((TextView) view.findViewById(R.id.coursTitleitem)).setText(mListSserie
 				.get(position).getTitle());
-		((TextView) view.findViewById(R.id.coursCategorieitem))
-				.setText(mListSserie.get(position).getCategories());
-		((TextView) view.findViewById(R.id.coursIntervitem)).setText(mListSserie
-				.get(position).getIntervenant());
+		((TextView) view.findViewById(R.id.coursIntervitem))
+				.setText(mListSserie.get(position).getIntervenant());
 		((TextView) view.findViewById(R.id.coursAudioPartitem)).setText(""
 				+ mListSserie.get(position).getAudio_count());
 		((TextView) view.findViewById(R.id.coursNbreVisiteuritem)).setText(""
