@@ -2,6 +2,7 @@ package com.freelanceProject.lavoiedroite;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -122,6 +123,13 @@ public class MainActivity extends Activity {
 
 		});
 
+	}
+
+	public void contactUs(View v) {
+		Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+	            "mailto","contact@webreaction.net", null));
+	emailIntent.putExtra(Intent.EXTRA_SUBJECT, "EXTRA_SUBJECT");
+	startActivity(Intent.createChooser(emailIntent, "Contactez nous..."));
 	}
 
 }
