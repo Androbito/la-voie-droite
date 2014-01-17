@@ -127,9 +127,9 @@ public class MainActivity extends Activity {
 
 	public void contactUs(View v) {
 		Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-	            "mailto","contact@webreaction.net", null));
-	emailIntent.putExtra(Intent.EXTRA_SUBJECT, "EXTRA_SUBJECT");
-	startActivity(Intent.createChooser(emailIntent, "Contactez nous..."));
+				"mailto", "www.lavoiedroite.com@gmail.com", null));
+		emailIntent.putExtra(Intent.EXTRA_SUBJECT, "");
+		startActivity(Intent.createChooser(emailIntent, "Contactez nous..."));
 	}
 
 }
