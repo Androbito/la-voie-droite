@@ -88,7 +88,7 @@ public class Carousel extends CarouselSpinner implements GestureDetector.OnGestu
      * How long the transition animation should run when a child view changes
      * position, measured in milliseconds.
      */
-    private int mAnimationDuration = 1200;    
+    private int mAnimationDuration = 900;    
     
 	/**
 	 * Camera to make 3D rotation
