@@ -10,8 +10,18 @@ public class Categorie {
 	private int idCategorie;
 	@SerializedName("detail")
 	private String detailCategoie;
+	@SerializedName("icone")
+	private String icone;
 	@SerializedName("themes")
 	private List<Theme> themes;
+
+	public String getIcone() {
+		return icone;
+	}
+
+	public void setIcone(String icone) {
+		this.icone = icone;
+	}
 
 	public List<Theme> getThemes() {
 		if (themes == null)
