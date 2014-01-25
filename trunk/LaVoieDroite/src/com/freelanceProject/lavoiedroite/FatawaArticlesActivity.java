@@ -22,7 +22,7 @@ public class FatawaArticlesActivity extends TabActivity {
 		setContentView(R.layout.fatawa_articles);
 		tabHost = getTabHost();
 		if (getIntent().getStringExtra("type").equals("fatwa"))
-			((TextView) findViewById(R.id.title)).setText("Fatwas");
+			((TextView) findViewById(R.id.title)).setText("Fatawas");
 		else
 			((TextView) findViewById(R.id.title)).setText("Articles");
 		setupTab(new TextView(this), "Par\nTheme", FAThemeActivity.class);
