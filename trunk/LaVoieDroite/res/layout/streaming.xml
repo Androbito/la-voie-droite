@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:paddingTop="45dp"
-                android:text="STREAMING" />
+                android:text="Le Direct" />
         </RelativeLayout>
     </FrameLayout>
 

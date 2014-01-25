@@ -145,18 +145,18 @@ public class FALastAddActivity extends Activity implements WSHelperListener {
 								.getListFatArts().get(position).getPdf());
 						reader.putExtra("type",
 								getIntent().getStringExtra("type"));
-						Intent intent = new Intent(Intent.ACTION_VIEW, Uri
-								.parse(wsResponseFaTArt.getListFatArts()
-												.get(position).getPdf()));
-						intent.setType("application/pdf");
-						PackageManager pm = getPackageManager();
-						List<ResolveInfo> activities = pm
-								.queryIntentActivities(intent, 0);
-						if (activities.size() > 0) {
-							startActivity(intent);
-						} else {
+//						Intent intent = new Intent(Intent.ACTION_VIEW, Uri
+//								.parse(wsResponseFaTArt.getListFatArts()
+//												.get(position).getPdf()));
+//						intent.setType("application/pdf");
+//						PackageManager pm = getPackageManager();
+//						List<ResolveInfo> activities = pm
+//								.queryIntentActivities(intent, 0);
+//						if (activities.size() > 0) {
+//							startActivity(intent);
+//						} else {
 							startActivity(reader);
-						}
+//						}
 					}
 				});
 			}

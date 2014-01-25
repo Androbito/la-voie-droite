@@ -12,9 +12,11 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
@@ -24,11 +26,16 @@ public class StreamingActivity extends Activity {
 	AudioManager audioManager;
 	ProgressBar volumeControl;
 	ProgressDialog mProgressDialog;
+	WakeLock  wl;
+	PowerManager pm;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.streaming);
+		pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+		wl = pm.newWakeLock(
+				PowerManager.SCREEN_DIM_WAKE_LOCK, "MyTag");
 		ImageView back = (ImageView) findViewById(R.id.back);
 		back.setOnClickListener(new OnClickListener() {
 
@@ -97,6 +104,8 @@ public class StreamingActivity extends Activity {
 			mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 			mediaPlayer.prepare();
 			mediaPlayer.start();
+
+			wl.acquire();
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		} catch (SecurityException e) {
@@ -113,6 +122,7 @@ public class StreamingActivity extends Activity {
 	protected void onStop() {
 		// TODO Auto-generated method stub
 		super.onStop();
+		wl.release();
 		mediaPlayer.stop();
 		mediaPlayer.reset();
 	}

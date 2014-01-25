@@ -7,6 +7,8 @@ import android.content.Context;
 import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -29,12 +31,15 @@ public class AudioFilesActivity extends Activity implements WSHelperListener {
 	ConnectivityManager cManager;
 	ListView lstViewAudios;
 	MediaPlayer mediaPlayer = new MediaPlayer();
+	WakeLock  wl;
+	PowerManager pm;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.audiodetail);
+		wl = pm.newWakeLock(
+				PowerManager.SCREEN_DIM_WAKE_LOCK, "MyTag");
 		lstViewAudios = (ListView) findViewById(R.id.listAudio);
 		cManager = (ConnectivityManager) this
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -57,7 +62,6 @@ public class AudioFilesActivity extends Activity implements WSHelperListener {
 
 	@Override
 	public void onAuthorsLoaded(List<String[]> Auteurs) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -68,6 +72,9 @@ public class AudioFilesActivity extends Activity implements WSHelperListener {
 					.setImageResource(R.drawable.player);
 		} else if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
 			mediaPlayer.start();
+			PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+			wl = pm.newWakeLock(
+					PowerManager.SCREEN_DIM_WAKE_LOCK, "MyTag");
 			((ImageView) findViewById(R.id.playIcon))
 					.setImageResource(R.drawable.pause);
 		}
@@ -75,37 +82,31 @@ public class AudioFilesActivity extends Activity implements WSHelperListener {
 
 	@Override
 	public void onErrorLoadingAuthors(String string) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onErrorLoadingCours(String string) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onThemesLoaded(WsResponseTheme wsResponseTheme) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onErrorLoadingThemes(String string) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onDetailItemLoaded(
 			final WsResponseAudioDetail wsResponseAudioDetail) {
-		// TODO Auto-generated method stub
 		runOnUiThread(new Runnable() {
 
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
 				lstViewAudios.setAdapter(new AudioElementAdapter(mediaPlayer,
 						getApplicationContext(), AudioFilesActivity.this,
 						wsResponseAudioDetail.getListAudio(), getIntent()
@@ -116,70 +117,59 @@ public class AudioFilesActivity extends Activity implements WSHelperListener {
 
 	@Override
 	protected void onStop() {
-		// TODO Auto-generated method stub
-
 		super.onStop();
 		mediaPlayer.reset();
+		wl.release();
 		WSHelper.getInstance().removeWSHelperListener(this);
 	}
 
 	@Override
 	public void onErrorLoadingItemDetail(String string) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onAudioListLoaded(WsResponseAudioList wsResponseAudioList) {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void onVideoLoaded(WsResponseVideo wsResponseVideo) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onErrorLoadingVideo(String string) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onEventsLoaded(WsResponseEvents wsResponseEvents) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onErrorLoadingEvents(String string) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onFatArtLoaded(WsResponseFaTArt wsResponseFaTArt) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onErrorLoadingFatArt(String error) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onSerieLoaded(WsResponseSouSeries wsResponseSserie) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onErrorLoadingSerie(String error) {
-		// TODO Auto-generated method stub
 
 	}
 

@@ -26,7 +26,7 @@ public class FatawaArticlesActivity extends TabActivity {
 		else
 			((TextView) findViewById(R.id.title)).setText("Articles");
 		setupTab(new TextView(this), "Par\nTheme", FAThemeActivity.class);
-		setupTab(new TextView(this), "Derniers\nAjout", FALastAddActivity.class);
+		setupTab(new TextView(this), "Derniers\nAjouts", FALastAddActivity.class);
 		tabHost.setCurrentTab(0);
 		ImageView back = (ImageView) findViewById(R.id.back);
 		back.setOnClickListener(new OnClickListener() {
