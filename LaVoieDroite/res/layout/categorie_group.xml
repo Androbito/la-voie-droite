@@ -21,8 +21,7 @@
             <ImageView
                 android:id="@+id/ThemeIcone"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/biographie" />
+                android:layout_height="wrap_content" />
 
             <ProgressBar
                 android:id="@+id/PBTheme"
