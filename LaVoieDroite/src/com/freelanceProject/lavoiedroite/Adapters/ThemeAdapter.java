@@ -97,7 +97,7 @@ public class ThemeAdapter extends BaseExpandableListAdapter {
 		ProgressBar pb = (ProgressBar) convertView.findViewById(R.id.PBTheme);
 		ImageView img = (ImageView) convertView.findViewById(R.id.ThemeIcone);
 		txtListCategorie.setText(groupText);
-		imgDown.download(groupIcone, img, pb);
+		imgDown.download(groupIcone.replace(" ", "%20"), img, pb);
 		return convertView;
 	}
 
