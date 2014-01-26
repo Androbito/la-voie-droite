@@ -5,15 +5,12 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.net.ConnectivityManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 
 import com.freelanceProject.lavoiedroite.Adapters.LastFatArtAdapter;
 import com.freelanceProject.lavoiedroite.beans.WsResponseAudioDetail;
@@ -130,9 +127,15 @@ public class FALastAddActivity extends Activity implements WSHelperListener {
 
 			@Override
 			public void run() {
-				lstViewLastFA.setAdapter(new LastFatArtAdapter(
-						getApplicationContext(), wsResponseFaTArt
-								.getListFatArts()));
+				if (wsResponseFaTArt.getListFatArts().size() > 10)
+					lstViewLastFA.setAdapter(new LastFatArtAdapter(
+							getApplicationContext(), wsResponseFaTArt
+									.getListFatArts().subList(0, 10)));
+				else
+					lstViewLastFA.setAdapter(new LastFatArtAdapter(
+							getApplicationContext(), wsResponseFaTArt
+									.getListFatArts()));
+
 				lstViewLastFA.setOnItemClickListener(new OnItemClickListener() {
 
 					@Override
@@ -145,18 +148,18 @@ public class FALastAddActivity extends Activity implements WSHelperListener {
 								.getListFatArts().get(position).getPdf());
 						reader.putExtra("type",
 								getIntent().getStringExtra("type"));
-//						Intent intent = new Intent(Intent.ACTION_VIEW, Uri
-//								.parse(wsResponseFaTArt.getListFatArts()
-//												.get(position).getPdf()));
-//						intent.setType("application/pdf");
-//						PackageManager pm = getPackageManager();
-//						List<ResolveInfo> activities = pm
-//								.queryIntentActivities(intent, 0);
-//						if (activities.size() > 0) {
-//							startActivity(intent);
-//						} else {
-							startActivity(reader);
-//						}
+						// Intent intent = new Intent(Intent.ACTION_VIEW, Uri
+						// .parse(wsResponseFaTArt.getListFatArts()
+						// .get(position).getPdf()));
+						// intent.setType("application/pdf");
+						// PackageManager pm = getPackageManager();
+						// List<ResolveInfo> activities = pm
+						// .queryIntentActivities(intent, 0);
+						// if (activities.size() > 0) {
+						// startActivity(intent);
+						// } else {
+						startActivity(reader);
+						// }
 					}
 				});
 			}

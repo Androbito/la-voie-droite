@@ -112,25 +112,24 @@ public class VideoActivity extends Activity implements WSHelperListener {
 					@Override
 					public void onItemClick(AdapterView<?> arg0, View arg1,
 							int position, long arg3) {
-						// Intent videoPlay = new
-						// Intent(getApplicationContext(),
-						// VideoPlayerActivity.class);
-						// videoPlay.putExtra("url", wsResponseVideo
-						// .getListVideos().get(position).getUrl());
-						// videoPlay.putExtra("titre", wsResponseVideo
-						// .getListVideos().get(position).getTitle());
-						// videoPlay.putExtra("name", wsResponseVideo
-						// .getListVideos().get(position).getName());
-						// startActivity(videoPlay);
-						String url = wsResponseVideo.getListVideos()
-								.get(position).getUrl();
-						Uri uri = Uri.parse(url);
-
-						String videoID = uri.getQueryParameter("v");
-						Intent intent = new Intent(Intent.ACTION_VIEW, Uri
-								.parse("vnd.youtube:" + videoID));
-						intent.putExtra("VIDEO_ID", videoID);
-						startActivity(intent);
+						Intent videoPlay = new Intent(getApplicationContext(),
+								VideoPlayerActivity.class);
+						videoPlay.putExtra("videoID", Uri.parse(wsResponseVideo
+								.getListVideos().get(position).getUrl()).getQueryParameter("v"));
+						videoPlay.putExtra("titre", wsResponseVideo
+								.getListVideos().get(position).getTitle());
+						videoPlay.putExtra("name", wsResponseVideo
+								.getListVideos().get(position).getName());
+						startActivity(videoPlay);
+//						String url = wsResponseVideo.getListVideos()
+//								.get(position).getUrl();
+//						Uri uri = Uri.parse(url);
+//
+//						String videoID = uri.getQueryParameter("v");
+//						Intent intent = new Intent(Intent.ACTION_VIEW, Uri
+//								.parse("vnd.youtube:" + videoID));
+//						intent.putExtra("VIDEO_ID", videoID);
+//						startActivity(intent);
 					}
 				});
 			}

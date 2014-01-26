@@ -69,9 +69,15 @@ public class LastAddActivity extends Activity implements WSHelperListener {
 
 			@Override
 			public void run() {
-				lstViewLastCours.setAdapter(new LastAddAdapter(
-						LastAddActivity.this, LastAddActivity.this,
-						wsResponseAudioList.getListCoursAudio()));
+				if (wsResponseAudioList.getListCoursAudio().size() > 10)
+					lstViewLastCours.setAdapter(new LastAddAdapter(
+							LastAddActivity.this, LastAddActivity.this,
+							wsResponseAudioList.getListCoursAudio().subList(0,
+									10)));
+				else
+					lstViewLastCours.setAdapter(new LastAddAdapter(
+							LastAddActivity.this, LastAddActivity.this,
+							wsResponseAudioList.getListCoursAudio()));
 				lstViewLastCours
 						.setOnItemClickListener(new OnItemClickListener() {
 
@@ -193,13 +199,13 @@ public class LastAddActivity extends Activity implements WSHelperListener {
 	@Override
 	public void onSerieLoaded(WsResponseSouSeries wsResponseSserie) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onErrorLoadingSerie(String error) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

@@ -26,7 +26,7 @@ public class StreamingActivity extends Activity {
 	AudioManager audioManager;
 	ProgressBar volumeControl;
 	ProgressDialog mProgressDialog;
-	WakeLock  wl;
+	WakeLock wl;
 	PowerManager pm;
 
 	@Override
@@ -34,8 +34,7 @@ public class StreamingActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.streaming);
 		pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-		wl = pm.newWakeLock(
-				PowerManager.SCREEN_DIM_WAKE_LOCK, "MyTag");
+		wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "MyTag");
 		ImageView back = (ImageView) findViewById(R.id.back);
 		back.setOnClickListener(new OnClickListener() {
 
@@ -122,7 +121,8 @@ public class StreamingActivity extends Activity {
 	protected void onStop() {
 		// TODO Auto-generated method stub
 		super.onStop();
-		wl.release();
+		if (wl.isHeld())
+			wl.release();
 		mediaPlayer.stop();
 		mediaPlayer.reset();
 	}

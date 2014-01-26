@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
@@ -31,15 +32,15 @@ public class AudioFilesActivity extends Activity implements WSHelperListener {
 	ConnectivityManager cManager;
 	ListView lstViewAudios;
 	MediaPlayer mediaPlayer = new MediaPlayer();
-	WakeLock  wl;
+	WakeLock wl;
 	PowerManager pm;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.audiodetail);
-		wl = pm.newWakeLock(
-				PowerManager.SCREEN_DIM_WAKE_LOCK, "MyTag");
+		mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+		pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+		wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "MyTag");
 		lstViewAudios = (ListView) findViewById(R.id.listAudio);
 		cManager = (ConnectivityManager) this
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -48,8 +49,12 @@ public class AudioFilesActivity extends Activity implements WSHelperListener {
 				getIntent().getStringExtra("idAudio"));
 		((TextView) findViewById(R.id.title)).setText(getIntent()
 				.getStringExtra("title"));
-		((TextView) findViewById(R.id.date)).setText(getIntent()
-				.getStringExtra("date"));
+		if (getIntent().getStringExtra("title").equalsIgnoreCase("conférences"))
+			((ImageView) findViewById(R.id.imageView1))
+					.setImageResource(R.drawable.conference);
+		if (getIntent().getStringExtra("title").equalsIgnoreCase("prêches"))
+			((ImageView) findViewById(R.id.imageView1))
+					.setImageResource(R.drawable.preche);
 		ImageView back = (ImageView) findViewById(R.id.back);
 		back.setOnClickListener(new OnClickListener() {
 
@@ -72,9 +77,6 @@ public class AudioFilesActivity extends Activity implements WSHelperListener {
 					.setImageResource(R.drawable.player);
 		} else if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
 			mediaPlayer.start();
-			PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-			wl = pm.newWakeLock(
-					PowerManager.SCREEN_DIM_WAKE_LOCK, "MyTag");
 			((ImageView) findViewById(R.id.playIcon))
 					.setImageResource(R.drawable.pause);
 		}
@@ -119,7 +121,8 @@ public class AudioFilesActivity extends Activity implements WSHelperListener {
 	protected void onStop() {
 		super.onStop();
 		mediaPlayer.reset();
-		wl.release();
+		if (wl.isHeld())
+			wl.release();
 		WSHelper.getInstance().removeWSHelperListener(this);
 	}
 
@@ -130,7 +133,7 @@ public class AudioFilesActivity extends Activity implements WSHelperListener {
 
 	@Override
 	public void onAudioListLoaded(WsResponseAudioList wsResponseAudioList) {
-		
+
 	}
 
 	@Override

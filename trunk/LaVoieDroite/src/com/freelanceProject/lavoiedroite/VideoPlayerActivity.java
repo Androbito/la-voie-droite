@@ -20,8 +20,7 @@ public class VideoPlayerActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.video);
-		String url = getIntent().getStringExtra("url");
-		videoID = url.substring(url.indexOf("=") + 1);
+		videoID = getIntent().getStringExtra("videoID");
 		Log.i("videoId", videoID);
 		back = (ImageView) findViewById(R.id.back);
 		((TextView) findViewById(R.id.textVideoTitre)).setText(getIntent()
