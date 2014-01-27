@@ -56,7 +56,8 @@
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
                             android:paddingTop="45dp"
-                            android:text="fatawarticles" />
+                            android:text="Vidéos"
+                            android:textColor="@android:color/white" />
                     </RelativeLayout>
                 </LinearLayout>
             </FrameLayout>
