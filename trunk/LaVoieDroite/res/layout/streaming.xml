@@ -54,10 +54,31 @@
         android:src="@drawable/play_strm" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
+        android:padding="20dp" >
+
+        <ProgressBar
+            android:id="@+id/strmPBH"
+            style="@style/CustomProgressBarHorizontal"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/darker_gray" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:gravity="center_vertical"
         android:padding="10dp" >
 
         <ImageView
@@ -91,8 +112,8 @@
             android:id="@+id/imageView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="volumeUp"
             android:layout_margin="5dp"
+            android:onClick="volumeUp"
             android:src="@drawable/up" />
     </LinearLayout>
 
