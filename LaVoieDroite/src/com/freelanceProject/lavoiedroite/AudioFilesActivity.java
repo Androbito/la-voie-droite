@@ -4,8 +4,6 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.PowerManager;
@@ -24,6 +22,7 @@ import com.freelanceProject.lavoiedroite.beans.WsResponseFaTArt;
 import com.freelanceProject.lavoiedroite.beans.WsResponseSouSeries;
 import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
 import com.freelanceProject.lavoiedroite.beans.WsResponseVideo;
+import com.freelanceProject.lavoiedroite.streaming.StreamingMediaPlayer;
 import com.freelanceProject.lavoiedroite.ws.WSHelper;
 import com.freelanceProject.lavoiedroite.ws.WSHelperListener;
 
@@ -31,14 +30,17 @@ public class AudioFilesActivity extends Activity implements WSHelperListener {
 
 	ConnectivityManager cManager;
 	ListView lstViewAudios;
-	MediaPlayer mediaPlayer = new MediaPlayer();
+
 	WakeLock wl;
 	PowerManager pm;
+	ImageView playButton, back;
+	private boolean isPlaying;
+	private StreamingMediaPlayer audioStreamer;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.audiodetail);
-		mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 		pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
 		wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "MyTag");
 		lstViewAudios = (ListView) findViewById(R.id.listAudio);
@@ -55,7 +57,8 @@ public class AudioFilesActivity extends Activity implements WSHelperListener {
 		if (getIntent().getStringExtra("title").equalsIgnoreCase("prêches"))
 			((ImageView) findViewById(R.id.imageView1))
 					.setImageResource(R.drawable.preche);
-		ImageView back = (ImageView) findViewById(R.id.back);
+		back = (ImageView) findViewById(R.id.back);
+		playButton = (ImageView) findViewById(R.id.playIcon);
 		back.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -63,23 +66,26 @@ public class AudioFilesActivity extends Activity implements WSHelperListener {
 				finish();
 			}
 		});
+		playButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {
+				if (audioStreamer != null) {
+					if (audioStreamer.getMediaPlayer().isPlaying()) {
+						audioStreamer.getMediaPlayer().pause();
+						playButton.setImageResource(R.drawable.player);
+					} else {
+						audioStreamer.getMediaPlayer().start();
+						audioStreamer.startPlayProgressUpdater();
+						playButton.setImageResource(R.drawable.pause);
+					}
+					isPlaying = !isPlaying;
+				}
+			}
+		});
 	}
 
 	@Override
 	public void onAuthorsLoaded(List<String[]> Auteurs) {
 
-	}
-
-	public void play(View v) {
-		if (mediaPlayer != null && mediaPlayer.isPlaying()) {
-			mediaPlayer.pause();
-			((ImageView) findViewById(R.id.playIcon))
-					.setImageResource(R.drawable.player);
-		} else if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
-			mediaPlayer.start();
-			((ImageView) findViewById(R.id.playIcon))
-					.setImageResource(R.drawable.pause);
-		}
 	}
 
 	@Override
@@ -109,7 +115,7 @@ public class AudioFilesActivity extends Activity implements WSHelperListener {
 
 			@Override
 			public void run() {
-				lstViewAudios.setAdapter(new AudioElementAdapter(mediaPlayer,
+				lstViewAudios.setAdapter(new AudioElementAdapter(audioStreamer,
 						getApplicationContext(), AudioFilesActivity.this,
 						wsResponseAudioDetail.getListAudio(), getIntent()
 								.getStringExtra("intervenant")));
@@ -120,7 +126,6 @@ public class AudioFilesActivity extends Activity implements WSHelperListener {
 	@Override
 	protected void onStop() {
 		super.onStop();
-		mediaPlayer.reset();
 		if (wl.isHeld())
 			wl.release();
 		WSHelper.getInstance().removeWSHelperListener(this);

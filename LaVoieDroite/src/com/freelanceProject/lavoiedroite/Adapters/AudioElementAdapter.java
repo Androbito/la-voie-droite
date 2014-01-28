@@ -2,8 +2,6 @@ package com.freelanceProject.lavoiedroite.Adapters;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,23 +11,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.freelanceProject.lavoiedroite.R;
 import com.freelanceProject.lavoiedroite.beans.AudioElement;
+import com.freelanceProject.lavoiedroite.streaming.StreamingMediaPlayer;
 import com.freelanceProject.lavoiedroite.web.DownloadManager;
 
 public class AudioElementAdapter extends BaseAdapter {
@@ -38,17 +35,18 @@ public class AudioElementAdapter extends BaseAdapter {
 	Activity mActivity;
 	String intervenant;
 	List<AudioElement> mListAudio;
-	MediaPlayer mediaPlayer;
+	StreamingMediaPlayer audioStreamer;
 	AudioManager audioManager;
 	ProgressDialog mProgressDialog;
 	private DownloadManager downloadManager;
 
-	public AudioElementAdapter(MediaPlayer mediaPlayer, Context mContext,
-			Activity mActivity, List<AudioElement> lstAudio, String mIntervenant) {
+	public AudioElementAdapter(StreamingMediaPlayer mediaPlayer,
+			Context mContext, Activity mActivity, List<AudioElement> lstAudio,
+			String mIntervenant) {
 		super();
 		this.mContext = mContext;
 		this.mActivity = mActivity;
-		this.mediaPlayer = mediaPlayer;
+		this.audioStreamer = mediaPlayer;
 		this.downloadManager = new DownloadManager(
 				mContext.getContentResolver(),
 				"com.freelanceProject.lavoiedroite");
@@ -128,8 +126,7 @@ public class AudioElementAdapter extends BaseAdapter {
 					@Override
 					public void onClick(View v) {
 						Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-						sendIntent.putExtra(
-								"sms_body",
+						sendIntent.putExtra("sms_body",
 								"Je vous recommande le contenu suivant: "
 										+ mListAudio.get(position).getUrl());
 						sendIntent.setType("vnd.android-dir/mms-sms");
@@ -142,76 +139,39 @@ public class AudioElementAdapter extends BaseAdapter {
 					@Override
 					public void onClick(View button) {
 						// TODO Auto-generated method stub
-
+						startStreamingAudio(mListAudio.get(position).getUrl(),
+								((ImageView) mActivity
+										.findViewById(R.id.playIcon)),
+								((TextView) mActivity
+										.findViewById(R.id.text_kb_streamed)),
+								audioStreamer, ((ProgressBar) mActivity
+										.findViewById(R.id.strmPBH)));
 						((TextView) mActivity
 								.findViewById(R.id.coursIntervenant))
 								.setText(AudioElementAdapter.this.intervenant);
 						((TextView) mActivity.findViewById(R.id.coursTitle))
 								.setText(mListAudio.get(position)
 										.getDescription());
-						Stream(button, view, mListAudio.get(position).getUrl());
+						((ImageView) mActivity.findViewById(R.id.playIcon))
+								.setTag(mListAudio.get(position).getUrl());
 					}
 				});
 		return view;
 	}
 
-	public void Stream(View button, View view, final String url) {
-		if (!mediaPlayer.isPlaying()) {
-			mProgressDialog = new ProgressDialog(this.mActivity);
-			mProgressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-			mProgressDialog.setMessage("Stream loading...");
-			mProgressDialog.show();
-			new Thread((new Runnable() {
-				Message msg = null;
-
-				public void run() {
-					try {
-						play(new URL(url));
-						msg = mHandler.obtainMessage(1);
-						// sends the message to our handler
-						mHandler.sendMessage(msg);
-						mediaPlayer.start();
-					} catch (MalformedURLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			})).start();
-		} else if (mediaPlayer != null && mediaPlayer.isPlaying()) {
-			mediaPlayer.stop();
-			mediaPlayer.reset();
-			((ImageView) mActivity.findViewById(R.id.playIcon))
-					.setImageResource(R.drawable.player);
-		}
-	}
-
-	protected void play(URL url) {
+	private void startStreamingAudio(String url, ImageView playButton,
+			TextView textStreamed, StreamingMediaPlayer audioStreamer,
+			ProgressBar progressBar) {
 		try {
-			mediaPlayer.setDataSource(url.toString());
-			mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-			mediaPlayer.prepare();
-			mediaPlayer.start();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
+			if (audioStreamer != null) {
+				audioStreamer.interrupt();
+			}
+			audioStreamer = new StreamingMediaPlayer(mActivity, textStreamed,
+					playButton, progressBar);
+			audioStreamer.startStreaming(url, 1677, 214);
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(getClass().getName(), "Error starting to stream audio.", e);
 		}
 
 	}
-
-	final Handler mHandler = new Handler() {
-		public void handleMessage(Message msg) {
-			switch (msg.what) {
-			case 1:
-				mProgressDialog.dismiss();
-				((ImageView) mActivity.findViewById(R.id.playIcon))
-						.setImageResource(R.drawable.pause);
-				break;
-			}
-		}
-	};
 }

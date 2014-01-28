@@ -52,7 +52,6 @@
                         android:layout_centerHorizontal="true"
                         android:paddingTop="45dp"
                         android:text="Conférences" />
-
                 </RelativeLayout>
             </LinearLayout>
         </FrameLayout>
@@ -86,42 +85,75 @@
             android:onClick="play"
             android:src="@drawable/player" />
 
-        <ScrollView
-            android:id="@+id/scrollView1"
-            android:layout_width="0dip"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1" >
+            android:orientation="vertical" >
+
+            <ScrollView
+                android:id="@+id/scrollView1"
+                android:layout_width="fill_parent"
+                android:layout_height="0dip"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="0.5" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/coursTitle"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </ScrollView>
+
+            <ProgressBar
+                android:id="@+id/strmPBH"
+                style="@style/CustomProgressBarHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical" >
+                android:layout_height="0dip"
+                android:layout_marginTop="5dp"
+                android:layout_weight="0.5"
+                android:orientation="horizontal" >
 
-                <TextView
-                    android:id="@+id/coursTitle"
-                    android:layout_width="fill_parent"
+                <ScrollView
+                    android:id="@+id/scrollView2"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/coursIntervenant"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </ScrollView>
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:textStyle="bold" />
+                    android:src="@drawable/date" />
 
                 <TextView
-                    android:id="@+id/coursIntervenant"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
+                    android:id="@+id/text_kb_streamed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
             </LinearLayout>
-        </ScrollView>
-
-<!--         <ImageView -->
-<!--             android:id="@+id/imageView3" -->
-<!--             android:layout_width="wrap_content" -->
-<!--             android:layout_height="wrap_content" -->
-<!--             android:src="@drawable/date" /> -->
-
-<!--         <TextView -->
-<!--             android:id="@+id/date" -->
-<!--             android:layout_width="wrap_content" -->
-<!--             android:layout_height="wrap_content" -->
-<!--             android:text="TextView" /> -->
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
