@@ -13,6 +13,7 @@ import android.graphics.Color;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Environment;
+import android.os.PowerManager.WakeLock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,14 +40,22 @@ public class AudioElementAdapter extends BaseAdapter {
 	AudioManager audioManager;
 	ProgressDialog mProgressDialog;
 	private DownloadManager downloadManager;
+	private WakeLock wl;
 
-	public AudioElementAdapter(StreamingMediaPlayer mediaPlayer,
-			Context mContext, Activity mActivity, List<AudioElement> lstAudio,
-			String mIntervenant) {
+	public StreamingMediaPlayer getAudioStreamer() {
+		return audioStreamer;
+	}
+
+	public void setAudioStreamer(StreamingMediaPlayer audioStreamer) {
+		this.audioStreamer = audioStreamer;
+	}
+
+	public AudioElementAdapter(Context mContext, WakeLock wl,
+			Activity mActivity, List<AudioElement> lstAudio, String mIntervenant) {
 		super();
+		this.wl = wl;
 		this.mContext = mContext;
 		this.mActivity = mActivity;
-		this.audioStreamer = mediaPlayer;
 		this.downloadManager = new DownloadManager(
 				mContext.getContentResolver(),
 				"com.freelanceProject.lavoiedroite");
@@ -55,8 +64,6 @@ public class AudioElementAdapter extends BaseAdapter {
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		this.mListAudio = new ArrayList<AudioElement>();
 		this.mListAudio.addAll(lstAudio);
-		this.audioManager = (AudioManager) mActivity
-				.getSystemService(Context.AUDIO_SERVICE);
 	}
 
 	@Override
@@ -139,13 +146,9 @@ public class AudioElementAdapter extends BaseAdapter {
 					@Override
 					public void onClick(View button) {
 						// TODO Auto-generated method stub
-						startStreamingAudio(mListAudio.get(position).getUrl(),
-								((ImageView) mActivity
-										.findViewById(R.id.playIcon)),
-								((TextView) mActivity
-										.findViewById(R.id.text_kb_streamed)),
-								audioStreamer, ((ProgressBar) mActivity
-										.findViewById(R.id.strmPBH)));
+						startStreamingAudio(
+								((ImageView) view.findViewById(R.id.play)),
+								position);
 						((TextView) mActivity
 								.findViewById(R.id.coursIntervenant))
 								.setText(AudioElementAdapter.this.intervenant);
@@ -159,16 +162,21 @@ public class AudioElementAdapter extends BaseAdapter {
 		return view;
 	}
 
-	private void startStreamingAudio(String url, ImageView playButton,
-			TextView textStreamed, StreamingMediaPlayer audioStreamer,
-			ProgressBar progressBar) {
+	private void startStreamingAudio(ImageView imageView, int position) {
 		try {
+			final ProgressBar progressBar = (ProgressBar) mActivity
+					.findViewById(R.id.strmPBH);
 			if (audioStreamer != null) {
 				audioStreamer.interrupt();
 			}
-			audioStreamer = new StreamingMediaPlayer(mActivity, textStreamed,
-					playButton, progressBar);
-			audioStreamer.startStreaming(url, 1677, 214);
+			setAudioStreamer(new StreamingMediaPlayer(mActivity,
+					((TextView) mActivity.findViewById(R.id.text_kb_streamed)),
+					((ImageView) mActivity.findViewById(R.id.playIcon)),
+					progressBar));
+			audioStreamer.startStreaming(mListAudio.get(position).getUrl(),
+					5208, 216);
+			imageView.setEnabled(false);
+			wl.acquire();
 		} catch (IOException e) {
 			Log.e(getClass().getName(), "Error starting to stream audio.", e);
 		}

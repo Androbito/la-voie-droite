@@ -35,7 +35,7 @@ public class AudioFilesActivity extends Activity implements WSHelperListener {
 	PowerManager pm;
 	ImageView playButton, back;
 	private boolean isPlaying;
-	private StreamingMediaPlayer audioStreamer;
+	protected StreamingMediaPlayer audioStreamer;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,16 +68,20 @@ public class AudioFilesActivity extends Activity implements WSHelperListener {
 		});
 		playButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
-				if (audioStreamer != null) {
-					if (audioStreamer.getMediaPlayer().isPlaying()) {
-						audioStreamer.getMediaPlayer().pause();
-						playButton.setImageResource(R.drawable.player);
-					} else {
-						audioStreamer.getMediaPlayer().start();
-						audioStreamer.startPlayProgressUpdater();
-						playButton.setImageResource(R.drawable.pause);
+				if (lstViewAudios.getAdapter() != null) {
+					audioStreamer = ((AudioElementAdapter) lstViewAudios
+							.getAdapter()).getAudioStreamer();
+					if (audioStreamer != null) {
+						if (audioStreamer.getMediaPlayer().isPlaying()) {
+							audioStreamer.getMediaPlayer().pause();
+							playButton.setImageResource(R.drawable.player);
+						} else {
+							audioStreamer.getMediaPlayer().start();
+							audioStreamer.startPlayProgressUpdater();
+							playButton.setImageResource(R.drawable.pause);
+						}
+						isPlaying = !isPlaying;
 					}
-					isPlaying = !isPlaying;
 				}
 			}
 		});
@@ -115,8 +119,8 @@ public class AudioFilesActivity extends Activity implements WSHelperListener {
 
 			@Override
 			public void run() {
-				lstViewAudios.setAdapter(new AudioElementAdapter(audioStreamer,
-						getApplicationContext(), AudioFilesActivity.this,
+				lstViewAudios.setAdapter(new AudioElementAdapter(
+						getApplicationContext(), wl, AudioFilesActivity.this,
 						wsResponseAudioDetail.getListAudio(), getIntent()
 								.getStringExtra("intervenant")));
 			}
@@ -126,6 +130,10 @@ public class AudioFilesActivity extends Activity implements WSHelperListener {
 	@Override
 	protected void onStop() {
 		super.onStop();
+		if (audioStreamer != null && audioStreamer.getMediaPlayer() != null) {
+			audioStreamer.getMediaPlayer().stop();
+			audioStreamer.getMediaPlayer().reset();
+		}
 		if (wl.isHeld())
 			wl.release();
 		WSHelper.getInstance().removeWSHelperListener(this);

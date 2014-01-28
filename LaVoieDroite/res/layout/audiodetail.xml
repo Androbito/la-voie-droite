@@ -121,6 +121,7 @@
                 android:layout_height="0dip"
                 android:layout_marginTop="5dp"
                 android:layout_weight="0.5"
+                android:gravity="center_vertical"
                 android:orientation="horizontal" >
 
                 <ScrollView
@@ -150,8 +151,7 @@
                 <TextView
                     android:id="@+id/text_kb_streamed"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

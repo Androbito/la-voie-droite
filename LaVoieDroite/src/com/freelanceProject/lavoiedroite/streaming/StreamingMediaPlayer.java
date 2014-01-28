@@ -10,10 +10,10 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
+import com.freelanceProject.lavoiedroite.R;
+
 import android.content.Context;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.MediaPlayer.OnPreparedListener;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageView;
@@ -102,7 +102,20 @@ public class StreamingMediaPlayer {
 		}
 
 		downloadingMediaFile = new File(context.getCacheDir(),
-				"downloadingMedia_" + (counter++) + ".dat");
+				"downloadingMedia.dat");
+
+		// Just in case a prior deletion failed because our code crashed or
+		// something, we also delete any previously
+		// downloaded file to ensure we start fresh. If you use this code,
+		// always delete
+		// no longer used downloads else you'll quickly fill up your hard disk
+		// memory. Of course, you can also
+		// store any previously downloaded file in a separate data cache for
+		// instant replay if you wanted as well.
+		if (downloadingMediaFile.exists()) {
+			downloadingMediaFile.delete();
+		}
+
 		FileOutputStream out = new FileOutputStream(downloadingMediaFile);
 		byte buf[] = new byte[16384];
 		int totalBytesRead = 0, incrementalBytesRead = 0;
@@ -118,7 +131,6 @@ public class StreamingMediaPlayer {
 			testMediaBuffer();
 			fireDataLoadUpdate();
 		} while (validateNotInterrupted());
-
 		stream.close();
 		if (validateNotInterrupted()) {
 			fireDataFullyLoaded();
@@ -174,33 +186,74 @@ public class StreamingMediaPlayer {
 		try {
 			File bufferedFile = new File(context.getCacheDir(), "playingMedia"
 					+ (counter++) + ".dat");
+
+			// We double buffer the data to avoid potential read/write errors
+			// that could happen if the
+			// download thread attempted to write at the same time the
+			// MediaPlayer was trying to read.
+			// For example, we can't guarantee that the MediaPlayer won't open a
+			// file for playing and leave it locked while
+			// the media is playing. This would permanently deadlock the file
+			// download. To avoid such a deadloack,
+			// we move the currently loaded data to a temporary buffer file that
+			// we start playing while the remaining
+			// data downloads.
 			moveFile(downloadingMediaFile, bufferedFile);
 
-			Log.e("Player", bufferedFile.length() + "");
-			Log.e("Player", bufferedFile.getAbsolutePath());
+			Log.e(getClass().getName(),
+					"Buffered File path: " + bufferedFile.getAbsolutePath());
+			Log.e(getClass().getName(),
+					"Buffered File length: " + bufferedFile.length() + "");
 
-			mediaPlayer = new MediaPlayer();
-			mediaPlayer.setDataSource(bufferedFile.getAbsolutePath());
-			mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-			mediaPlayer.prepareAsync();
-			mediaPlayer.setOnPreparedListener(new OnPreparedListener() {
-
-				@Override
-				public void onPrepared(MediaPlayer mp) {
-					fireDataPreloadComplete();
-				}
-			});
-
+			mediaPlayer = createMediaPlayer(bufferedFile);
+			Log.i(getClass().getName(), "File duration: "
+					+ convertDuration(mediaPlayer.getDuration() / 1000));
+			// We have pre-loaded enough content and started the MediaPlayer so
+			// update the buttons & progress meters.
+			mediaPlayer.start();
+			startPlayProgressUpdater();
+			playButton.setEnabled(true);
+			playButton.setImageResource(R.drawable.pause);
 		} catch (IOException e) {
-			Log.e(getClass().getName(), "Error initializing the MediaPlaer.", e);
+			Log.e(getClass().getName(), "Error initializing the MediaPlayer.",
+					e);
 			return;
 		}
 	}
 
+	private String convertDuration(int sec) {
+		int hours = (int) sec / 3600;
+		int minutes = ((int) sec % 3600) / 60;
+		int seconds = (int) sec % 60;
+		return (hours + ":" + minutes + ":" + seconds);
+	}
+
+	private MediaPlayer createMediaPlayer(File mediaFile) throws IOException {
+		MediaPlayer mPlayer = new MediaPlayer();
+		mPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+			public boolean onError(MediaPlayer mp, int what, int extra) {
+				Log.e(getClass().getName(), "Error in MediaPlayer: (" + what
+						+ ") with extra (" + extra + ")");
+				return false;
+			}
+		});
+
+		// It appears that for security/permission reasons, it is better to pass
+		// a FileDescriptor rather than a direct path to the File.
+		// Also I have seen errors such as "PVMFErrNotSupported" and
+		// "Prepare failed.: status=0x1" if a file path String is passed to
+		// setDataSource(). So unless otherwise noted, we use a FileDescriptor
+		// here.
+		FileInputStream fis = new FileInputStream(mediaFile);
+		mPlayer.setDataSource(fis.getFD());
+		mPlayer.prepare();
+		return mPlayer;
+	}
+
 	/**
-	 * Transfer buffered data to the MediaPlayer. Interacting with MediaPlayer
-	 * on non-main UI thread can causes crashes to so perform this using a
-	 * Handler.
+	 * Transfer buffered data to the MediaPlayer. NOTE: Interacting with a
+	 * MediaPlayer on a non-main UI thread can cause thread-lock and crashes so
+	 * this method should always be called using a Handler.
 	 */
 	private void transferBufferToMediaPlayer() {
 		try {
@@ -208,19 +261,34 @@ public class StreamingMediaPlayer {
 			// transferring data...e.g. perhaps the user pressed pause
 			boolean wasPlaying = mediaPlayer.isPlaying();
 			int curPosition = mediaPlayer.getCurrentPosition();
-			mediaPlayer.pause();
 
+			// Copy the currently downloaded content to a new buffered File.
+			// Store the old File for deleting later.
+			File oldBufferedFile = new File(context.getCacheDir(),
+					"playingMedia" + counter + ".dat");
 			File bufferedFile = new File(context.getCacheDir(), "playingMedia"
 					+ (counter++) + ".dat");
-			// FileUtils.copyFile(downloadingMediaFile,bufferedFile);
 
-			mediaPlayer = new MediaPlayer();
-			mediaPlayer.setDataSource(bufferedFile.getAbsolutePath());
-			// mediaPlayer.setAudioStreamType(AudioSystem.STREAM_MUSIC);
-			mediaPlayer.prepare();
+			// This may be the last buffered File so ask that it be delete on
+			// exit. If it's already deleted, then this won't mean anything. If
+			// you want to
+			// keep and track fully downloaded files for later use, write
+			// caching code and please send me a copy.
+			bufferedFile.deleteOnExit();
+			moveFile(downloadingMediaFile, bufferedFile);
+
+			// Pause the current player now as we are about to create and start
+			// a new one. So far (Android v1.5),
+			// this always happens so quickly that the user never realized we've
+			// stopped the player and started a new one
+			mediaPlayer.pause();
+
+			// Create a new MediaPlayer rather than try to re-prepare the prior
+			// one.
+			mediaPlayer = createMediaPlayer(bufferedFile);
 			mediaPlayer.seekTo(curPosition);
 
-			// Restart if at end of prior beuffered content or mediaPlayer was
+			// Restart if at end of prior buffered content or mediaPlayer was
 			// previously playing.
 			// NOTE: We test for < 1second of data because the media player can
 			// stop when there is still
@@ -230,6 +298,11 @@ public class StreamingMediaPlayer {
 			if (wasPlaying || atEndOfFile) {
 				mediaPlayer.start();
 			}
+
+			// Lastly delete the previously playing buffered File as it's no
+			// longer needed.
+			oldBufferedFile.delete();
+
 		} catch (Exception e) {
 			Log.e(getClass().getName(),
 					"Error updating to newly loaded content.", e);
@@ -239,25 +312,9 @@ public class StreamingMediaPlayer {
 	private void fireDataLoadUpdate() {
 		Runnable updater = new Runnable() {
 			public void run() {
-				textStreamed.setText((CharSequence) (totalKbRead + " Kb read"));
+				// textStreamed.setText((totalKbRead + " Kb read"));
 				float loadProgress = ((float) totalKbRead / (float) mediaLengthInKb);
 				progressBar.setSecondaryProgress((int) (loadProgress * 100));
-			}
-		};
-		handler.post(updater);
-	}
-
-	/**
-	 * We have preloaded enough content and started the MediaPlayer so update
-	 * the buttons & progress meters.
-	 */
-	private void fireDataPreloadComplete() {
-		Runnable updater = new Runnable() {
-			public void run() {
-				mediaPlayer.start();
-				startPlayProgressUpdater();
-				playButton.setEnabled(true);
-				// streamButton.setEnabled(false);
 			}
 		};
 		handler.post(updater);
@@ -267,8 +324,12 @@ public class StreamingMediaPlayer {
 		Runnable updater = new Runnable() {
 			public void run() {
 				transferBufferToMediaPlayer();
-				textStreamed.setText((CharSequence) ("Audio full loaded: "
-						+ totalKbRead + " Kb read"));
+
+				// Delete the downloaded File as it's now been transferred to
+				// the currently playing buffer file.
+				downloadingMediaFile.delete();
+				// textStreamed.setText(("Audio full loaded: " + totalKbRead +
+				// " Kb read"));
 			}
 		};
 		handler.post(updater);
@@ -279,9 +340,13 @@ public class StreamingMediaPlayer {
 	}
 
 	public void startPlayProgressUpdater() {
-		float progress = (((float) mediaPlayer.getCurrentPosition() / 1000) / (float) mediaLengthInSeconds);
+		mediaLengthInSeconds = mediaPlayer.getDuration();
+		float progress = (((float) mediaPlayer.getCurrentPosition() / 1000) / mediaLengthInSeconds);
 		progressBar.setProgress((int) (progress * 100));
-
+		textStreamed
+				.setText(convertDuration(mediaPlayer.getCurrentPosition() / 1000)
+						+ "/"
+						+ convertDuration(mediaPlayer.getDuration() / 1000));
 		if (mediaPlayer.isPlaying()) {
 			Runnable notification = new Runnable() {
 				public void run() {
@@ -298,6 +363,9 @@ public class StreamingMediaPlayer {
 		validateNotInterrupted();
 	}
 
+	/**
+	 * Move the file in oldLocation to newLocation.
+	 */
 	public void moveFile(File oldLocation, File newLocation) throws IOException {
 
 		if (oldLocation.exists()) {
