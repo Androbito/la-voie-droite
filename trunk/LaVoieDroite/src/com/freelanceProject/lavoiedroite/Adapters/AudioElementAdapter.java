@@ -23,6 +23,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.freelanceProject.lavoiedroite.R;
@@ -161,10 +162,9 @@ public class AudioElementAdapter extends BaseAdapter {
 				});
 		return view;
 	}
-
 	private void startStreamingAudio(ImageView imageView, int position) {
 		try {
-			final ProgressBar progressBar = (ProgressBar) mActivity
+			final SeekBar progressBar = (SeekBar) mActivity
 					.findViewById(R.id.strmPBH);
 			if (audioStreamer != null) {
 				audioStreamer.interrupt();

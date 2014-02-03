@@ -10,15 +10,17 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
-import com.freelanceProject.lavoiedroite.R;
-
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Handler;
+import android.text.InputFilter.LengthFilter;
 import android.util.Log;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+
+import com.freelanceProject.lavoiedroite.R;
 
 /**
  * MediaPlayer does not yet support streaming from external URLs so this class
@@ -30,19 +32,19 @@ public class StreamingMediaPlayer {
 	private static final int INTIAL_KB_BUFFER = 96 * 10 / 8;// assume
 															// 96kbps*10secs/8bits
 															// per byte
-
+	private float progress = 0;
 	private TextView textStreamed;
 
 	private ImageView playButton;
 
-	private ProgressBar progressBar;
+	private SeekBar progressBar;
 
 	// Track for display by progressBar
 	private long mediaLengthInKb, mediaLengthInSeconds;
 	private int totalKbRead = 0;
 
 	// Create Handler to call View updates on the main UI thread.
-	private final Handler handler = new Handler();
+	public Handler handler = new Handler();
 
 	private MediaPlayer mediaPlayer;
 
@@ -53,9 +55,10 @@ public class StreamingMediaPlayer {
 	private Context context;
 
 	private int counter = 0;
+	protected float loadProgress;
 
 	public StreamingMediaPlayer(Context context, TextView textStreamed,
-			ImageView playButton, ProgressBar progressBar) {
+			ImageView playButton, SeekBar progressBar) {
 		this.context = context;
 		this.textStreamed = textStreamed;
 		this.playButton = playButton;
@@ -221,7 +224,7 @@ public class StreamingMediaPlayer {
 		}
 	}
 
-	private String convertDuration(int sec) {
+	private String convertDuration(long sec) {
 		int hours = (int) sec / 3600;
 		int minutes = ((int) sec % 3600) / 60;
 		int seconds = (int) sec % 60;
@@ -268,7 +271,9 @@ public class StreamingMediaPlayer {
 					"playingMedia" + counter + ".dat");
 			File bufferedFile = new File(context.getCacheDir(), "playingMedia"
 					+ (counter++) + ".dat");
-
+			mediaLengthInKb = (oldBufferedFile.length() + bufferedFile.length()) / 1000;
+			loadProgress = ((float) totalKbRead / (float) mediaLengthInKb);
+			progressBar.setSecondaryProgress((int) (loadProgress * 100));
 			// This may be the last buffered File so ask that it be delete on
 			// exit. If it's already deleted, then this won't mean anything. If
 			// you want to
@@ -313,7 +318,7 @@ public class StreamingMediaPlayer {
 		Runnable updater = new Runnable() {
 			public void run() {
 				// textStreamed.setText((totalKbRead + " Kb read"));
-				float loadProgress = ((float) totalKbRead / (float) mediaLengthInKb);
+				loadProgress = ((float) totalKbRead / (float) mediaLengthInKb);
 				progressBar.setSecondaryProgress((int) (loadProgress * 100));
 			}
 		};
@@ -332,7 +337,7 @@ public class StreamingMediaPlayer {
 				// " Kb read"));
 			}
 		};
-		handler.post(updater);
+		handler.postDelayed(updater, 1000);
 	}
 
 	public MediaPlayer getMediaPlayer() {
@@ -340,13 +345,13 @@ public class StreamingMediaPlayer {
 	}
 
 	public void startPlayProgressUpdater() {
-		mediaLengthInSeconds = mediaPlayer.getDuration();
-		float progress = (((float) mediaPlayer.getCurrentPosition() / 1000) / mediaLengthInSeconds);
+		mediaLengthInSeconds = mediaPlayer.getDuration() / 1000;
+		float mediaPositionSeconds = mediaPlayer.getCurrentPosition() / 1000;
+		float progress = (mediaPositionSeconds / mediaLengthInSeconds);
 		progressBar.setProgress((int) (progress * 100));
 		textStreamed
 				.setText(convertDuration(mediaPlayer.getCurrentPosition() / 1000)
-						+ "/"
-						+ convertDuration(mediaPlayer.getDuration() / 1000));
+						+ "/" + convertDuration(mediaLengthInSeconds));
 		if (mediaPlayer.isPlaying()) {
 			Runnable notification = new Runnable() {
 				public void run() {
