@@ -13,11 +13,12 @@ import java.net.URLConnection;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Handler;
-import android.text.InputFilter.LengthFilter;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
 import com.freelanceProject.lavoiedroite.R;
@@ -344,11 +345,26 @@ public class StreamingMediaPlayer {
 		return mediaPlayer;
 	}
 
+	private void seekChange(View v) {
+		if (mediaPlayer.isPlaying()) {
+			SeekBar sb = (SeekBar) v;
+			mediaPlayer.seekTo(sb.getProgress()
+					* ((int) (mediaLengthInSeconds * 10)));
+		}
+	}
+
 	public void startPlayProgressUpdater() {
 		mediaLengthInSeconds = mediaPlayer.getDuration() / 1000;
 		float mediaPositionSeconds = mediaPlayer.getCurrentPosition() / 1000;
 		float progress = (mediaPositionSeconds / mediaLengthInSeconds);
 		progressBar.setProgress((int) (progress * 100));
+		progressBar.setOnTouchListener(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				seekChange(v);
+				return false;
+			}
+		});
 		textStreamed
 				.setText(convertDuration(mediaPlayer.getCurrentPosition() / 1000)
 						+ "/" + convertDuration(mediaLengthInSeconds));
