@@ -110,7 +110,7 @@
                 </LinearLayout>
             </ScrollView>
 
-            <ProgressBar
+            <SeekBar
                 android:id="@+id/strmPBH"
                 style="@style/CustomProgressBarHorizontal"
                 android:layout_width="match_parent"
