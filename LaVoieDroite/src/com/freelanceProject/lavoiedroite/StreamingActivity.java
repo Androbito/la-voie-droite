@@ -60,7 +60,7 @@ public class StreamingActivity extends Activity {
 
 				public void run() {
 					try {
-						play(new URL("http://37.58.75.163:8060/stream"));
+						play(new URL(getIntent().getStringExtra("url")));
 						msg = mHandler.obtainMessage(1);
 						// sends the message to our handler
 						mHandler.sendMessage(msg);

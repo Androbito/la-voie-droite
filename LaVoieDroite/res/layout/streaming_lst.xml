@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/basic_fond"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:id="@+id/form"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:id="@+id/menu"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/header"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:src="@drawable/back" >
+            </ImageView>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/list"
+            android:layout_width="fill_parent"
+            android:layout_height="122dp"
+            android:background="@android:color/transparent"
+            android:paddingTop="50dp" >
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:paddingTop="45dp"
+                android:text="Le Direct" />
+        </RelativeLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/direct1"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="#0A000000"
+        android:paddingLeft="10dp" >
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="Le Direct N°1"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#004493" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/group_down" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.2dip"
+        android:background="@android:color/darker_gray" />
+
+    <LinearLayout
+        android:id="@+id/direct2"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:paddingLeft="10dp" >
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:onClick="direct"
+            android:text="Le Direct N°2"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#004493" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/group_down" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.2dip"
+        android:background="@android:color/darker_gray" />
+
+</LinearLayout>

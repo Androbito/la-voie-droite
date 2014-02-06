@@ -91,7 +91,7 @@ public class MainActivity extends Activity {
 					startActivity(fatArt);
 				} else if (position == 3) {
 					Intent strm = new Intent(view.getContext(),
-							StreamingActivity.class);
+							StreamingListActivity.class);
 					startActivity(strm);
 				} else if (position == 4) {
 					Intent conference = new Intent(view.getContext(),

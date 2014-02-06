@@ -1,7 +1,11 @@
 package com.freelanceProject.lavoiedroite.ws;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -13,7 +17,7 @@ import android.util.Log;
 
 public class WsRequest {
 	public static InputStream retrieveStream(String url) {
-		
+
 		DefaultHttpClient client = new DefaultHttpClient();
 
 		HttpGet getRequest = new HttpGet(url);
@@ -37,6 +41,23 @@ public class WsRequest {
 		}
 
 		return null;
+	}
+	public static String getText(String url) throws Exception {
+		 URL website = new URL(url);
+	        URLConnection connection = website.openConnection();
+	        BufferedReader in = new BufferedReader(
+	                                new InputStreamReader(
+	                                    connection.getInputStream()));
+
+	        StringBuilder response = new StringBuilder();
+	        String inputLine;
+
+	        while ((inputLine = in.readLine()) != null) 
+	            response.append(inputLine);
+
+	        in.close();
+
+	        return response.toString();
 	}
 
 }
