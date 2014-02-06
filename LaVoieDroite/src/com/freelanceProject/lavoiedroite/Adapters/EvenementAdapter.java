@@ -55,8 +55,8 @@ public class EvenementAdapter extends BaseAdapter {
 	public View getView(final int position, final View convertView,
 			final ViewGroup parent) {
 		// TODO Auto-generated method stub
-		final View view = mLayoutInflater.inflate(R.layout.evenement_item, parent,
-				false);
+		final View view = mLayoutInflater.inflate(R.layout.evenement_item,
+				parent, false);
 		if (position % 2 == 00)
 			((LinearLayout) view.findViewById(R.id.layEvent))
 					.setBackgroundColor(Color.parseColor("#100000FF"));
@@ -81,10 +81,8 @@ public class EvenementAdapter extends BaseAdapter {
 						else {
 							detail.setVisibility(View.VISIBLE);
 							((WebView) view.findViewById(R.id.webEvent))
-									.loadDataWithBaseURL(null,
-											listEvents.get(position)
-													.getDetails(), "text/html",
-											"UTF-8", null);
+									.loadUrl(listEvents.get(position)
+											.getDetails());
 						}
 					}
 				});
