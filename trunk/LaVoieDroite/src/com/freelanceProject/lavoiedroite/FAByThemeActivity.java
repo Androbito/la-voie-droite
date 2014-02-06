@@ -48,7 +48,7 @@ public class FAByThemeActivity extends Activity implements WSHelperListener {
 		WSHelper.getInstance().getLastFatArt(getIntent().getStringExtra("url"),
 				cManager, FAByThemeActivity.this);
 		if (getIntent().getStringExtra("type").equals("fatwa"))
-			titre = "Fatwas";
+			titre = "Fatawas";
 		if (getIntent().getStringExtra("type").equals("article"))
 			titre = "Articles";
 		((TextView) findViewById(R.id.title)).setText(titre);

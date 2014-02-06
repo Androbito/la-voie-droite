@@ -146,8 +146,11 @@ public class FALastAddActivity extends Activity implements WSHelperListener {
 								FAReaderActivity.class);
 						reader.putExtra("pdf", wsResponseFaTArt
 								.getListFatArts().get(position).getPdf());
-						reader.putExtra("type",
-								getIntent().getStringExtra("type"));
+						reader.putExtra(
+								"type",
+								(getIntent().getStringExtra("type")
+										.equalsIgnoreCase("article") ? "Articles"
+										: "Fatawas"));
 						// Intent intent = new Intent(Intent.ACTION_VIEW, Uri
 						// .parse(wsResponseFaTArt.getListFatArts()
 						// .get(position).getPdf()));

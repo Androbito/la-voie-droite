@@ -14,6 +14,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -36,6 +37,8 @@ public class StreamingActivity extends Activity {
 		pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
 		wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "MyTag");
 		ImageView back = (ImageView) findViewById(R.id.back);
+		Log.i("url",getIntent().getStringExtra("url"));
+
 		back.setOnClickListener(new OnClickListener() {
 
 			@Override

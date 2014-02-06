@@ -35,11 +35,8 @@ public class FAReaderActivity extends Activity {
 				finish();
 			}
 		});
-		if (getIntent().getStringExtra("type").equals("fatwa"))
-			titre = "Fatwas";
-		if (getIntent().getStringExtra("type").equals("article"))
-			titre = "Articles";
-		((TextView) findViewById(R.id.title)).setText(titre);
+		((TextView) findViewById(R.id.title)).setText(getIntent()
+				.getStringExtra("type"));
 		webview = (WebView) findViewById(R.id.webview);
 
 		WebSettings settings = webview.getSettings();

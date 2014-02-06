@@ -1,5 +1,6 @@
 package com.freelanceProject.lavoiedroite;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -7,6 +8,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import org.apache.http.util.ByteArrayBuffer;
 
 import android.os.AsyncTask;
 import android.os.Environment;
@@ -45,10 +48,10 @@ public class SplashLoading extends AsyncTask<String, Integer, Integer> {
 	protected Integer doInBackground(String... params) {
 		downloadResources(
 				"http://manager.radioking.fr:2199/tunein/liveaima.ram",
-				"liveaima.ram", 0);
+				"liveaima.ram", 50);
 		downloadResources(
 				"http://manager.radioking.fr:2199/tunein/wwwlavoi.ram",
-				"wwwlavoi.ram", 50);
+				"wwwlavoi.ram", 100);
 		// Perhaps you want to return something to your post execute
 		return 1234;
 	}
@@ -81,25 +84,20 @@ public class SplashLoading extends AsyncTask<String, Integer, Integer> {
 				input = connection.getInputStream();
 				output = new FileOutputStream(directory.getAbsolutePath() + "/"
 						+ fileExt);
-
-				byte data[] = new byte[4096];
+				BufferedInputStream bis = new BufferedInputStream(input);
+				ByteArrayBuffer baf = new ByteArrayBuffer(50);
 				long total = 0;
-				int count;
-				while ((count = input.read(data)) != -1) {
+				while ((total = bis.read()) != -1) {
 					// allow canceling with back button
 					if (isCancelled())
 						Log.i("Cancelled ", "allow canceling with back button");
-					total += count;
-					Log.i("COUNT", "" + count);
+					baf.append((byte) total);
 					// publishing the progress....
 					// if (fileLength > 0) // only if total length is known
 					Log.i("FileLength", "" + fileLength);
-					publishProgress(prog + (int) total);
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException ignore) {
-					}
 				}
+				output.write(baf.toByteArray());
+				publishProgress(prog);
 
 			} catch (Exception e) {
 				Log.e("Exception", e.toString());
