@@ -41,13 +41,14 @@ public class FAReaderActivity extends Activity {
 
 		WebSettings settings = webview.getSettings();
 		settings.setJavaScriptEnabled(true);
+		settings.setBuiltInZoomControls(true);
+		settings.setSupportZoom(true);
 		webview.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
 
 		final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
 
 		progressBar = ProgressDialog.show(FAReaderActivity.this, getIntent()
 				.getStringExtra("type"), "Loading...");
-
 		webview.setWebViewClient(new WebViewClient() {
 			@Override
 			public boolean shouldOverrideUrlLoading(final WebView view,
