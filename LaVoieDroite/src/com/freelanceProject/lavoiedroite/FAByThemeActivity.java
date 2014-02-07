@@ -163,46 +163,17 @@ public class FAByThemeActivity extends Activity implements WSHelperListener {
 								FAReaderActivity.class);
 						reader.putExtra("pdf", wsResponseFaTArt
 								.getListFatArts().get(position).getPdf());
-						reader.putExtra("type", titre);
-						Intent intent = new Intent(Intent.ACTION_VIEW, Uri
-								.parse(wsResponseFaTArt.getListFatArts()
-										.get(position).getPdf()));
-						intent.setType("application/pdf");
-						PackageManager pm = getPackageManager();
-						List<ResolveInfo> activities = pm
-								.queryIntentActivities(intent, 0);
-						if (activities.size() > 0) {
-							startActivity(intent);
-						} else {
-							startActivity(reader);
-						}
+						reader.putExtra(
+								"type",
+								(getIntent().getStringExtra("type")
+										.equalsIgnoreCase("article") ? "Articles"
+										: "Fatawas"));
+						startActivity(reader);
 					}
 				});
 			}
 		});
 
-	}
-
-	private void loadDocInReader(String doc) throws ActivityNotFoundException,
-			Exception {
-
-		try {
-			Intent intent = new Intent();
-
-			intent.setPackage("com.adobe.reader");
-			intent.setDataAndType(Uri.parse(doc), "application/pdf");
-
-			startActivity(intent);
-
-		} catch (ActivityNotFoundException activityNotFoundException) {
-			activityNotFoundException.printStackTrace();
-
-			throw activityNotFoundException;
-		} catch (Exception otherException) {
-			otherException.printStackTrace();
-
-			throw otherException;
-		}
 	}
 
 	@Override
