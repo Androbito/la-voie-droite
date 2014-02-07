@@ -49,12 +49,22 @@ public class FAReaderActivity extends Activity {
 				.getStringExtra("type"), "Loading...");
 
 		webview.setWebViewClient(new WebViewClient() {
-			public boolean shouldOverrideUrlLoading(WebView view, String url) {
+			@Override
+			public boolean shouldOverrideUrlLoading(final WebView view,
+					final String url) {
 				Log.i(TAG, "Processing webview url click...");
-				view.loadUrl(url);
+				new Thread(new Runnable() {
+
+					public void run() {
+						view.loadUrl(url);
+					}
+
+				}).start();
+
 				return true;
 			}
 
+			@Override
 			public void onPageFinished(WebView view, String url) {
 				Log.i(TAG, "Finished loading URL: " + url);
 				if (progressBar.isShowing()) {
