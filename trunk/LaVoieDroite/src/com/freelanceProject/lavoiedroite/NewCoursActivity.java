@@ -8,6 +8,7 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 
 public class NewCoursActivity extends Activity {
+	WebView wv;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +23,10 @@ public class NewCoursActivity extends Activity {
 				finish();
 			}
 		});
-		((WebView) findViewById(R.id.webNewCours))
-				.loadUrl("http://www.lavoiedroite.com/imagesAppIndroid/planning-cours.jpg");
+		wv = ((WebView) findViewById(R.id.webNewCours));
+		wv.getSettings().setBuiltInZoomControls(true);
+		wv.getSettings().setSupportZoom(true);
+		wv.loadUrl("http://www.lavoiedroite.com/imagesAppIndroid/planning-cours.jpg");
 	}
 
 }
