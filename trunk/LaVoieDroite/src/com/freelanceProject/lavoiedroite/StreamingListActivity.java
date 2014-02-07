@@ -36,15 +36,18 @@ public class StreamingListActivity extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub	
+		String direct = "Le Direct";
 		switch (v.getId()) {
 		case R.id.direct1:
 			file = new File(Environment.getExternalStorageDirectory()
 					.toString() + "/LaVoieDroite_mp3/liveaima.ram");
+			direct = "Le Direct N°1";
 			break;
 		case R.id.direct2:
 			file = new File(Environment.getExternalStorageDirectory()
 					.toString() + "/LaVoieDroite_mp3/wwwlavoi.ram");
+			direct = "Le Direct N°2";
 			break;
 		}
 		if (file.exists()) {
@@ -52,6 +55,7 @@ public class StreamingListActivity extends Activity implements OnClickListener {
 					StreamingActivity.class);
 			try {
 				i.putExtra("url", readFile(file));
+				i.putExtra("direct", direct);
 				startActivity(i);
 			} catch (IOException e) {
 				Toast.makeText(getApplicationContext(),

@@ -20,6 +20,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 public class StreamingActivity extends Activity {
 
@@ -37,8 +38,9 @@ public class StreamingActivity extends Activity {
 		pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
 		wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "MyTag");
 		ImageView back = (ImageView) findViewById(R.id.back);
-		Log.i("url",getIntent().getStringExtra("url"));
-
+		Log.i("url", getIntent().getStringExtra("url"));
+		((TextView) findViewById(R.id.title)).setText(getIntent()
+				.getStringExtra("direct"));
 		back.setOnClickListener(new OnClickListener() {
 
 			@Override
