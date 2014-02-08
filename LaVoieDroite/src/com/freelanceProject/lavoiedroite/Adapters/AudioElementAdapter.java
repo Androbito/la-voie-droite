@@ -28,7 +28,7 @@ import android.widget.TextView;
 
 import com.freelanceProject.lavoiedroite.R;
 import com.freelanceProject.lavoiedroite.beans.AudioElement;
-import com.freelanceProject.lavoiedroite.streaming.StreamingMediaPlayer;
+import com.freelanceProject.lavoiedroite.streaming.StreamingMPBuff;
 import com.freelanceProject.lavoiedroite.web.DownloadManager;
 
 public class AudioElementAdapter extends BaseAdapter {
@@ -37,17 +37,17 @@ public class AudioElementAdapter extends BaseAdapter {
 	Activity mActivity;
 	String intervenant;
 	List<AudioElement> mListAudio;
-	StreamingMediaPlayer audioStreamer;
+	StreamingMPBuff audioStreamer;
 	AudioManager audioManager;
 	ProgressDialog mProgressDialog;
 	private DownloadManager downloadManager;
 	private WakeLock wl;
 
-	public StreamingMediaPlayer getAudioStreamer() {
+	public StreamingMPBuff getAudioStreamer() {
 		return audioStreamer;
 	}
 
-	public void setAudioStreamer(StreamingMediaPlayer audioStreamer) {
+	public void setAudioStreamer(StreamingMPBuff audioStreamer) {
 		this.audioStreamer = audioStreamer;
 	}
 
@@ -169,7 +169,7 @@ public class AudioElementAdapter extends BaseAdapter {
 			if (audioStreamer != null) {
 				audioStreamer.interrupt();
 			}
-			setAudioStreamer(new StreamingMediaPlayer(mActivity,
+			setAudioStreamer(new StreamingMPBuff(mActivity,
 					((TextView) mActivity.findViewById(R.id.text_kb_streamed)),
 					((ImageView) mActivity.findViewById(R.id.playIcon)),
 					progressBar));
