@@ -22,13 +22,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.freelanceProject.lavoiedroite.R;
 import com.freelanceProject.lavoiedroite.beans.AudioElement;
-import com.freelanceProject.lavoiedroite.streaming.StreamingMPBuff;
+import com.freelanceProject.lavoiedroite.streaming.StreamingMPNoBuff;
 import com.freelanceProject.lavoiedroite.web.DownloadManager;
 
 public class AudioElementAdapter extends BaseAdapter {
@@ -37,17 +36,17 @@ public class AudioElementAdapter extends BaseAdapter {
 	Activity mActivity;
 	String intervenant;
 	List<AudioElement> mListAudio;
-	StreamingMPBuff audioStreamer;
+	StreamingMPNoBuff audioStreamer;
 	AudioManager audioManager;
 	ProgressDialog mProgressDialog;
 	private DownloadManager downloadManager;
 	private WakeLock wl;
 
-	public StreamingMPBuff getAudioStreamer() {
+	public StreamingMPNoBuff getAudioStreamer() {
 		return audioStreamer;
 	}
 
-	public void setAudioStreamer(StreamingMPBuff audioStreamer) {
+	public void setAudioStreamer(StreamingMPNoBuff audioStreamer) {
 		this.audioStreamer = audioStreamer;
 	}
 
@@ -162,6 +161,7 @@ public class AudioElementAdapter extends BaseAdapter {
 				});
 		return view;
 	}
+
 	private void startStreamingAudio(ImageView imageView, int position) {
 		try {
 			final SeekBar progressBar = (SeekBar) mActivity
@@ -169,7 +169,7 @@ public class AudioElementAdapter extends BaseAdapter {
 			if (audioStreamer != null) {
 				audioStreamer.interrupt();
 			}
-			setAudioStreamer(new StreamingMPBuff(mActivity,
+			setAudioStreamer(new StreamingMPNoBuff(mActivity,
 					((TextView) mActivity.findViewById(R.id.text_kb_streamed)),
 					((ImageView) mActivity.findViewById(R.id.playIcon)),
 					progressBar));
