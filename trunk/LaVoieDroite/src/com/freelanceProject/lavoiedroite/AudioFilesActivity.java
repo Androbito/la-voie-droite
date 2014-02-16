@@ -22,7 +22,7 @@ import com.freelanceProject.lavoiedroite.beans.WsResponseFaTArt;
 import com.freelanceProject.lavoiedroite.beans.WsResponseSouSeries;
 import com.freelanceProject.lavoiedroite.beans.WsResponseTheme;
 import com.freelanceProject.lavoiedroite.beans.WsResponseVideo;
-import com.freelanceProject.lavoiedroite.streaming.StreamingMPBuff;
+import com.freelanceProject.lavoiedroite.streaming.StreamingMPNoBuff;
 import com.freelanceProject.lavoiedroite.ws.WSHelper;
 import com.freelanceProject.lavoiedroite.ws.WSHelperListener;
 
@@ -35,7 +35,7 @@ public class AudioFilesActivity extends Activity implements WSHelperListener {
 	PowerManager pm;
 	ImageView playButton, back;
 	private boolean isPlaying;
-	protected StreamingMPBuff audioStreamer;
+	protected StreamingMPNoBuff audioStreamer;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
